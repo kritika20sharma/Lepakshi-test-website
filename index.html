@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lepakshi — Temple of Living Stone</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=IM+Fell+English:ital@0;1&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            terra:  '#C8624D',
+            olive:  '#8C8C52',
+            bark:   '#4A4737',
+            parch:  '#F5F0E8',
+            stone:  '#2A261C',
+            aged:   '#B8A88A',
+            rust:   '#9B4A35',
+          },
+          fontFamily: {
+            serif: ['"Cormorant Garamond"', 'serif'],
+            fell:  ['"IM Fell English"', 'serif'],
+            sans:  ['Raleway', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* ─── GRAIN OVERLAY ─────────────────────────── */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.04;
+      pointer-events: none;
+      z-index: 9000;
+    }
+
+    /* ─── BASE ───────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: #F5F0E8;
+      color: #2A261C;
+      font-family: 'Cormorant Garamond', serif;
+      overflow-x: hidden;
+    }
+    img { display: block; max-width: 100%; }
+
+    /* ─── REVEAL ANIMATIONS ─────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(44px);
+      transition: opacity 1.3s cubic-bezier(0.16,1,0.3,1),
+                  transform 1.3s cubic-bezier(0.16,1,0.3,1);
+    }
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-52px);
+      transition: opacity 1.5s cubic-bezier(0.16,1,0.3,1),
+                  transform 1.5s cubic-bezier(0.16,1,0.3,1);
+    }
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(52px);
+      transition: opacity 1.5s cubic-bezier(0.16,1,0.3,1),
+                  transform 1.5s cubic-bezier(0.16,1,0.3,1);
+    }
+    .reveal.visible,
+    .reveal-left.visible,
+    .reveal-right.visible { opacity: 1; transform: none; }
+
+    .d1 { transition-delay: 0.10s; }
+    .d2 { transition-delay: 0.24s; }
+    .d3 { transition-delay: 0.38s; }
+    .d4 { transition-delay: 0.52s; }
+    .d5 { transition-delay: 0.66s; }
+
+    /* ─── NAV ────────────────────────────────────── */
+    #main-nav {
+      transition: background 0.7s ease, backdrop-filter 0.7s ease, padding 0.5s ease;
+    }
+    #main-nav.scrolled {
+      background: rgba(42,38,28,0.93) !important;
+      backdrop-filter: blur(14px);
+      padding-top: 0.85rem;
+      padding-bottom: 0.85rem;
+    }
+    .nav-link {
+      position: relative;
+      transition: color 0.3s ease;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -3px; left: 0;
+      width: 0; height: 1px;
+      background: #C8624D;
+      transition: width 0.4s cubic-bezier(0.16,1,0.3,1);
+    }
+    .nav-link:hover::after { width: 100%; }
+
+    /* ─── HERO ───────────────────────────────────── */
+    #hero { position: relative; height: 100svh; overflow: hidden; }
+    #hero-bg {
+      position: absolute;
+      inset: -12%;
+      background-size: cover;
+      background-position: center top;
+      will-change: transform;
+    }
+    .hero-grad {
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(42,38,28,0.18) 0%,
+        rgba(42,38,28,0.52) 45%,
+        rgba(42,38,28,0.88) 100%
+      );
+    }
+    .color-treatment {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(200,98,77,0.22) 0%, rgba(74,71,55,0.45) 100%);
+      mix-blend-mode: multiply;
+    }
+
+    /* ─── ORNAMENTAL DIVIDER ─────────────────────── */
+    .ornament-line {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      color: #8C8C52;
+    }
+    .ornament-line::before,
+    .ornament-line::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: currentColor;
+      opacity: 0.35;
+    }
+    .ornament-dot::before {
+      content: '✦';
+      font-size: 0.6rem;
+      color: #C8624D;
+      opacity: 0.7;
+    }
+
+    /* ─── SECTION TEXTURE ────────────────────────── */
+    .bg-texture-light {
+      background-color: #F5F0E8;
+      background-image:
+        radial-gradient(ellipse at 20% 60%, rgba(200,98,77,0.055) 0%, transparent 52%),
+        radial-gradient(ellipse at 80% 20%, rgba(140,140,82,0.04) 0%, transparent 42%);
+    }
+    .bg-texture-dark {
+      background-color: #2A261C;
+      background-image:
+        radial-gradient(ellipse at 15% 85%, rgba(200,98,77,0.08) 0%, transparent 48%),
+        radial-gradient(ellipse at 85% 15%, rgba(140,140,82,0.06) 0%, transparent 40%);
+    }
+    .bg-texture-bark {
+      background-color: #3a2f22;
+      background-image:
+        radial-gradient(ellipse at 25% 50%, rgba(200,98,77,0.07) 0%, transparent 50%),
+        radial-gradient(ellipse at 75% 50%, rgba(140,140,82,0.05) 0%, transparent 42%);
+    }
+
+    /* ─── PARALLAX ───────────────────────────────── */
+    .parallax-el { will-change: transform; }
+
+    /* ─── SKETCH BLEND EFFECT ────────────────────── */
+    .sketch-frame {
+      position: relative;
+      overflow: hidden;
+    }
+    .sketch-frame::before {
+      content: '';
+      position: absolute; inset: 0; z-index: 2;
+      background: linear-gradient(to bottom right, rgba(245,240,232,0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .sketch-frame .img-photo {
+      filter: sepia(18%) contrast(1.06) brightness(0.93);
+      transition: filter 0.6s ease, transform 0.9s cubic-bezier(0.16,1,0.3,1);
+    }
+    .sketch-frame:hover .img-photo {
+      filter: sepia(6%) contrast(1.02) brightness(0.98);
+      transform: scale(1.04);
+    }
+    .sketch-pencil-overlay {
+      position: absolute; inset: 0; z-index: 3;
+      background-size: cover;
+      background-position: center;
+      mix-blend-mode: multiply;
+      opacity: 0.22;
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+    }
+    .sketch-frame:hover .sketch-pencil-overlay { opacity: 0.1; }
+
+    /* ─── HERITAGE CARD ──────────────────────────── */
+    .heritage-card {
+      transition: transform 0.65s cubic-bezier(0.16,1,0.3,1),
+                  box-shadow 0.65s cubic-bezier(0.16,1,0.3,1);
+    }
+    .heritage-card:hover {
+      transform: translateY(-10px);
+      box-shadow:
+        0 28px 64px rgba(200,98,77,0.13),
+        0 8px 24px rgba(42,38,28,0.18);
+    }
+    .heritage-card .card-thumb { overflow: hidden; }
+    .heritage-card .card-thumb img {
+      transition: transform 0.85s cubic-bezier(0.16,1,0.3,1);
+      filter: sepia(15%) contrast(1.05) brightness(0.92);
+    }
+    .heritage-card:hover .card-thumb img { transform: scale(1.07); }
+
+    /* ─── GALLERY ────────────────────────────────── */
+    .gallery-cell {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .gallery-cell img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: sepia(12%) contrast(1.06) brightness(0.93);
+      transition: transform 0.95s cubic-bezier(0.16,1,0.3,1),
+                  filter 0.5s ease;
+    }
+    .gallery-cell:hover img {
+      transform: scale(1.09);
+      filter: sepia(4%) contrast(1.02) brightness(1.0);
+    }
+    .gallery-cell .g-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(42,38,28,0.72) 0%, transparent 55%);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    .gallery-cell:hover .g-overlay { opacity: 1; }
+    .gallery-cell .g-label {
+      position: absolute; bottom: 1.25rem; left: 1.25rem;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.4s ease 0.05s, transform 0.4s ease 0.05s;
+    }
+    .gallery-cell:hover .g-label { opacity: 1; transform: translateY(0); }
+
+    /* ─── CTA BUTTON ─────────────────────────────── */
+    .btn-outline {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(245,240,232,0.4);
+      transition: border-color 0.4s ease, color 0.4s ease;
+    }
+    .btn-outline::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: #C8624D;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.45s cubic-bezier(0.16,1,0.3,1);
+    }
+    .btn-outline:hover { border-color: #C8624D; color: #F5F0E8; }
+    .btn-outline:hover::before { transform: scaleX(1); }
+    .btn-outline span { position: relative; z-index: 1; }
+
+    .btn-terra {
+      background: #C8624D;
+      transition: background 0.35s ease, box-shadow 0.35s ease, transform 0.35s ease;
+    }
+    .btn-terra:hover {
+      background: #9B4A35;
+      box-shadow: 0 8px 24px rgba(200,98,77,0.35);
+      transform: translateY(-2px);
+    }
+    .btn-terra:active { transform: translateY(0); }
+
+    /* ─── SCROLL INDICATOR ───────────────────────── */
+    @keyframes scrollPulse {
+      0%,100% { transform: translateY(0); opacity: 0.7; }
+      50%      { transform: translateY(9px); opacity: 0.25; }
+    }
+    .scroll-cue { animation: scrollPulse 2.2s ease-in-out infinite; }
+
+    /* ─── STAT BLOCK ─────────────────────────────── */
+    .stat-bar {
+      border-left: 2px solid;
+      padding-left: 1rem;
+    }
+
+    /* ─── VISIT INFO CARD ────────────────────────── */
+    .visit-card {
+      transition: background 0.4s ease, border-color 0.4s ease;
+    }
+    .visit-card:hover {
+      background: rgba(245,240,232,0.07) !important;
+      border-color: rgba(200,98,77,0.3) !important;
+    }
+
+    /* ─── MOBILE MENU ────────────────────────────── */
+    #mobile-menu {
+      transition: opacity 0.4s ease, visibility 0.4s ease;
+    }
+    #mobile-menu.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+    #mobile-menu:not(.hidden) { opacity: 1; visibility: visible; }
+
+    /* ─── FOOTER ─────────────────────────────────── */
+    .footer-link {
+      transition: color 0.3s ease;
+    }
+    .footer-link:hover { color: rgba(245,240,232,0.85); }
+
+    /* ─── ICON RING ──────────────────────────────── */
+    .icon-ring {
+      width: 2.5rem; height: 2.5rem;
+      flex-shrink: 0;
+      border: 1px solid rgba(200,98,77,0.35);
+      display: flex; align-items: center; justify-content: center;
+      transition: border-color 0.3s ease, background 0.3s ease;
+    }
+    .visit-card:hover .icon-ring {
+      border-color: rgba(200,98,77,0.7);
+      background: rgba(200,98,77,0.08);
+    }
+
+    /* ─── SECTION LABEL ──────────────────────────── */
+    .section-eyebrow {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .eyebrow-line {
+      width: 3.5rem; height: 1px;
+      background: #C8624D;
+    }
+
+    /* ─── SCROLLBAR ──────────────────────────────── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #2A261C; }
+    ::-webkit-scrollbar-thumb { background: #C8624D; border-radius: 3px; }
+  </style>
+</head>
+
+<body class="bg-texture-light text-stone font-serif overflow-x-hidden">
+
+  <!-- ══════════════════════════════════
+       NAVIGATION
+  ════════════════════════════════════ -->
+  <nav id="main-nav" class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-6"
+       style="background: transparent;">
+    <!-- Logo -->
+    <a href="#hero" class="flex-shrink-0 flex items-center gap-3.5 hover:opacity-80 transition-opacity duration-300 focus:outline-none" style="color:#F5F0E8;">
+      <!-- Nandi mark — garland cutouts via fill-rule evenodd -->
+      <svg height="42" viewBox="0 0 128 100" fill="none" aria-hidden="true" style="width:auto; flex-shrink:0;">
+        <path fill="currentColor" fill-rule="evenodd" d="
+          M 100,25 C 104,20 110,19 114,24
+          C 118,28 118,35 116,41 C 114,46 111,50 109,55
+          L 115,62 L 121,62 L 121,86 L 105,86
+          L 22,86 L 14,86 L 8,78
+          C 6,70 5,60 7,52 C 9,44 13,37 18,32
+          C 23,27 33,22 47,20 C 61,18 75,18 85,20
+          C 92,22 97,24 100,25 Z
+          M 106.2,62 A 2.8,2.8 0 0,0 111.8,62 A 2.8,2.8 0 0,0 106.2,62 Z
+          M 105.2,69 A 2.8,2.8 0 0,0 110.8,69 A 2.8,2.8 0 0,0 105.2,69 Z
+          M 107.2,76 A 2.8,2.8 0 0,0 112.8,76 A 2.8,2.8 0 0,0 107.2,76 Z
+          M 111.2,81 A 2.8,2.8 0 0,0 116.8,81 A 2.8,2.8 0 0,0 111.2,81 Z
+          M 115.2,79 A 2.8,2.8 0 0,0 120.8,79 A 2.8,2.8 0 0,0 115.2,79 Z
+          M 116.2,72 A 2.8,2.8 0 0,0 121.8,72 A 2.8,2.8 0 0,0 116.2,72 Z
+          M 109.2,86 A 2.8,2.8 0 0,0 114.8,86 A 2.8,2.8 0 0,0 109.2,86 Z"/>
+        <ellipse cx="112" cy="20" rx="5" ry="7" transform="rotate(18 112 20)" fill="currentColor"/>
+        <path d="M 97,25 C 93,17 97,10 101,10"
+              stroke="currentColor" stroke-width="3" stroke-linecap="round" fill="none"/>
+        <path d="M 104,23 C 102,15 107,9 111,10"
+              stroke="currentColor" stroke-width="2.4" stroke-linecap="round" fill="none" opacity="0.6"/>
+        <path d="M 15,52 C 7,43 5,32 9,23 C 12,16 19,16 20,22"
+              stroke="currentColor" stroke-width="3" stroke-linecap="round" fill="none"/>
+      </svg>
+      <!-- Wordmark -->
+      <div class="leading-none">
+        <div class="font-serif" style="font-size:1.12rem; font-weight:500; letter-spacing:0.17em;">LEPAKSHI</div>
+        <div class="font-sans" style="font-size:0.46rem; letter-spacing:0.24em; opacity:0.4; margin-top:3px; text-transform:uppercase;">Heritage &amp; Temple</div>
+      </div>
+    </a>
+
+    <!-- Desktop links -->
+    <div class="hidden md:flex items-center gap-10">
+      <a href="#origin"       class="nav-link font-sans text-[0.65rem] tracking-[0.22em] text-parch/75 uppercase hover:text-parch">Origin</a>
+      <a href="#architecture" class="nav-link font-sans text-[0.65rem] tracking-[0.22em] text-parch/75 uppercase hover:text-parch">Architecture</a>
+      <a href="#gallery"      class="nav-link font-sans text-[0.65rem] tracking-[0.22em] text-parch/75 uppercase hover:text-parch">Gallery</a>
+      <a href="#visit"        class="nav-link font-sans text-[0.65rem] tracking-[0.22em] text-parch/75 uppercase hover:text-parch">Visit</a>
+      <a href="#visit" class="btn-outline font-sans text-[0.65rem] tracking-[0.22em] text-parch uppercase px-7 py-3 focus:outline-none">
+        <span>Plan Your Visit</span>
+      </a>
+    </div>
+
+    <!-- Mobile burger -->
+    <button id="menu-open" class="md:hidden text-parch focus:outline-none p-1" aria-label="Open menu">
+      <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.4">
+        <line x1="3" y1="7"  x2="23" y2="7"/>
+        <line x1="3" y1="13" x2="23" y2="13"/>
+        <line x1="3" y1="19" x2="23" y2="19"/>
+      </svg>
+    </button>
+  </nav>
+
+  <!-- Mobile menu overlay -->
+  <div id="mobile-menu" class="hidden fixed inset-0 bg-stone/96 backdrop-blur-lg z-[9100] flex flex-col items-center justify-center gap-9">
+    <button id="menu-close" class="absolute top-6 right-8 text-parch/70 hover:text-parch focus:outline-none">
+      <svg width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.4">
+        <line x1="5" y1="5"  x2="25" y2="25"/>
+        <line x1="25" y1="5" x2="5"  y2="25"/>
+      </svg>
+    </button>
+    <a href="#origin"       class="m-link font-serif text-parch text-4xl font-light tracking-wide hover:text-terra transition-colors duration-300">Origin</a>
+    <a href="#architecture" class="m-link font-serif text-parch text-4xl font-light tracking-wide hover:text-terra transition-colors duration-300">Architecture</a>
+    <a href="#gallery"      class="m-link font-serif text-parch text-4xl font-light tracking-wide hover:text-terra transition-colors duration-300">Gallery</a>
+    <a href="#visit"        class="m-link font-serif text-parch text-4xl font-light tracking-wide hover:text-terra transition-colors duration-300">Visit</a>
+  </div>
+
+
+  <!-- ══════════════════════════════════
+       HERO
+  ════════════════════════════════════ -->
+  <section id="hero" class="relative flex items-center justify-center">
+    <!-- Parallax background -->
+    <div id="hero-bg" class="parallax-el"
+         style="background-image: url('https://placehold.co/1920x1080/2a2018/4a3820?text=+'); background-size: cover; background-position: center;">
+    </div>
+
+    <!-- Colour treatment -->
+    <div class="color-treatment"></div>
+    <!-- Dark gradient -->
+    <div class="hero-grad"></div>
+
+    <!-- Decorative horizontal rule -->
+    <div class="absolute left-8 right-8 top-1/4 border-t border-parch/[0.06] pointer-events-none"></div>
+    <div class="absolute left-8 right-8 bottom-1/4 border-t border-parch/[0.06] pointer-events-none"></div>
+
+    <!-- Content -->
+    <div class="relative z-10 text-center px-6 max-w-5xl mx-auto select-none">
+
+      <!-- Eyebrow -->
+      <div class="reveal section-eyebrow mb-10">
+        <span class="font-sans text-[0.6rem] tracking-[0.3em] text-terra/90 uppercase">
+          Andhra Pradesh · 16th Century · Vijayanagara Empire
+        </span>
+        <div class="eyebrow-line opacity-60"></div>
+      </div>
+
+      <!-- Main title -->
+      <h1 class="reveal d1 text-parch font-serif font-light mb-7"
+          style="font-size: clamp(3.2rem, 9vw, 8rem); line-height: 1.0; letter-spacing: -0.025em;">
+        Where Stone<br>
+        <em class="italic" style="color: #F5F0E8; font-weight: 300;">Breathes</em>
+      </h1>
+
+      <!-- Subheadline -->
+      <p class="reveal d2 font-fell italic text-parch/65 mb-14"
+         style="font-size: clamp(1.05rem, 2.4vw, 1.55rem); line-height: 1.7; max-width: 620px; margin-left: auto; margin-right: auto;">
+        "Lepakshi — a living testament to an empire that carved devotion into granite, and breathed legend into stone."
+      </p>
+
+      <!-- CTAs -->
+      <div class="reveal d3 flex flex-col sm:flex-row items-center justify-center gap-5">
+        <a href="#origin" class="btn-outline font-sans text-[0.65rem] tracking-[0.22em] text-parch uppercase px-12 py-4 focus:outline-none">
+          <span>Discover the Story</span>
+        </a>
+        <a href="#gallery" class="font-sans text-[0.65rem] tracking-[0.22em] text-parch/50 uppercase hover:text-terra transition-colors duration-400 px-4">
+          View Gallery &darr;
+        </a>
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="scroll-cue absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2.5 pointer-events-none">
+      <span class="font-sans text-[0.55rem] tracking-[0.28em] text-parch/35 uppercase">Scroll</span>
+      <div class="w-px h-14 bg-gradient-to-b from-parch/30 to-transparent"></div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════
+       INTRODUCTION STRIP
+  ════════════════════════════════════ -->
+  <div class="bg-texture-bark py-7 px-6 overflow-hidden">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-16">
+      <div class="text-center">
+        <p class="font-serif text-parch/80 text-5xl font-light leading-none" style="letter-spacing:-0.03em;">16<sup class="text-xl">th</sup></p>
+        <p class="font-sans text-[0.6rem] tracking-[0.22em] text-parch/35 uppercase mt-1">Century CE</p>
+      </div>
+      <div class="hidden sm:block w-px h-10 bg-parch/10"></div>
+      <div class="text-center">
+        <p class="font-serif text-parch/80 text-5xl font-light leading-none" style="letter-spacing:-0.03em;">70</p>
+        <p class="font-sans text-[0.6rem] tracking-[0.22em] text-parch/35 uppercase mt-1">Sculpted Pillars</p>
+      </div>
+      <div class="hidden sm:block w-px h-10 bg-parch/10"></div>
+      <div class="text-center">
+        <p class="font-serif text-parch/80 text-5xl font-light leading-none" style="letter-spacing:-0.03em;">3</p>
+        <p class="font-sans text-[0.6rem] tracking-[0.22em] text-parch/35 uppercase mt-1">Temple Shrines</p>
+      </div>
+      <div class="hidden sm:block w-px h-10 bg-parch/10"></div>
+      <div class="text-center">
+        <p class="font-serif text-parch/80 text-5xl font-light leading-none" style="letter-spacing:-0.03em;">1</p>
+        <p class="font-sans text-[0.6rem] tracking-[0.22em] text-parch/35 uppercase mt-1">Hanging Pillar</p>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════
+       ORIGIN STORY
+  ════════════════════════════════════ -->
+  <section id="origin" class="relative py-36 bg-texture-light overflow-hidden">
+
+    <!-- Ghost watermark -->
+    <div class="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden select-none" aria-hidden="true">
+      <span class="font-serif font-semibold text-bark/[0.025]" style="font-size: 22vw; white-space: nowrap; letter-spacing:-0.06em;">LEPAKSHI</span>
+    </div>
+
+    <div class="relative max-w-7xl mx-auto px-6 lg:px-16">
+
+      <!-- Section label -->
+      <div class="reveal section-eyebrow text-center mb-24">
+        <span class="font-sans text-[0.6rem] tracking-[0.28em] text-olive uppercase">The Legend</span>
+        <div class="eyebrow-line"></div>
+      </div>
+
+      <!-- Two-column: sketch + text -->
+      <div class="grid lg:grid-cols-2 gap-20 items-center mb-36">
+
+        <!-- Left: Sketch/Photo blend -->
+        <div class="reveal-left relative">
+          <div class="sketch-frame rounded-sm" style="aspect-ratio: 4/5;">
+            <img src="https://placehold.co/720x900/4a3320/7a5840?text=+"
+                 alt="Lepakshi Temple sketch" class="img-photo w-full h-full object-cover">
+            <!-- Pencil-sketch overlay layer -->
+            <div class="sketch-pencil-overlay"
+                 style="background: url('https://placehold.co/720x900/f5f0e8/d4c9b0?text=+') center/cover;"></div>
+            <!-- Bottom gradient -->
+            <div class="absolute inset-0 bg-gradient-to-t from-stone/65 via-transparent to-transparent pointer-events-none z-[4]"></div>
+            <!-- Caption -->
+            <div class="absolute bottom-5 left-6 right-6 z-[5]">
+              <p class="font-sans text-[0.55rem] tracking-[0.22em] text-parch/50 uppercase">Hand-drawn sketch · Veerabhadra Temple, Lepakshi</p>
+            </div>
+          </div>
+          <!-- Decorative border offsets -->
+          <div class="absolute -bottom-5 -right-5 w-36 h-36 border border-terra/20 rounded-sm -z-10"></div>
+          <div class="absolute -top-5 -left-5 w-24 h-24 border border-olive/15 rounded-sm -z-10"></div>
+        </div>
+
+        <!-- Right: Story text -->
+        <div class="reveal-right">
+          <h2 class="font-serif text-stone font-light mb-2" style="font-size: clamp(2.6rem, 5.5vw, 4.8rem); line-height: 1.08; letter-spacing: -0.028em;">
+            Le Pakshi —
+          </h2>
+          <h2 class="font-serif font-light mb-8 italic" style="font-size: clamp(2.6rem, 5.5vw, 4.8rem); line-height: 1.08; letter-spacing: -0.028em; color: #C8624D;">
+            Rise, O Bird
+          </h2>
+
+          <div class="ornament-line ornament-dot mb-8">
+            <span class="font-sans text-[0.55rem] tracking-[0.22em] text-olive/70 uppercase">Origin · Mythology</span>
+          </div>
+
+          <p class="font-fell italic text-bark/85 mb-7" style="font-size: 1.22rem; line-height: 1.85;">
+            "Where the sacred bird Jatayu fell wounded, where the divine breathed life back into the earth — here stands Lepakshi, born of a god's compassion."
+          </p>
+
+          <p class="font-sans text-bark/65 mb-5" style="font-size: 0.92rem; line-height: 1.95; font-weight: 300;">
+            According to Hindu mythology, Lepakshi is the hallowed ground where Jatayu — the divine eagle — collapsed after his valiant battle with Ravana to save Goddess Sita. Lord Rama, discovering the fallen bird, uttered the words <em class="italic text-bark/90">"Le Pakshi"</em> (Rise, O Bird), blessing this sacred land with its name and its legend.
+          </p>
+
+          <p class="font-sans text-bark/65 mb-12" style="font-size: 0.92rem; line-height: 1.95; font-weight: 300;">
+            Built in the 16th century under the Vijayanagara Empire by chieftains Virupanna and Viranna Nayaka, the temple complex at Lepakshi remains one of India's finest examples of Dravidian artistry — a monument where every carved surface is a prayer crystallised in time.
+          </p>
+
+          <a href="#architecture" class="inline-flex items-center gap-3 font-sans text-[0.65rem] tracking-[0.22em] text-terra uppercase group focus:outline-none">
+            <span class="border-b border-terra/30 pb-0.5 group-hover:border-terra transition-colors duration-300">Explore the Architecture</span>
+            <span class="transition-transform duration-300 group-hover:translate-x-1.5">→</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════
+       FULL-WIDTH QUOTE
+  ════════════════════════════════════ -->
+  <section class="bg-texture-dark relative py-32 px-6 overflow-hidden">
+    <!-- Diagonal pattern -->
+    <div class="absolute inset-0 opacity-[0.03] pointer-events-none" aria-hidden="true"
+         style="background: repeating-linear-gradient(45deg, #C8624D 0, #C8624D 1px, transparent 0, transparent 28px);"></div>
+
+    <div class="relative max-w-4xl mx-auto text-center reveal">
+      <!-- Large decorative quote mark -->
+      <div class="font-serif text-terra/20 leading-none select-none mb-4" style="font-size: 9rem; line-height: 0.7;">&ldquo;</div>
+      <p class="font-fell italic text-parch/85 mb-8"
+         style="font-size: clamp(1.3rem, 3.2vw, 2.1rem); line-height: 1.75; font-weight: 300;">
+        Every pillar, every fresco, every carved stone at Lepakshi is a prayer crystallised in time — a testament to the devotion of an empire that made beauty its offering to the divine.
+      </p>
+      <p class="font-sans text-[0.58rem] tracking-[0.28em] text-parch/25 uppercase">— Vijayanagara Chronicles, 16th Century</p>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════
+       ARCHITECTURE
+  ════════════════════════════════════ -->
+  <section id="architecture" class="relative py-36 bg-texture-light overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6 lg:px-16">
+
+      <!-- Section label -->
+      <div class="reveal section-eyebrow text-center mb-8">
+        <span class="font-sans text-[0.6rem] tracking-[0.28em] text-olive uppercase">Architectural Wonders</span>
+        <div class="eyebrow-line"></div>
+      </div>
+      <div class="reveal text-center mb-24">
+        <h2 class="font-serif text-stone font-light" style="font-size: clamp(2.8rem, 6.5vw, 5.5rem); line-height: 1.0; letter-spacing: -0.028em;">
+          Carved in<br>
+          <em class="italic" style="color: #4A4737;">Devotion</em>
+        </h2>
+      </div>
+
+      <!-- 3 Cards -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-32">
+
+        <!-- Card: The Great Nandi -->
+        <div class="heritage-card reveal d1 cursor-pointer">
+          <div class="card-thumb rounded-t-sm overflow-hidden" style="aspect-ratio: 4/3;">
+            <img src="https://placehold.co/640x480/3d2b1a/6b4d2a?text=+"
+                 alt="The Great Nandi" class="w-full h-full object-cover">
+          </div>
+          <div class="bg-white/55 border border-bark/10 border-t-0 rounded-b-sm p-7">
+            <span class="font-sans text-[0.58rem] tracking-[0.22em] text-terra uppercase">Monolithic Marvel</span>
+            <h3 class="font-serif text-stone mt-2 mb-3 font-medium" style="font-size: 1.85rem; line-height: 1.15;">The Great Nandi</h3>
+            <p class="font-sans text-bark/65 mb-5" style="font-size: 0.88rem; line-height: 1.9; font-weight: 300;">
+              India's largest monolithic Nandi bull stands 4.5 metres tall and 8 metres long, carved from a single granite boulder. Adorned with delicate stone jewellery, this sacred guardian gazes with serene devotion toward the presiding deity.
+            </p>
+            <span class="inline-flex items-center gap-2 font-sans text-[0.62rem] tracking-[0.18em] text-terra uppercase border-b border-terra/25 pb-0.5 cursor-pointer hover:border-terra transition-colors duration-300">
+              Learn More <span>→</span>
+            </span>
+          </div>
+        </div>
+
+        <!-- Card: The Hanging Pillar -->
+        <div class="heritage-card reveal d2 cursor-pointer">
+          <div class="card-thumb rounded-t-sm overflow-hidden" style="aspect-ratio: 4/3;">
+            <img src="https://placehold.co/640x480/2a1f14/4a3420?text=+"
+                 alt="The Hanging Pillar" class="w-full h-full object-cover">
+          </div>
+          <div class="bg-white/55 border border-bark/10 border-t-0 rounded-b-sm p-7">
+            <span class="font-sans text-[0.58rem] tracking-[0.22em] text-terra uppercase">Engineering Mystery</span>
+            <h3 class="font-serif text-stone mt-2 mb-3 font-medium" style="font-size: 1.85rem; line-height: 1.15;">The Hanging Pillar</h3>
+            <p class="font-sans text-bark/65 mb-5" style="font-size: 0.88rem; line-height: 1.9; font-weight: 300;">
+              Among Lepakshi's 70 exquisitely carved pillars, one defies gravity — suspended from the ceiling without touching the ground. Visitors traditionally pass a cloth beneath it as a token of witnessing this unexplained miracle.
+            </p>
+            <span class="inline-flex items-center gap-2 font-sans text-[0.62rem] tracking-[0.18em] text-terra uppercase border-b border-terra/25 pb-0.5 cursor-pointer hover:border-terra transition-colors duration-300">
+              Learn More <span>→</span>
+            </span>
+          </div>
+        </div>
+
+        <!-- Card: The Frescoes -->
+        <div class="heritage-card reveal d3 cursor-pointer md:col-span-2 lg:col-span-1">
+          <div class="card-thumb rounded-t-sm overflow-hidden" style="aspect-ratio: 4/3;">
+            <img src="https://placehold.co/640x480/3a2810/5a4218?text=+"
+                 alt="Vijayanagara Frescoes" class="w-full h-full object-cover">
+          </div>
+          <div class="bg-white/55 border border-bark/10 border-t-0 rounded-b-sm p-7">
+            <span class="font-sans text-[0.58rem] tracking-[0.22em] text-terra uppercase">Living Murals</span>
+            <h3 class="font-serif text-stone mt-2 mb-3 font-medium" style="font-size: 1.85rem; line-height: 1.15;">The Frescoes</h3>
+            <p class="font-sans text-bark/65 mb-5" style="font-size: 0.88rem; line-height: 1.9; font-weight: 300;">
+              The ceilings of Lepakshi bear some of India's finest Vijayanagara-era frescoes — vivid murals of the Mahabharata, Ramayana, and the legends of Shiva, painted in natural pigments that retain their brilliance five centuries on.
+            </p>
+            <span class="inline-flex items-center gap-2 font-sans text-[0.62rem] tracking-[0.18em] text-terra uppercase border-b border-terra/25 pb-0.5 cursor-pointer hover:border-terra transition-colors duration-300">
+              Learn More <span>→</span>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature: Sita Pada -->
+      <div class="grid lg:grid-cols-2 gap-20 items-center">
+
+        <!-- Text -->
+        <div class="reveal-left order-2 lg:order-1">
+          <div class="section-eyebrow items-start mb-6">
+            <span class="font-sans text-[0.6rem] tracking-[0.28em] text-olive uppercase">The Sacred Footprint</span>
+            <div class="eyebrow-line" style="margin-left: 0;"></div>
+          </div>
+          <h3 class="font-serif text-stone font-light mb-6" style="font-size: clamp(2rem, 4.5vw, 3.8rem); line-height: 1.1; letter-spacing: -0.025em;">
+            Sita Pada —<br>The Divine<br>
+            <em class="italic" style="color: #C8624D;">Impression</em>
+          </h3>
+          <p class="font-sans text-bark/65 mb-5" style="font-size: 0.92rem; line-height: 1.95; font-weight: 300;">
+            Carved into the living rock of Lepakshi is a pair of giant footprints, believed by many to be the sacred imprints of Goddess Sita as she passed through this hallowed land during the events of the Ramayana.
+          </p>
+          <p class="font-sans text-bark/65 mb-10" style="font-size: 0.92rem; line-height: 1.95; font-weight: 300;">
+            Standing over a metre in length, the Sita Pada remains one of Lepakshi's most venerated relics. Pilgrims travel from across the subcontinent to pay homage, leaving offerings of flowers and prayer at the base of these ancient impressions.
+          </p>
+          <div class="flex gap-10">
+            <div class="stat-bar border-terra">
+              <p class="font-serif text-stone text-4xl font-light" style="letter-spacing:-0.03em;">1m+</p>
+              <p class="font-sans text-[0.6rem] tracking-[0.18em] text-bark/45 uppercase mt-1">Footprint Length</p>
+            </div>
+            <div class="stat-bar border-olive">
+              <p class="font-serif text-stone text-4xl font-light" style="letter-spacing:-0.03em;">500+</p>
+              <p class="font-sans text-[0.6rem] tracking-[0.18em] text-bark/45 uppercase mt-1">Years of Devotion</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Image -->
+        <div class="reveal-right order-1 lg:order-2 relative">
+          <div class="sketch-frame rounded-sm" style="aspect-ratio: 3/4;">
+            <img src="https://placehold.co/640x853/3a2a1a/5a4228?text=+"
+                 alt="Sita Pada sacred footprint" class="img-photo w-full h-full object-cover">
+            <div class="sketch-pencil-overlay"
+                 style="background: url('https://placehold.co/640x853/f5f0e8/d8cbb8?text=+') center/cover;"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-stone/60 via-transparent to-transparent z-[4] pointer-events-none"></div>
+          </div>
+          <div class="absolute -top-4 -right-4 w-28 h-28 border border-terra/18 rounded-sm -z-10"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════
+       PARALLAX INTERLUDE
+  ════════════════════════════════════ -->
+  <section class="relative h-80 overflow-hidden flex items-center justify-center">
+    <div id="mid-parallax" class="parallax-el absolute inset-[-25%]"
+         style="background: url('https://placehold.co/1920x700/1a1208/2c2010?text=+') center/cover no-repeat;">
+    </div>
+    <div class="absolute inset-0" style="background: rgba(30,24,12,0.72);"></div>
+    <div class="absolute inset-0" style="background: linear-gradient(135deg, rgba(200,98,77,0.12) 0%, transparent 60%);"></div>
+    <div class="relative z-10 text-center px-6 reveal max-w-3xl mx-auto">
+      <p class="font-fell italic text-parch/80" style="font-size: clamp(1.2rem, 2.8vw, 1.9rem); line-height: 1.75;">
+        "In the silence of Lepakshi, stone becomes scripture,<br>
+        and every carving — a completed prayer."
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════
+       GALLERY
+  ════════════════════════════════════ -->
+  <section id="gallery" class="py-36 bg-texture-light">
+    <div class="max-w-7xl mx-auto px-6 lg:px-16">
+
+      <!-- Header -->
+      <div class="reveal section-eyebrow text-center mb-8">
+        <span class="font-sans text-[0.6rem] tracking-[0.28em] text-olive uppercase">Visual Journey</span>
+        <div class="eyebrow-line"></div>
+      </div>
+      <div class="reveal text-center mb-16">
+        <h2 class="font-serif text-stone font-light" style="font-size: clamp(2.8rem, 6.5vw, 5.5rem); line-height: 1.0; letter-spacing:-0.028em;">
+          Through the<br>
+          <em class="italic" style="color:#4A4737;">Lens of Stone</em>
+        </h2>
+      </div>
+
+      <!-- Gallery grid -->
+      <div class="grid grid-cols-2 lg:grid-cols-12 gap-3 auto-rows-[200px]">
+
+        <!-- Large vertical left -->
+        <div class="gallery-cell reveal d1 rounded-sm col-span-1 lg:col-span-5 row-span-2">
+          <img src="https://placehold.co/800x1000/2d1f12/4d3520?text=+"
+               alt="Veerabhadra shrine">
+          <div class="g-overlay"></div>
+          <div class="g-label">
+            <p class="font-sans text-[0.58rem] tracking-[0.2em] text-parch/70 uppercase">Veerabhadra · Main Shrine</p>
+          </div>
+        </div>
+
+        <!-- Top right stack -->
+        <div class="gallery-cell reveal d2 rounded-sm col-span-1 lg:col-span-4 row-span-1">
+          <img src="https://placehold.co/700x400/3d2b20/6b4d35?text=+"
+               alt="Stone carvings">
+          <div class="g-overlay"></div>
+          <div class="g-label">
+            <p class="font-sans text-[0.58rem] tracking-[0.2em] text-parch/70 uppercase">Stone Carvings</p>
+          </div>
+        </div>
+        <div class="gallery-cell reveal d3 rounded-sm col-span-1 lg:col-span-3 row-span-1">
+          <img src="https://placehold.co/480x400/251a0f/453020?text=+"
+               alt="Gopuram detail">
+          <div class="g-overlay"></div>
+          <div class="g-label">
+            <p class="font-sans text-[0.58rem] tracking-[0.2em] text-parch/70 uppercase">Gopuram</p>
+          </div>
+        </div>
+
+        <!-- Bottom right -->
+        <div class="gallery-cell reveal d2 rounded-sm col-span-1 lg:col-span-3 row-span-1">
+          <img src="https://placehold.co/480x400/1a1208/302208?text=+"
+               alt="Fresco detail">
+          <div class="g-overlay"></div>
+          <div class="g-label">
+            <p class="font-sans text-[0.58rem] tracking-[0.2em] text-parch/70 uppercase">Fresco Detail</p>
+          </div>
+        </div>
+        <div class="gallery-cell reveal d3 rounded-sm col-span-1 lg:col-span-4 row-span-1">
+          <img src="https://placehold.co/700x400/3a2a18/5a4028?text=+"
+               alt="Hanging pillar detail">
+          <div class="g-overlay"></div>
+          <div class="g-label">
+            <p class="font-sans text-[0.58rem] tracking-[0.2em] text-parch/70 uppercase">The Hanging Pillar</p>
+          </div>
+        </div>
+
+        <!-- Wide bottom panorama -->
+        <div class="gallery-cell reveal d1 rounded-sm col-span-2 lg:col-span-12 row-span-1">
+          <img src="https://placehold.co/1920x400/2a1f14/3d2d1e?text=+"
+               alt="Great Nandi panorama" class="object-[center_40%]">
+          <div class="g-overlay"></div>
+          <div class="g-label">
+            <p class="font-sans text-[0.58rem] tracking-[0.2em] text-parch/70 uppercase">The Great Nandi · Panorama</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════
+       PLAN YOUR VISIT
+  ════════════════════════════════════ -->
+  <section id="visit" class="relative py-36 bg-texture-dark overflow-hidden">
+
+    <!-- Decorative radial glow -->
+    <div class="absolute top-0 right-0 w-[600px] h-[600px] rounded-full pointer-events-none -z-0"
+         style="background: radial-gradient(circle, rgba(200,98,77,0.06), transparent 70%); transform: translate(30%, -35%);"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-16">
+      <div class="grid lg:grid-cols-2 gap-20 items-start">
+
+        <!-- Left: info -->
+        <div>
+          <div class="reveal mb-14">
+            <div class="section-eyebrow items-start mb-6">
+              <span class="font-sans text-[0.6rem] tracking-[0.28em] text-terra uppercase">Plan Your Visit</span>
+              <div class="eyebrow-line" style="margin-left:0;"></div>
+            </div>
+            <h2 class="font-serif text-parch font-light" style="font-size: clamp(2.6rem, 5.5vw, 4.8rem); line-height: 1.07; letter-spacing:-0.028em;">
+              Embark on Your<br>
+              <em class="italic" style="color:#C8624D;">Pilgrimage</em>
+            </h2>
+          </div>
+
+          <div class="space-y-4">
+
+            <!-- Visiting Hours -->
+            <div class="visit-card reveal d1 border border-parch/8 rounded-sm p-6 bg-parch/[0.02]">
+              <div class="flex items-start gap-5">
+                <div class="icon-ring">
+                  <svg width="16" height="16" fill="none" stroke="#C8624D" stroke-width="1.5" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/>
+                  </svg>
+                </div>
+                <div>
+                  <h4 class="font-serif text-parch text-xl mb-1.5 font-normal">Visiting Hours</h4>
+                  <p class="font-sans text-parch/45 text-sm" style="font-weight:300; line-height:1.8;">
+                    6:00 AM – 6:30 PM · Open daily<br>
+                    Aarti at 6:00 AM · 12:00 PM · 6:00 PM
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- How to Reach -->
+            <div class="visit-card reveal d2 border border-parch/8 rounded-sm p-6 bg-parch/[0.02]">
+              <div class="flex items-start gap-5">
+                <div class="icon-ring">
+                  <svg width="16" height="16" fill="none" stroke="#C8624D" stroke-width="1.5" viewBox="0 0 24 24">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+                  </svg>
+                </div>
+                <div>
+                  <h4 class="font-serif text-parch text-xl mb-1.5 font-normal">How to Reach</h4>
+                  <p class="font-sans text-parch/45 text-sm" style="font-weight:300; line-height:1.8;">
+                    14 km from Hindupur · 120 km from Bengaluru<br>
+                    Nearest airport: Kempegowda International (BLR)
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Best Time -->
+            <div class="visit-card reveal d3 border border-parch/8 rounded-sm p-6 bg-parch/[0.02]">
+              <div class="flex items-start gap-5">
+                <div class="icon-ring">
+                  <svg width="16" height="16" fill="none" stroke="#C8624D" stroke-width="1.5" viewBox="0 0 24 24">
+                    <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+                  </svg>
+                </div>
+                <div>
+                  <h4 class="font-serif text-parch text-xl mb-1.5 font-normal">Best Season</h4>
+                  <p class="font-sans text-parch/45 text-sm" style="font-weight:300; line-height:1.8;">
+                    October – March (cooler months)<br>
+                    Shivaratri &amp; Lepakshi Utsav are the grandest festivals
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Entry -->
+            <div class="visit-card reveal d4 border border-parch/8 rounded-sm p-6 bg-parch/[0.02]">
+              <div class="flex items-start gap-5">
+                <div class="icon-ring">
+                  <svg width="16" height="16" fill="none" stroke="#C8624D" stroke-width="1.5" viewBox="0 0 24 24">
+                    <path d="M20 7H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
+                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+                  </svg>
+                </div>
+                <div>
+                  <h4 class="font-serif text-parch text-xl mb-1.5 font-normal">Entry &amp; Facilities</h4>
+                  <p class="font-sans text-parch/45 text-sm" style="font-weight:300; line-height:1.8;">
+                    Entry is free for all visitors<br>
+                    Photography permitted · Shoe storage available at entrance
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: image + etiquette -->
+        <div class="reveal-right">
+          <div class="sketch-frame rounded-sm mb-7" style="aspect-ratio: 3/4;">
+            <img src="https://placehold.co/640x853/2a1f0f/4a3a1f?text=+"
+                 alt="Temple pathway" class="img-photo w-full h-full object-cover">
+            <div class="sketch-pencil-overlay"
+                 style="background: url('https://placehold.co/640x853/f0ebe0/d0c5b0?text=+') center/cover;"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-stone/72 via-stone/15 to-transparent z-[4] pointer-events-none"></div>
+            <div class="absolute bottom-8 left-8 right-8 z-[5]">
+              <p class="font-fell italic text-parch/80 leading-relaxed" style="font-size: 1.1rem;">
+                "Come with an open heart —<br>Lepakshi speaks to those<br>who listen in silence."
+              </p>
+            </div>
+          </div>
+
+          <!-- Etiquette note -->
+          <div class="border border-terra/18 rounded-sm p-6 bg-terra/[0.03]">
+            <p class="font-sans text-[0.58rem] tracking-[0.22em] text-terra uppercase mb-3">Visitor Etiquette</p>
+            <p class="font-sans text-parch/45 text-sm" style="font-weight:300; line-height:1.8;">
+              Modest dress is appreciated and respectful. Remove footwear before entering any shrine. Photography is welcomed outside the inner sanctum. Please maintain silence in the mandapam.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════
+       FOOTER
+  ════════════════════════════════════ -->
+  <footer class="bg-stone py-20 px-6 border-t border-parch/[0.07]">
+    <div class="max-w-7xl mx-auto">
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-14">
+
+        <!-- Brand -->
+        <div class="lg:col-span-2">
+          <!-- Nandi mark (footer) -->
+          <div class="flex items-center gap-3.5 mb-5" style="color:rgba(245,240,232,0.68);">
+            <svg height="38" viewBox="0 0 128 100" fill="none" aria-hidden="true" style="width:auto; flex-shrink:0;">
+              <path fill="currentColor" fill-rule="evenodd" d="
+                M 100,25 C 104,20 110,19 114,24
+                C 118,28 118,35 116,41 C 114,46 111,50 109,55
+                L 115,62 L 121,62 L 121,86 L 105,86
+                L 22,86 L 14,86 L 8,78
+                C 6,70 5,60 7,52 C 9,44 13,37 18,32
+                C 23,27 33,22 47,20 C 61,18 75,18 85,20
+                C 92,22 97,24 100,25 Z
+                M 106.2,62 A 2.8,2.8 0 0,0 111.8,62 A 2.8,2.8 0 0,0 106.2,62 Z
+                M 105.2,69 A 2.8,2.8 0 0,0 110.8,69 A 2.8,2.8 0 0,0 105.2,69 Z
+                M 107.2,76 A 2.8,2.8 0 0,0 112.8,76 A 2.8,2.8 0 0,0 107.2,76 Z
+                M 111.2,81 A 2.8,2.8 0 0,0 116.8,81 A 2.8,2.8 0 0,0 111.2,81 Z
+                M 115.2,79 A 2.8,2.8 0 0,0 120.8,79 A 2.8,2.8 0 0,0 115.2,79 Z
+                M 116.2,72 A 2.8,2.8 0 0,0 121.8,72 A 2.8,2.8 0 0,0 116.2,72 Z
+                M 109.2,86 A 2.8,2.8 0 0,0 114.8,86 A 2.8,2.8 0 0,0 109.2,86 Z"/>
+              <ellipse cx="112" cy="20" rx="5" ry="7" transform="rotate(18 112 20)" fill="currentColor"/>
+              <path d="M 97,25 C 93,17 97,10 101,10"
+                    stroke="currentColor" stroke-width="3" stroke-linecap="round" fill="none"/>
+              <path d="M 104,23 C 102,15 107,9 111,10"
+                    stroke="currentColor" stroke-width="2.4" stroke-linecap="round" fill="none" opacity="0.6"/>
+              <path d="M 15,52 C 7,43 5,32 9,23 C 12,16 19,16 20,22"
+                    stroke="currentColor" stroke-width="3" stroke-linecap="round" fill="none"/>
+            </svg>
+            <div class="leading-none">
+              <div class="font-serif" style="font-size:1.05rem; font-weight:500; letter-spacing:0.17em;">LEPAKSHI</div>
+              <div class="font-sans" style="font-size:0.46rem; letter-spacing:0.24em; opacity:0.42; margin-top:3px; text-transform:uppercase;">Heritage &amp; Temple</div>
+            </div>
+          </div>
+          <p class="font-sans text-parch/35 text-sm mb-6" style="font-weight:300; line-height:1.8; max-width: 280px;">
+            A heritage sanctuary of Vijayanagara art, devotion, and stone — carved for eternity, cherished for generations.
+          </p>
+          <div class="flex gap-4">
+            <!-- Placeholder social icons -->
+            <a href="#" class="w-9 h-9 border border-parch/10 flex items-center justify-center hover:border-terra/50 transition-colors duration-300" aria-label="Instagram">
+              <svg width="14" height="14" fill="none" stroke="#F5F0E8" stroke-width="1.5" opacity="0.4" viewBox="0 0 24 24">
+                <rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="0.5" fill="#F5F0E8"/>
+              </svg>
+            </a>
+            <a href="#" class="w-9 h-9 border border-parch/10 flex items-center justify-center hover:border-terra/50 transition-colors duration-300" aria-label="Facebook">
+              <svg width="14" height="14" fill="none" stroke="#F5F0E8" stroke-width="1.5" opacity="0.4" viewBox="0 0 24 24">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Explore -->
+        <div>
+          <p class="font-sans text-[0.58rem] tracking-[0.25em] text-terra uppercase mb-5">Explore</p>
+          <div class="space-y-3">
+            <a href="#origin"       class="footer-link block font-sans text-parch/35 text-sm" style="font-weight:300;">The Origin Story</a>
+            <a href="#architecture" class="footer-link block font-sans text-parch/35 text-sm" style="font-weight:300;">Architecture &amp; Art</a>
+            <a href="#gallery"      class="footer-link block font-sans text-parch/35 text-sm" style="font-weight:300;">Photo Gallery</a>
+            <a href="#visit"        class="footer-link block font-sans text-parch/35 text-sm" style="font-weight:300;">Plan Your Visit</a>
+          </div>
+        </div>
+
+        <!-- Location -->
+        <div>
+          <p class="font-sans text-[0.58rem] tracking-[0.25em] text-terra uppercase mb-5">Location</p>
+          <p class="font-sans text-parch/35 text-sm" style="font-weight:300; line-height:1.9;">
+            Lepakshi, Hindupur Taluk<br>
+            Anantapur District<br>
+            Andhra Pradesh, India<br>
+            PIN — 515 331
+          </p>
+        </div>
+      </div>
+
+      <div class="border-t border-parch/[0.07] pt-7 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <p class="font-sans text-parch/18 text-xs" style="font-weight:300;">
+          &copy; 2025 Lepakshi Heritage Trust. All rights reserved.
+        </p>
+        <p class="font-sans text-parch/18 text-xs" style="font-weight:300;">
+          Crafted with reverence for the living stones of Lepakshi
+        </p>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ══════════════════════════════════
+       SCRIPTS
+  ════════════════════════════════════ -->
+  <script>
+    (() => {
+      // ── Nav scroll state ──────────────────────────
+      const nav = document.getElementById('main-nav');
+      const onScroll = () => {
+        nav.classList.toggle('scrolled', window.scrollY > 55);
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+
+      // ── Parallax ──────────────────────────────────
+      const heroBg   = document.getElementById('hero-bg');
+      const midPara  = document.getElementById('mid-parallax');
+
+      const runParallax = () => {
+        const sy = window.scrollY;
+
+        // Hero bg moves up as user scrolls down
+        if (heroBg) {
+          heroBg.style.transform = `translateY(${sy * 0.38}px)`;
+        }
+
+        // Mid section: relative scroll from section centre
+        if (midPara) {
+          const section = midPara.closest('section');
+          const rect    = section.getBoundingClientRect();
+          const centre  = rect.top + rect.height * 0.5 - window.innerHeight * 0.5;
+          midPara.style.transform = `translateY(${centre * 0.28}px)`;
+        }
+      };
+
+      window.addEventListener('scroll', runParallax, { passive: true });
+      runParallax(); // initial call
+
+      // ── Reveal on scroll ──────────────────────────
+      const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+      }, { threshold: 0.08, rootMargin: '0px 0px -50px 0px' });
+      revealEls.forEach(el => io.observe(el));
+
+      // ── Mobile menu ───────────────────────────────
+      const menuOpen  = document.getElementById('menu-open');
+      const menuClose = document.getElementById('menu-close');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const mLinks     = document.querySelectorAll('.m-link');
+
+      const openMenu  = () => mobileMenu.classList.remove('hidden');
+      const closeMenu = () => mobileMenu.classList.add('hidden');
+
+      menuOpen?.addEventListener('click', openMenu);
+      menuClose?.addEventListener('click', closeMenu);
+      mLinks.forEach(l => l.addEventListener('click', closeMenu));
+
+      // Close on Escape key
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') closeMenu();
+      });
+    })();
+  </script>
+</body>
+</html>

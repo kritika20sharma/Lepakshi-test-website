@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 118" fill="none"
+     role="img" aria-label="Lepakshi — Primary Brand Mark">
+
+  <!--
+    PRIMARY BRAND MARK
+    Based on: brand_assets/photo_2026-03-23 12.55.26.jpeg
+    Icon color  : #C8624D  (terracotta)
+    Wordmark    : #4A4737  (bark / spaced serif caps)
+    Nandi faces : RIGHT
+    Garland     : 7 cutout circles via fill-rule evenodd
+  -->
+
+  <!-- ── NANDI SILHOUETTE + GARLAND CUTOUTS (compound path, evenodd) ── -->
+  <path fill="#C8624D" fill-rule="evenodd" d="
+
+    M 100,25
+    C 104,20 110,19 114,24
+    C 118,28 118,35 116,41
+    C 114,46 111,50 109,55
+    L 115,62
+    L 121,62
+    L 121,86
+    L 105,86
+    L 22,86
+    L 14,86
+    L 8,78
+    C 6,70 5,60 7,52
+    C 9,44 13,37 18,32
+    C 23,27 33,22 47,20
+    C 61,18 75,18 85,20
+    C 92,22 97,24 100,25
+    Z
+
+    M 106.2,62 A 2.8,2.8 0 0,0 111.8,62 A 2.8,2.8 0 0,0 106.2,62 Z
+    M 105.2,69 A 2.8,2.8 0 0,0 110.8,69 A 2.8,2.8 0 0,0 105.2,69 Z
+    M 107.2,76 A 2.8,2.8 0 0,0 112.8,76 A 2.8,2.8 0 0,0 107.2,76 Z
+    M 111.2,81 A 2.8,2.8 0 0,0 116.8,81 A 2.8,2.8 0 0,0 111.2,81 Z
+    M 115.2,79 A 2.8,2.8 0 0,0 120.8,79 A 2.8,2.8 0 0,0 115.2,79 Z
+    M 116.2,72 A 2.8,2.8 0 0,0 121.8,72 A 2.8,2.8 0 0,0 116.2,72 Z
+    M 109.2,86 A 2.8,2.8 0 0,0 114.8,86 A 2.8,2.8 0 0,0 109.2,86 Z
+
+  "/>
+
+  <!-- ── EAR ── -->
+  <ellipse cx="112" cy="20" rx="5" ry="7"
+           transform="rotate(18 112 20)" fill="#C8624D"/>
+
+  <!-- ── NEAR HORN ── -->
+  <path d="M 97,25 C 93,17 97,10 101,10"
+        stroke="#C8624D" stroke-width="3" stroke-linecap="round" fill="none"/>
+
+  <!-- ── FAR HORN (depth, slightly fainter) ── -->
+  <path d="M 104,23 C 102,15 107,9 111,10"
+        stroke="#C8624D" stroke-width="2.4" stroke-linecap="round" fill="none" opacity="0.6"/>
+
+  <!-- ── TAIL (curling upward from left rump) ── -->
+  <path d="M 15,52 C 7,43 5,32 9,23 C 12,16 19,16 20,22"
+        stroke="#C8624D" stroke-width="3" stroke-linecap="round" fill="none"/>
+
+  <!-- ── WORDMARK ── -->
+  <text x="64" y="111"
+        text-anchor="middle"
+        font-family="'Cormorant Garamond', 'Palatino Linotype', Georgia, serif"
+        font-size="13.5"
+        font-weight="500"
+        letter-spacing="5"
+        fill="#4A4737">LEPAKSHI</text>
+
+</svg>
