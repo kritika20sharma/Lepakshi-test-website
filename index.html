@@ -357,6 +357,120 @@
     ::-webkit-scrollbar-track { background: #2A261C; }
     ::-webkit-scrollbar-thumb { background: #C8624D; border-radius: 3px; }
 
+    /* ─── STAYS SECTION ──────────────────────────── */
+    .stay-card {
+      position: relative; overflow: hidden;
+      transition: box-shadow 0.65s cubic-bezier(0.16,1,0.3,1);
+    }
+    .stay-card:hover {
+      box-shadow: 0 28px 72px rgba(200,98,77,0.2), 0 10px 28px rgba(42,38,28,0.22);
+    }
+    .stay-card .sc-img {
+      transition: transform 1s cubic-bezier(0.16,1,0.3,1), filter 0.65s ease;
+      filter: sepia(14%) contrast(1.05) brightness(0.86);
+    }
+    .stay-card:hover .sc-img {
+      transform: scale(1.06);
+      filter: sepia(5%) contrast(1.02) brightness(0.96);
+    }
+    .sc-glow {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 35% 65%, rgba(200,98,77,0.28) 0%, transparent 65%);
+      opacity: 0;
+      transition: opacity 0.75s ease;
+      mix-blend-mode: soft-light;
+      pointer-events: none; z-index: 2;
+    }
+    .stay-card:hover .sc-glow { opacity: 1; }
+    .impact-strip {
+      background: linear-gradient(135deg, rgba(200,98,77,0.14) 0%, rgba(140,140,82,0.09) 100%);
+      border: 1px solid rgba(200,98,77,0.3);
+    }
+    .stay-badge {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      padding: 0.3rem 0.8rem;
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.57rem; letter-spacing: 0.17em; text-transform: uppercase;
+      border: 1px solid;
+      transition: background 0.35s ease, color 0.35s ease;
+    }
+
+    /* ─── EATERIES SECTION ────────────────────────── */
+    .eatery-card {
+      background: #FAF7F2;
+      border: 1px solid rgba(74,71,55,0.1);
+      overflow: hidden;
+      transition: transform 0.55s cubic-bezier(0.16,1,0.3,1),
+                  box-shadow 0.55s cubic-bezier(0.16,1,0.3,1);
+    }
+    .eatery-card:hover {
+      transform: translateY(-7px);
+      box-shadow: 0 20px 52px rgba(200,98,77,0.1), 0 6px 18px rgba(42,38,28,0.09);
+    }
+    .eatery-card .ec-img {
+      transition: transform 0.9s cubic-bezier(0.16,1,0.3,1), filter 0.5s ease;
+      filter: sepia(10%) contrast(1.05) brightness(0.92);
+    }
+    .eatery-card:hover .ec-img { transform: scale(1.07); filter: sepia(3%) brightness(1.0); }
+    .dish-tag {
+      display: inline-block; padding: 0.22rem 0.7rem;
+      background: rgba(200,98,77,0.08);
+      border: 1px solid rgba(200,98,77,0.22);
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.58rem; letter-spacing: 0.1em;
+      color: #C8624D; text-transform: uppercase;
+    }
+
+    /* ─── EXPLORE / TIMELINE ──────────────────────── */
+    .timeline-track { position: relative; }
+    .timeline-track::before {
+      content: '';
+      position: absolute;
+      left: 50%; top: 3rem; bottom: 3rem;
+      width: 1px;
+      background: linear-gradient(to bottom,
+        transparent 0%,
+        rgba(200,98,77,0.4) 12%,
+        rgba(200,98,77,0.4) 88%,
+        transparent 100%);
+      transform: translateX(-50%);
+    }
+    @media (max-width: 768px) {
+      .timeline-track::before { left: 1.25rem; top: 1rem; bottom: 1rem; }
+    }
+    .timeline-dot {
+      width: 0.65rem; height: 0.65rem; border-radius: 50%;
+      background: #C8624D;
+      box-shadow: 0 0 0 4px rgba(200,98,77,0.18), 0 0 0 8px rgba(200,98,77,0.06);
+      flex-shrink: 0;
+    }
+    .explore-card {
+      background: rgba(245,240,232,0.045);
+      border: 1px solid rgba(245,240,232,0.08);
+      overflow: hidden;
+      transition: background 0.45s ease, border-color 0.45s ease,
+                  transform 0.55s cubic-bezier(0.16,1,0.3,1),
+                  box-shadow 0.55s cubic-bezier(0.16,1,0.3,1);
+    }
+    .explore-card:hover {
+      background: rgba(245,240,232,0.08);
+      border-color: rgba(200,98,77,0.28);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 52px rgba(0,0,0,0.25), 0 6px 16px rgba(200,98,77,0.1);
+    }
+    .explore-card .ex-img {
+      transition: transform 0.9s cubic-bezier(0.16,1,0.3,1), filter 0.5s ease;
+      filter: sepia(18%) contrast(1.07) brightness(0.8);
+    }
+    .explore-card:hover .ex-img { transform: scale(1.08); filter: sepia(7%) brightness(0.92); }
+    .stop-number {
+      font-family: 'IM Fell English', serif;
+      font-size: clamp(4.5rem, 10vw, 8rem);
+      line-height: 1; color: rgba(245,240,232,0.04);
+      position: absolute; top: -0.2em; right: -0.05em;
+      pointer-events: none; user-select: none;
+    }
+
     /* ─── SACRED MANUSCRIPT ──────────────────────── */
     .ms-paper {
       background-color: #EDE8DE;
@@ -510,6 +624,8 @@
       <a href="#architecture" class="nav-link font-sans text-[0.65rem] tracking-[0.22em] text-parch/75 uppercase hover:text-parch">Architecture</a>
       <a href="#gallery"      class="nav-link font-sans text-[0.65rem] tracking-[0.22em] text-parch/75 uppercase hover:text-parch">Gallery</a>
       <a href="#manuscripts"  class="nav-link font-sans text-[0.65rem] tracking-[0.22em] text-parch/75 uppercase hover:text-parch">Sketches</a>
+      <a href="#stays"        class="nav-link font-sans text-[0.65rem] tracking-[0.22em] text-parch/75 uppercase hover:text-parch">Stay</a>
+      <a href="#explore"      class="nav-link font-sans text-[0.65rem] tracking-[0.22em] text-parch/75 uppercase hover:text-parch">Explore</a>
       <a href="#visit"        class="nav-link font-sans text-[0.65rem] tracking-[0.22em] text-parch/75 uppercase hover:text-parch">Visit</a>
       <a href="#visit" class="btn-outline font-sans text-[0.65rem] tracking-[0.22em] text-parch uppercase px-7 py-3 focus:outline-none">
         <span>Plan Your Visit</span>
@@ -538,6 +654,8 @@
     <a href="#architecture" class="m-link font-serif text-parch text-4xl font-light tracking-wide hover:text-terra transition-colors duration-300">Architecture</a>
     <a href="#gallery"      class="m-link font-serif text-parch text-4xl font-light tracking-wide hover:text-terra transition-colors duration-300">Gallery</a>
     <a href="#manuscripts"  class="m-link font-serif text-parch text-4xl font-light tracking-wide hover:text-terra transition-colors duration-300">Sketches</a>
+    <a href="#stays"        class="m-link font-serif text-parch text-4xl font-light tracking-wide hover:text-terra transition-colors duration-300">Stay</a>
+    <a href="#explore"      class="m-link font-serif text-parch text-4xl font-light tracking-wide hover:text-terra transition-colors duration-300">Explore</a>
     <a href="#visit"        class="m-link font-serif text-parch text-4xl font-light tracking-wide hover:text-terra transition-colors duration-300">Visit</a>
   </div>
 
@@ -659,7 +777,7 @@
                  alt="Lepakshi Temple interior" class="img-photo w-full h-full object-cover">
             <!-- Pencil-sketch overlay layer -->
             <div class="sketch-pencil-overlay"
-                 style="background: url('brand_assets/papneshwara_1st%262nd_parikrama.png') center/cover;"></div>
+                 style="background: url('brand_assets/veerabhadra_temple.jpg') center/cover;"></div>
             <!-- Bottom gradient -->
             <div class="absolute inset-0 bg-gradient-to-t from-stone/65 via-transparent to-transparent pointer-events-none z-[4]"></div>
             <!-- Caption -->
@@ -1228,6 +1346,352 @@
     </div>
     <p id="lb-caption"></p>
   </div>
+
+
+  <!-- ══════════════════════════════════
+       STAYS — PURPOSE-LED TRAVEL
+  ════════════════════════════════════ -->
+  <section id="stays" class="py-36 bg-texture-bark overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6 lg:px-16">
+
+      <!-- Heading -->
+      <div class="text-center mb-16 reveal">
+        <div class="ornament-line mb-8">
+          <span class="ornament-dot"></span>
+          <span class="font-sans text-[0.58rem] tracking-[0.28em] text-terra/75 uppercase">Sleep with Purpose</span>
+          <span class="ornament-dot"></span>
+        </div>
+        <h2 class="font-fell text-5xl md:text-6xl text-parch leading-[1.06] mb-5">
+          A Stay That<br><em>Gives Back</em>
+        </h2>
+        <p class="font-sans font-light text-sm tracking-wide text-parch/50 max-w-lg mx-auto leading-[1.9]">
+          Where you rest shapes what endures. Every night spent here is a quiet act
+          of preservation — of stone, story, and living heritage.
+        </p>
+      </div>
+
+      <!-- 15% Impact Strip -->
+      <div class="impact-strip rounded-sm px-8 py-7 mb-16 flex flex-col sm:flex-row items-center gap-6 reveal">
+        <div class="flex-shrink-0 text-center sm:text-left">
+          <p class="font-fell text-[3.5rem] leading-none text-terra">15%</p>
+          <p class="font-sans text-[0.55rem] tracking-[0.22em] text-terra/70 uppercase mt-1">of every stay</p>
+        </div>
+        <div class="hidden sm:block w-px h-16 bg-terra/20 flex-shrink-0"></div>
+        <div>
+          <p class="font-fell text-xl md:text-2xl text-parch/90 italic leading-snug mb-2">
+            "Goes directly towards the preservation and community support of Lepakshi Temple."
+          </p>
+          <p class="font-sans font-light text-xs tracking-wide text-parch/45 leading-loose">
+            Your travel funds conservation programs, artisan livelihoods, and the maintenance
+            of this 16th-century Vijayanagara masterpiece — for generations to come.
+          </p>
+        </div>
+        <div class="flex-shrink-0 text-center">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" class="mx-auto opacity-40">
+            <path d="M24 4L28 16H40L30 24L34 36L24 28L14 36L18 24L8 16H20L24 4Z" stroke="#C8624D" stroke-width="1.2" fill="none"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- ProtoVillage Card -->
+      <div class="stay-card reveal lg:flex rounded-sm overflow-hidden" style="min-height: 520px;">
+
+        <!-- Left: Sketch-photo blend image -->
+        <div class="relative lg:w-[55%] flex-shrink-0" style="min-height: 340px;">
+          <div class="sketch-frame h-full">
+            <img src="https://placehold.co/900x600/2a1f0f/4a3420?text=ProtoVillage"
+                 alt="ProtoVillage eco heritage stay" class="sc-img img-photo w-full h-full object-cover">
+            <!-- sketch overlay -->
+            <div class="sketch-pencil-overlay"
+                 style="background: url('brand_assets/B4415058-6589-48E4-92D9-5941AC8223D1.png') center/cover; opacity: 0.18;"></div>
+            <div class="absolute inset-0 bg-gradient-to-r from-transparent to-[#3a2f22]/80 pointer-events-none z-[4]"></div>
+          </div>
+          <div class="sc-glow"></div>
+
+          <!-- Badges overlaid on image -->
+          <div class="absolute top-6 left-6 z-[5] flex flex-col gap-2">
+            <span class="stay-badge text-parch/85 border-parch/25 bg-stone/60 backdrop-blur-sm">
+              <svg width="8" height="8" viewBox="0 0 8 8" fill="#C8624D"><circle cx="4" cy="4" r="4"/></svg>
+              Heritage Support Stay
+            </span>
+            <span class="stay-badge text-parch/85 border-parch/25 bg-stone/60 backdrop-blur-sm">
+              <svg width="8" height="8" viewBox="0 0 8 8" fill="#8C8C52"><circle cx="4" cy="4" r="4"/></svg>
+              Travel with Impact
+            </span>
+          </div>
+        </div>
+
+        <!-- Right: Content -->
+        <div class="lg:w-[45%] bg-[#2e2419] px-10 py-12 flex flex-col justify-center">
+          <p class="font-sans text-[0.55rem] tracking-[0.28em] text-terra/70 uppercase mb-3">Featured Stay · Andhra Pradesh</p>
+          <h3 class="font-fell text-4xl md:text-5xl text-parch italic leading-tight mb-5">ProtoVillage</h3>
+          <div class="eyebrow-line mb-6 opacity-50"></div>
+          <p class="font-sans font-light text-sm text-parch/55 leading-[1.95] mb-8">
+            Tucked 12 km from Lepakshi, ProtoVillage is a living experiment in sustainable,
+            community-led living. Stay in traditional mud-brick structures, wake to open farmland,
+            and leave knowing your visit has nourished both soul and stone.
+          </p>
+
+          <!-- Amenity tags -->
+          <div class="flex flex-wrap gap-2 mb-10">
+            <span class="dish-tag text-olive border-olive/25" style="color:#8C8C52; background: rgba(140,140,82,0.08); border-color: rgba(140,140,82,0.25);">Farm Stay</span>
+            <span class="dish-tag text-olive border-olive/25" style="color:#8C8C52; background: rgba(140,140,82,0.08); border-color: rgba(140,140,82,0.25);">Community Meals</span>
+            <span class="dish-tag text-olive border-olive/25" style="color:#8C8C52; background: rgba(140,140,82,0.08); border-color: rgba(140,140,82,0.25);">Temple Walks</span>
+            <span class="dish-tag text-olive border-olive/25" style="color:#8C8C52; background: rgba(140,140,82,0.08); border-color: rgba(140,140,82,0.25);">Craft Workshops</span>
+            <span class="dish-tag text-olive border-olive/25" style="color:#8C8C52; background: rgba(140,140,82,0.08); border-color: rgba(140,140,82,0.25);">Stargazing</span>
+          </div>
+
+          <!-- CTA -->
+          <a href="#visit" class="btn-outline self-start font-sans text-[0.62rem] tracking-[0.2em] text-parch uppercase px-8 py-3.5 focus:outline-none">
+            <span>Enquire &amp; Book</span>
+          </a>
+
+          <!-- Assurance note -->
+          <p class="font-sans font-light text-[0.6rem] tracking-wide text-parch/30 mt-5 leading-loose">
+            ✦ &nbsp;15% of your booking directly funds Lepakshi Temple preservation.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════
+       EATERIES — THE ANDHRA TABLE
+  ════════════════════════════════════ -->
+  <section id="eateries" class="py-36 bg-texture-light overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6 lg:px-16">
+
+      <!-- Heading -->
+      <div class="text-center mb-20 reveal">
+        <div class="ornament-line mb-8">
+          <span class="ornament-dot"></span>
+          <span class="font-sans text-[0.58rem] tracking-[0.28em] text-terra/75 uppercase">Local Flavour</span>
+          <span class="ornament-dot"></span>
+        </div>
+        <h2 class="font-fell text-5xl md:text-6xl text-bark leading-[1.06] mb-5">
+          The Andhra<br><em>Table</em>
+        </h2>
+        <p class="font-sans font-light text-sm tracking-wide text-bark/55 max-w-lg mx-auto leading-[1.9]">
+          Telugu cuisine is an act of devotion. Fiery, earthy, and deeply rooted —
+          the food around Lepakshi is as layered as the temple's frescoes.
+        </p>
+      </div>
+
+      <!-- Featured: APTDC Haritha Hotel -->
+      <div class="eatery-card reveal lg:flex rounded-sm mb-10" style="min-height: 420px;">
+
+        <!-- Image -->
+        <div class="relative lg:w-[48%] flex-shrink-0 overflow-hidden" style="min-height: 280px;">
+          <img src="brand_assets/interiors.jpeg"
+               alt="APTDC Haritha Hotel dining" class="ec-img w-full h-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-bark/50 via-transparent to-transparent pointer-events-none"></div>
+          <span class="absolute top-5 left-5 stay-badge text-parch border-parch/25 bg-bark/70 backdrop-blur-sm">
+            ✦ &nbsp;Featured Dining
+          </span>
+        </div>
+
+        <!-- Content -->
+        <div class="lg:w-[52%] px-10 py-12 flex flex-col justify-center">
+          <p class="font-sans text-[0.55rem] tracking-[0.28em] text-terra/70 uppercase mb-3">Government Heritage Dining · APTDC</p>
+          <h3 class="font-fell text-3xl md:text-4xl text-bark italic mb-4">Haritha Hotel, Lepakshi</h3>
+          <div class="chapter-rule mb-6"></div>
+          <p class="font-sans font-light text-sm text-bark/60 leading-[1.95] mb-8">
+            Run by Andhra Pradesh Tourism, Haritha Hotel serves the definitive Telugu thali
+            in a clean, no-frills dining hall — a fitting companion to a temple visit.
+            The meal arrives in courses, unhurried, as it always has.
+          </p>
+
+          <!-- Signature dishes -->
+          <p class="font-sans text-[0.56rem] tracking-[0.22em] text-bark/45 uppercase mb-3">On the thali</p>
+          <div class="flex flex-wrap gap-2 mb-8">
+            <span class="dish-tag">Pulihora</span>
+            <span class="dish-tag">Ragi Sangati</span>
+            <span class="dish-tag">Gongura Mutton</span>
+            <span class="dish-tag">Pesarattu</span>
+            <span class="dish-tag">Natu Kodi Pulusu</span>
+            <span class="dish-tag">Jaggery Pongal</span>
+            <span class="dish-tag">Dosakaya Pachadi</span>
+          </div>
+
+          <div class="flex gap-6">
+            <div class="stat-bar border-terra/40">
+              <p class="font-sans text-[0.55rem] tracking-[0.18em] text-bark/45 uppercase mb-1">Open</p>
+              <p class="font-serif text-sm text-bark">7 am – 10 pm</p>
+            </div>
+            <div class="stat-bar border-terra/40">
+              <p class="font-sans text-[0.55rem] tracking-[0.18em] text-bark/45 uppercase mb-1">Cuisine</p>
+              <p class="font-serif text-sm text-bark">Andhra · Telugu</p>
+            </div>
+            <div class="stat-bar border-terra/40">
+              <p class="font-sans text-[0.55rem] tracking-[0.18em] text-bark/45 uppercase mb-1">Distance</p>
+              <p class="font-serif text-sm text-bark">500 m from temple</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Local food notes row -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div class="eatery-card reveal d1 p-7">
+          <p class="font-sans text-[0.55rem] tracking-[0.22em] text-terra/65 uppercase mb-3">Morning Ritual</p>
+          <h4 class="font-fell text-xl text-bark italic mb-3">Pesarattu & Upma</h4>
+          <p class="font-sans font-light text-xs text-bark/55 leading-[1.9]">
+            Green moong crepes served with ginger chutney and soft upma — the canonical Andhra breakfast, eaten standing at small dhabas near the bus stop.
+          </p>
+        </div>
+        <div class="eatery-card reveal d2 p-7">
+          <p class="font-sans text-[0.55rem] tracking-[0.22em] text-terra/65 uppercase mb-3">The Staple</p>
+          <h4 class="font-fell text-xl text-bark italic mb-3">Ragi Sangati</h4>
+          <p class="font-sans font-light text-xs text-bark/55 leading-[1.9]">
+            Finger millet balls eaten with spiced mutton or tangy gongura — the rural heart of Rayalaseema cooking. Dense, earthy, deeply sustaining.
+          </p>
+        </div>
+        <div class="eatery-card reveal d3 p-7">
+          <p class="font-sans text-[0.55rem] tracking-[0.22em] text-terra/65 uppercase mb-3">The Sweet Close</p>
+          <h4 class="font-fell text-xl text-bark italic mb-3">Bellam Pongal</h4>
+          <p class="font-sans font-light text-xs text-bark/55 leading-[1.9]">
+            Jaggery rice pudding fragrant with cardamom and cashew — often offered at the temple first, then served in the hotel. Sacred before it is sweet.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════
+       EXPLORE — NEARBY ATTRACTIONS
+  ════════════════════════════════════ -->
+  <section id="explore" class="py-36 bg-texture-dark overflow-hidden">
+    <div class="max-w-6xl mx-auto px-6 lg:px-16">
+
+      <!-- Heading -->
+      <div class="text-center mb-24 reveal">
+        <div class="ornament-line mb-8">
+          <span class="ornament-dot"></span>
+          <span class="font-sans text-[0.58rem] tracking-[0.28em] text-terra/75 uppercase">The Journey Continues</span>
+          <span class="ornament-dot"></span>
+        </div>
+        <h2 class="font-fell text-5xl md:text-6xl text-parch leading-[1.06] mb-5">
+          Beyond the<br><em>Temple Gate</em>
+        </h2>
+        <p class="font-sans font-light text-sm tracking-wide text-parch/48 max-w-lg mx-auto leading-[1.9]">
+          Lepakshi is a beginning, not a destination. The landscape around it holds
+          wonders carved in stone, lived in villages, and written in the land itself.
+        </p>
+      </div>
+
+      <!-- Timeline -->
+      <div class="timeline-track space-y-0">
+
+        <!-- Stop 1: Monolithic Nandi -->
+        <div class="reveal grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-8 md:gap-12 items-center mb-20">
+          <!-- Card — left side -->
+          <div class="explore-card rounded-sm overflow-hidden">
+            <div class="overflow-hidden" style="aspect-ratio: 4/3;">
+              <img src="brand_assets/Great_nandi.webp" alt="Monolithic Nandi" class="ex-img w-full h-full object-cover">
+            </div>
+            <div class="p-7">
+              <div class="relative">
+                <span class="stop-number">1</span>
+                <p class="font-sans text-[0.55rem] tracking-[0.24em] text-terra/65 uppercase mb-2">Stop 01 · 0.5 km</p>
+                <h3 class="font-fell text-2xl md:text-3xl text-parch italic mb-3">The Monolithic Nandi</h3>
+                <p class="font-sans font-light text-xs text-parch/50 leading-[1.9]">
+                  Carved from a single boulder, 4.5 metres tall and adorned with garlands of stone —
+                  the largest monolithic Nandi in India sits serenely outside the temple, facing west into the setting sun.
+                </p>
+              </div>
+              <div class="flex gap-2 mt-5 flex-wrap">
+                <span class="dish-tag" style="color:#8C8C52; background:rgba(140,140,82,0.07); border-color:rgba(140,140,82,0.2);">Monolithic sculpture</span>
+                <span class="dish-tag" style="color:#8C8C52; background:rgba(140,140,82,0.07); border-color:rgba(140,140,82,0.2);">Free entry</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Centre dot -->
+          <div class="hidden md:flex flex-col items-center gap-3">
+            <div class="timeline-dot"></div>
+          </div>
+
+          <!-- Spacer (right side empty for stop 1) -->
+          <div class="hidden md:block"></div>
+        </div>
+
+        <!-- Stop 2: Kalyana Mandapa -->
+        <div class="reveal grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-8 md:gap-12 items-center mb-20">
+          <!-- Spacer (left empty for stop 2) -->
+          <div class="hidden md:block order-1 md:order-none"></div>
+
+          <!-- Centre dot -->
+          <div class="hidden md:flex flex-col items-center gap-3 order-first md:order-none">
+            <div class="timeline-dot"></div>
+          </div>
+
+          <!-- Card — right side -->
+          <div class="explore-card rounded-sm overflow-hidden">
+            <div class="overflow-hidden" style="aspect-ratio: 4/3;">
+              <img src="brand_assets/kalyana%20mantapa.jpeg" alt="Kalyana Mandapa" class="ex-img w-full h-full object-cover">
+            </div>
+            <div class="p-7">
+              <div class="relative">
+                <span class="stop-number">2</span>
+                <p class="font-sans text-[0.55rem] tracking-[0.24em] text-terra/65 uppercase mb-2">Stop 02 · Within temple</p>
+                <h3 class="font-fell text-2xl md:text-3xl text-parch italic mb-3">Kalyana Mandapa</h3>
+                <p class="font-sans font-light text-xs text-parch/50 leading-[1.9]">
+                  The celestial wedding hall — 38 exquisitely carved pillars supporting a ceiling painted
+                  with Vijayanagara frescoes. The unfinished work of Virupanna, abandoned mid-stroke,
+                  left incomplete and perfect.
+                </p>
+              </div>
+              <div class="flex gap-2 mt-5 flex-wrap">
+                <span class="dish-tag" style="color:#8C8C52; background:rgba(140,140,82,0.07); border-color:rgba(140,140,82,0.2);">38 carved pillars</span>
+                <span class="dish-tag" style="color:#8C8C52; background:rgba(140,140,82,0.07); border-color:rgba(140,140,82,0.2);">Fresco ceiling</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stop 3: ProtoVillage -->
+        <div class="reveal grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-8 md:gap-12 items-center">
+          <!-- Card — left side -->
+          <div class="explore-card rounded-sm overflow-hidden">
+            <div class="overflow-hidden" style="aspect-ratio: 4/3;">
+              <img src="https://placehold.co/800x600/2a1f0f/4a3420?text=ProtoVillage"
+                   alt="ProtoVillage" class="ex-img w-full h-full object-cover">
+            </div>
+            <div class="p-7">
+              <div class="relative">
+                <span class="stop-number">3</span>
+                <p class="font-sans text-[0.55rem] tracking-[0.24em] text-terra/65 uppercase mb-2">Stop 03 · 12 km from temple</p>
+                <h3 class="font-fell text-2xl md:text-3xl text-parch italic mb-3">ProtoVillage</h3>
+                <p class="font-sans font-light text-xs text-parch/50 leading-[1.9]">
+                  A 25-acre experiment in regenerative living — mud homes, organic farming, rainwater
+                  harvesting, and a community that demonstrates what rural Andhra life can be when
+                  reimagined with intention. Stay here. Leave changed.
+                </p>
+              </div>
+              <div class="flex gap-2 mt-5 flex-wrap">
+                <span class="dish-tag" style="color:#8C8C52; background:rgba(140,140,82,0.07); border-color:rgba(140,140,82,0.2);">Eco village</span>
+                <span class="dish-tag" style="color:#8C8C52; background:rgba(140,140,82,0.07); border-color:rgba(140,140,82,0.2);">12 km away</span>
+                <span class="dish-tag" style="color:#C8624D; background:rgba(200,98,77,0.07); border-color:rgba(200,98,77,0.2);">15% for temple</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Centre dot -->
+          <div class="hidden md:flex flex-col items-center gap-3">
+            <div class="timeline-dot"></div>
+          </div>
+
+          <!-- Spacer -->
+          <div class="hidden md:block"></div>
+        </div>
+
+      </div><!-- /timeline-track -->
+    </div>
+  </section>
 
 
   <!-- ══════════════════════════════════
