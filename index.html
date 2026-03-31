@@ -500,10 +500,9 @@
     .mf-inner .sketch-img {
       width: 100%; height: 100%; object-fit: contain; display: block;
       background: #F8F4EE;
-      filter: contrast(1.07) brightness(0.96);
       transition: transform 0.9s cubic-bezier(0.16,1,0.3,1), filter 0.5s ease;
     }
-    .museum-frame:hover .sketch-img { transform: scale(1.04); filter: contrast(1.09) brightness(1.01); }
+    .museum-frame:hover .sketch-img { transform: scale(1.04); }
     .mf-label {
       padding: 0.65rem 0.4rem 0.7rem;
       display: flex; gap: 0.65rem; align-items: flex-start;
@@ -591,7 +590,7 @@
       transform: scale(0.93); transition: transform 0.42s cubic-bezier(0.16,1,0.3,1);
     }
     #sketch-lightbox.lb-open #lb-img-wrap { transform: scale(1); }
-    #lb-img { max-width: 100%; max-height: 82vh; object-fit: contain; filter: contrast(1.05) brightness(0.98); }
+    #lb-img { max-width: 100%; max-height: 82vh; object-fit: contain; }
     #lb-close {
       position: absolute; top: 1.25rem; right: 1.25rem;
       width: 2.4rem; height: 2.4rem;
@@ -621,6 +620,61 @@
       background: rgba(8,6,3,0.45);
     }
     .lb-arrow:hover { color: #F5F0E8; border-color: rgba(200,98,77,0.45); background: rgba(200,98,77,0.09); }
+
+    /* ─── SKETCH BACKGROUND ATMOSPHERE ──────── */
+    /* Common base */
+    .sketch-bg-el {
+      position: absolute; pointer-events: none; user-select: none;
+      will-change: transform; max-width: none; display: block;
+    }
+    /* On light parchment sections — multiply blends the sepia ink naturally */
+    .sketch-bg-light {
+      opacity: 0.065;
+      filter: sepia(0.6) contrast(0.8) brightness(1.18) blur(0.4px);
+      mix-blend-mode: multiply;
+    }
+    /* On dark sections — overlay lifts the ink against the dark field */
+    .sketch-bg-dark {
+      opacity: 0.10;
+      filter: sepia(0.4) contrast(0.75) brightness(1.45) blur(0.6px);
+      mix-blend-mode: overlay;
+    }
+
+    /* Interstitial sketch divider between sections */
+    .sketch-divider {
+      position: relative; height: 180px; overflow: hidden;
+      background: linear-gradient(to bottom, #EDE7DC, #F5F0E8);
+    }
+    .sketch-divider .sd-img {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 115%; height: auto;
+      opacity: 0.09;
+      filter: sepia(0.55) contrast(0.76) brightness(1.2);
+      mix-blend-mode: multiply;
+      pointer-events: none;
+    }
+    .sketch-divider::before,
+    .sketch-divider::after {
+      content: ''; position: absolute; left: 0; right: 0; z-index: 2;
+      height: 65px; pointer-events: none;
+    }
+    .sketch-divider::before { top: 0;    background: linear-gradient(to bottom, #F5F0E8, transparent); }
+    .sketch-divider::after  { bottom: 0; background: linear-gradient(to top,   #F5F0E8, transparent); }
+    .sketch-divider .sd-label {
+      position: absolute; inset: 0; z-index: 3;
+      display: flex; align-items: center; justify-content: center; gap: 1rem;
+    }
+    .sketch-divider .sd-rule { flex: 0 0 3rem; height: 1px; background: rgba(74,71,55,0.2); }
+
+    /* Sepia harmonisation for gallery sketch images */
+    .mf-inner .sketch-img {
+      filter: sepia(0.22) contrast(1.05) brightness(0.97);
+    }
+    .museum-frame:hover .sketch-img {
+      filter: sepia(0.12) contrast(1.12) brightness(1.02);
+    }
+    #lb-img { filter: sepia(0.15) contrast(1.06) brightness(0.98); }
   </style>
 </head>
 
@@ -692,6 +746,18 @@
     <div class="color-treatment"></div>
     <!-- Dark gradient -->
     <div class="hero-grad"></div>
+
+    <!-- Atmospheric sketch layers -->
+    <img src="brand_assets/532C688D-73FD-4B6C-BFB6-6BD1EC8F31C4.png"
+         alt="" aria-hidden="true"
+         class="sketch-bg-el sketch-bg-dark"
+         data-parallax-speed="0.08"
+         style="width: 58%; right: -6%; top: -5%;">
+    <img src="brand_assets/papneshwara_1st%262nd_parikrama.png"
+         alt="" aria-hidden="true"
+         class="sketch-bg-el sketch-bg-dark"
+         data-parallax-speed="0.04"
+         style="width: 46%; left: -4%; bottom: 6%;">
 
     <!-- Decorative horizontal rule -->
     <div class="absolute left-8 right-8 top-1/4 border-t border-parch/[0.06] pointer-events-none"></div>
@@ -777,6 +843,17 @@
     <div class="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden select-none" aria-hidden="true">
       <span class="font-serif font-semibold text-bark/[0.025]" style="font-size: 22vw; white-space: nowrap; letter-spacing:-0.06em;">LEPAKSHI</span>
     </div>
+    <!-- Atmospheric sketch layer -->
+    <img src="brand_assets/0D1057A8-DD86-42EE-BB3A-DE84CCB177BA_1_105_c.jpeg"
+         alt="" aria-hidden="true"
+         class="sketch-bg-el sketch-bg-light"
+         data-parallax-speed="0.05"
+         style="width: 28%; right: 0%; top: 8%;">
+    <img src="brand_assets/4DEE6BF4-17CC-417C-86FA-641A0D4801C0.png"
+         alt="" aria-hidden="true"
+         class="sketch-bg-el sketch-bg-light"
+         data-parallax-speed="0.03"
+         style="width: 18%; left: 1%; bottom: 5%;">
 
     <div class="relative max-w-7xl mx-auto px-6 lg:px-16">
 
@@ -851,6 +928,17 @@
     <!-- Diagonal pattern -->
     <div class="absolute inset-0 opacity-[0.03] pointer-events-none" aria-hidden="true"
          style="background: repeating-linear-gradient(45deg, #C8624D 0, #C8624D 1px, transparent 0, transparent 28px);"></div>
+    <!-- Atmospheric sketch layer -->
+    <img src="brand_assets/EB8E798E-6F90-4AE0-B544-0FC635A9178B.png"
+         alt="" aria-hidden="true"
+         class="sketch-bg-el sketch-bg-dark"
+         data-parallax-speed="0.06"
+         style="width: 36%; right: 8%; top: -8%;">
+    <img src="brand_assets/DD1309E2-A250-40BB-9F6D-337D23F697BD.png"
+         alt="" aria-hidden="true"
+         class="sketch-bg-el sketch-bg-dark"
+         data-parallax-speed="0.04"
+         style="width: 24%; left: 5%; bottom: -5%;">
 
     <div class="relative max-w-4xl mx-auto text-center reveal">
       <!-- Large decorative quote mark -->
@@ -868,6 +956,17 @@
        ARCHITECTURE
   ════════════════════════════════════ -->
   <section id="architecture" class="relative py-36 bg-texture-light overflow-hidden">
+    <!-- Atmospheric sketch layers -->
+    <img src="brand_assets/4DC269F6-8819-4518-A738-AF9C8BCDB86B.png"
+         alt="" aria-hidden="true"
+         class="sketch-bg-el sketch-bg-light"
+         data-parallax-speed="0.045"
+         style="width: 26%; left: -3%; top: 6%;">
+    <img src="brand_assets/B793355E-0BED-4174-BFF0-D18F14F83114.png"
+         alt="" aria-hidden="true"
+         class="sketch-bg-el sketch-bg-light"
+         data-parallax-speed="0.055"
+         style="width: 20%; right: -1%; bottom: 10%;">
     <div class="max-w-7xl mx-auto px-6 lg:px-16">
 
       <!-- Section label -->
@@ -1084,6 +1183,17 @@
       </div>
     </div>
   </section>
+
+
+  <!-- Sketch divider: Gallery → Manuscripts -->
+  <div class="sketch-divider" aria-hidden="true">
+    <img src="brand_assets/437B8528-13AF-46A5-88EC-1B18A6426981.png" alt="" class="sd-img">
+    <div class="sd-label">
+      <span class="sd-rule"></span>
+      <span class="font-sans text-[0.54rem] tracking-[0.28em] text-bark/28 uppercase">Studies in Ink &amp; Stone</span>
+      <span class="sd-rule"></span>
+    </div>
+  </div>
 
 
   <!-- ══════════════════════════════════
@@ -2054,8 +2164,9 @@
       window.addEventListener('scroll', onScroll, { passive: true });
 
       // ── Parallax ──────────────────────────────────
-      const heroBg   = document.getElementById('hero-bg');
-      const midPara  = document.getElementById('mid-parallax');
+      const heroBg      = document.getElementById('hero-bg');
+      const midPara     = document.getElementById('mid-parallax');
+      const sketchBgEls = Array.from(document.querySelectorAll('.sketch-bg-el[data-parallax-speed]'));
 
       const runParallax = () => {
         const sy = window.scrollY;
@@ -2072,6 +2183,16 @@
           const centre  = rect.top + rect.height * 0.5 - window.innerHeight * 0.5;
           midPara.style.transform = `translateY(${centre * 0.28}px)`;
         }
+
+        // Sketch background atmospheric elements — each drifts at its own speed
+        sketchBgEls.forEach(el => {
+          const parent = el.parentElement;
+          if (!parent) return;
+          const rect   = parent.getBoundingClientRect();
+          const centre = rect.top + rect.height * 0.5 - window.innerHeight * 0.5;
+          const speed  = parseFloat(el.dataset.parallaxSpeed) || 0.05;
+          el.style.transform = `translateY(${centre * speed}px)`;
+        });
       };
 
       window.addEventListener('scroll', runParallax, { passive: true });
