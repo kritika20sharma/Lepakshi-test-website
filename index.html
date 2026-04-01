@@ -621,6 +621,108 @@
     }
     .lb-arrow:hover { color: #F5F0E8; border-color: rgba(200,98,77,0.45); background: rgba(200,98,77,0.09); }
 
+    /* ─── GUIDE REGISTRATION ─────────────────── */
+    .reg-section-bg {
+      background-color: #F2ECE1;
+      background-image:
+        radial-gradient(ellipse at 10% 50%, rgba(200,98,77,0.07) 0%, transparent 55%),
+        radial-gradient(ellipse at 90% 20%, rgba(74,71,55,0.05) 0%, transparent 50%);
+    }
+    /* Form inputs */
+    .reg-input {
+      width: 100%; background: #FFFFFF;
+      border: 1px solid rgba(74,71,55,0.16);
+      color: #2A261C;
+      padding: 0.82rem 1rem;
+      font-family: 'Raleway', sans-serif; font-size: 0.88rem; font-weight: 300;
+      outline: none; border-radius: 1px;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      appearance: none;
+    }
+    .reg-input:focus {
+      border-color: #C8624D;
+      box-shadow: 0 0 0 3px rgba(200,98,77,0.09);
+    }
+    .reg-input::placeholder { color: rgba(74,71,55,0.35); }
+    .reg-label {
+      display: block;
+      font-family: 'Raleway', sans-serif; font-size: 0.57rem;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: rgba(74,71,55,0.55); margin-bottom: 0.4rem;
+    }
+    .btn-register {
+      width: 100%; background: #C8624D; color: #F5F0E8;
+      border: none; padding: 1.05rem 2rem; cursor: pointer;
+      font-family: 'Raleway', sans-serif; font-size: 0.68rem;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      display: flex; align-items: center; justify-content: center; gap: 0.75rem;
+      position: relative; overflow: hidden;
+      transition: background 0.3s ease, transform 0.2s cubic-bezier(0.16,1,0.3,1);
+    }
+    .btn-register::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, transparent 60%);
+    }
+    .btn-register:hover  { background: #B3543E; transform: translateY(-2px); }
+    .btn-register:active { transform: translateY(0); }
+    /* Guide card preview */
+    .guide-card {
+      background: #FFFDF8;
+      border: 1px solid rgba(74,71,55,0.14);
+      box-shadow: 0 8px 40px rgba(74,71,55,0.1), 0 2px 8px rgba(74,71,55,0.06);
+      position: relative; overflow: hidden;
+    }
+    .guide-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(to right, #C8624D, #9B4A35);
+    }
+    .guide-avatar {
+      width: 72px; height: 72px; border-radius: 50%;
+      background: linear-gradient(135deg, #C8624D22, #4A473722);
+      border: 2px solid rgba(200,98,77,0.25);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .guide-contact-locked {
+      position: relative;
+    }
+    .guide-contact-locked .contact-value {
+      filter: blur(4.5px); user-select: none; pointer-events: none;
+      font-family: 'Raleway', sans-serif; font-size: 0.88rem;
+      color: #4A4737; letter-spacing: 0.04em;
+    }
+    .lock-badge {
+      position: absolute; right: 0; top: 50%; transform: translateY(-50%);
+      background: rgba(200,98,77,0.1); border: 1px solid rgba(200,98,77,0.22);
+      padding: 0.18rem 0.55rem;
+      font-family: 'Raleway', sans-serif; font-size: 0.5rem;
+      letter-spacing: 0.16em; text-transform: uppercase; color: #C8624D;
+    }
+    /* Trust badges */
+    .trust-pill {
+      display: inline-flex; align-items: center; gap: 0.45rem;
+      background: #FFF8F4; border: 1px solid rgba(200,98,77,0.18);
+      padding: 0.35rem 0.8rem;
+      font-family: 'Raleway', sans-serif; font-size: 0.54rem;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: rgba(74,71,55,0.65);
+    }
+    /* Verified stamp */
+    .verified-stamp {
+      position: absolute; top: 1.2rem; right: 1.2rem;
+      width: 52px; height: 52px;
+      border: 2px solid rgba(140,140,82,0.4);
+      border-radius: 50%;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      transform: rotate(12deg);
+    }
+    /* Form success state */
+    .reg-success {
+      display: none; text-align: center; padding: 2.5rem 1rem;
+    }
+    .reg-success.visible { display: block; }
+    .reg-form-inner.hidden { display: none; }
+
     /* ─── SKETCH BACKGROUND ATMOSPHERE ──────── */
     /* Common base */
     .sketch-bg-el {
@@ -700,6 +802,7 @@
       <a href="#stays"        class="nav-link font-sans text-[0.65rem] tracking-[0.22em] text-parch/75 uppercase hover:text-parch">Stay</a>
       <a href="#explore"      class="nav-link font-sans text-[0.65rem] tracking-[0.22em] text-parch/75 uppercase hover:text-parch">Explore</a>
       <a href="#visit"        class="nav-link font-sans text-[0.65rem] tracking-[0.22em] text-parch/75 uppercase hover:text-parch">Visit</a>
+      <a href="#guide"        class="nav-link font-sans text-[0.65rem] tracking-[0.22em] text-parch/75 uppercase hover:text-parch">Guide</a>
       <a href="#visit" class="btn-outline font-sans text-[0.65rem] tracking-[0.22em] text-parch uppercase px-7 py-3 focus:outline-none">
         <span>Plan Your Visit</span>
       </a>
@@ -730,6 +833,7 @@
     <a href="#stays"        class="m-link font-serif text-parch text-4xl font-light tracking-wide hover:text-terra transition-colors duration-300">Stay</a>
     <a href="#explore"      class="m-link font-serif text-parch text-4xl font-light tracking-wide hover:text-terra transition-colors duration-300">Explore</a>
     <a href="#visit"        class="m-link font-serif text-parch text-4xl font-light tracking-wide hover:text-terra transition-colors duration-300">Visit</a>
+    <a href="#guide"        class="m-link font-serif text-parch text-4xl font-light tracking-wide hover:text-terra transition-colors duration-300">Guide</a>
   </div>
 
 
@@ -2103,6 +2207,306 @@
 
 
   <!-- ══════════════════════════════════
+       GUIDE REGISTRATION
+  ════════════════════════════════════ -->
+  <section id="guide" class="reg-section-bg py-28 overflow-hidden relative">
+
+    <!-- Sketch atmosphere — Apsara faint background -->
+    <img src="brand_assets/437B8528-13AF-46A5-88EC-1B18A6426981.png" alt="" aria-hidden="true"
+         style="position:absolute;right:-4%;top:0;width:22%;opacity:0.055;
+                filter:sepia(0.55) contrast(0.8) brightness(1.15);
+                mix-blend-mode:multiply;pointer-events:none;user-select:none;">
+    <img src="brand_assets/4DC269F6-8819-4518-A738-AF9C8BCDB86B.png" alt="" aria-hidden="true"
+         style="position:absolute;left:-2%;bottom:0;width:18%;opacity:0.05;
+                filter:sepia(0.55) contrast(0.8) brightness(1.15);
+                mix-blend-mode:multiply;pointer-events:none;user-select:none;">
+
+    <div class="max-w-7xl mx-auto px-6 lg:px-16 relative z-[1]">
+
+      <!-- Section heading -->
+      <div class="text-center mb-16 reveal">
+        <div class="ornament-line mb-8">
+          <span class="ornament-dot"></span>
+          <span class="font-sans text-[0.58rem] tracking-[0.28em] text-terra/75 uppercase">Walk with a Guardian</span>
+          <span class="ornament-dot"></span>
+        </div>
+        <h2 class="font-fell text-5xl md:text-6xl text-bark leading-[1.06] mb-5">
+          Meet Your<br><em>Temple Guide</em>
+        </h2>
+        <p class="font-sans font-light text-sm tracking-wide text-bark/55 max-w-lg mx-auto leading-[1.9]">
+          Every stone at Lepakshi holds a story. Register to receive the verified contact details
+          of a certified local guide who will bring those stories to life.
+        </p>
+      </div>
+
+      <!-- 2-column: Guide card preview + Form -->
+      <div class="grid lg:grid-cols-2 gap-12 xl:gap-20 items-start">
+
+        <!-- LEFT: Guide card preview + trust signals -->
+        <div class="reveal-left">
+
+          <!-- Guide card -->
+          <div class="guide-card rounded-sm p-7 mb-6">
+            <!-- Verified stamp -->
+            <div class="verified-stamp">
+              <span class="font-sans text-[0.38rem] tracking-[0.15em] text-olive/70 uppercase leading-none">Cert.</span>
+              <span class="font-sans text-[0.38rem] tracking-[0.12em] text-olive/70 uppercase leading-none mt-0.5">Guide</span>
+            </div>
+
+            <!-- Guide header -->
+            <div class="flex items-center gap-4 mb-5">
+              <div class="guide-avatar">
+                <!-- Silhouette icon -->
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                  <circle cx="16" cy="11" r="5.5" stroke="#C8624D" stroke-width="1.2" fill="rgba(200,98,77,0.08)"/>
+                  <path d="M4 28c0-6.627 5.373-12 12-12s12 5.373 12 12" stroke="#C8624D" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+                </svg>
+              </div>
+              <div>
+                <p class="font-fell text-bark text-xl leading-tight mb-0.5">Govinda Reddy</p>
+                <p class="font-sans text-bark/45 text-xs" style="font-weight:300; letter-spacing:0.06em;">
+                  Lepakshi Temple · Certified Guide
+                </p>
+                <!-- Stars -->
+                <div class="flex gap-0.5 mt-1.5">
+                  <svg width="10" height="10" viewBox="0 0 10 10" fill="#C8624D"><path d="M5 1l1.18 2.6L9 4.18 7 6.1l.47 2.9L5 7.6 2.53 9 3 6.1 1 4.18l2.82-.58z"/></svg>
+                  <svg width="10" height="10" viewBox="0 0 10 10" fill="#C8624D"><path d="M5 1l1.18 2.6L9 4.18 7 6.1l.47 2.9L5 7.6 2.53 9 3 6.1 1 4.18l2.82-.58z"/></svg>
+                  <svg width="10" height="10" viewBox="0 0 10 10" fill="#C8624D"><path d="M5 1l1.18 2.6L9 4.18 7 6.1l.47 2.9L5 7.6 2.53 9 3 6.1 1 4.18l2.82-.58z"/></svg>
+                  <svg width="10" height="10" viewBox="0 0 10 10" fill="#C8624D"><path d="M5 1l1.18 2.6L9 4.18 7 6.1l.47 2.9L5 7.6 2.53 9 3 6.1 1 4.18l2.82-.58z"/></svg>
+                  <svg width="10" height="10" viewBox="0 0 10 10" fill="#C8624D"><path d="M5 1l1.18 2.6L9 4.18 7 6.1l.47 2.9L5 7.6 2.53 9 3 6.1 1 4.18l2.82-.58z"/></svg>
+                  <span class="font-sans text-bark/35 text-[0.6rem] ml-1.5" style="font-weight:300;">4.9 / 5</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Divider -->
+            <div style="height:1px;background:rgba(74,71,55,0.08);margin-bottom:1.25rem;"></div>
+
+            <!-- Stats row -->
+            <div class="grid grid-cols-3 gap-4 mb-5 text-center">
+              <div>
+                <p class="font-fell text-terra text-2xl leading-none">21</p>
+                <p class="font-sans text-bark/40 text-[0.55rem] tracking-[0.14em] uppercase mt-1" style="font-weight:300;">Years exp.</p>
+              </div>
+              <div style="border-left:1px solid rgba(74,71,55,0.08);border-right:1px solid rgba(74,71,55,0.08);">
+                <p class="font-fell text-terra text-2xl leading-none">4</p>
+                <p class="font-sans text-bark/40 text-[0.55rem] tracking-[0.14em] uppercase mt-1" style="font-weight:300;">Languages</p>
+              </div>
+              <div>
+                <p class="font-fell text-terra text-2xl leading-none">1.2k</p>
+                <p class="font-sans text-bark/40 text-[0.55rem] tracking-[0.14em] uppercase mt-1" style="font-weight:300;">Guests</p>
+              </div>
+            </div>
+
+            <!-- Details list -->
+            <ul class="space-y-2.5 mb-5">
+              <li class="flex items-start gap-3">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" class="mt-0.5 flex-shrink-0">
+                  <circle cx="6" cy="6" r="5.5" stroke="#8C8C52" stroke-width="1"/>
+                  <path d="M3.5 6l2 2 3-3" stroke="#8C8C52" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span class="font-sans text-bark/60 text-xs" style="font-weight:300; line-height:1.7;">
+                  Specialist in Vijayanagara iconography &amp; fresco interpretation
+                </span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" class="mt-0.5 flex-shrink-0">
+                  <circle cx="6" cy="6" r="5.5" stroke="#8C8C52" stroke-width="1"/>
+                  <path d="M3.5 6l2 2 3-3" stroke="#8C8C52" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span class="font-sans text-bark/60 text-xs" style="font-weight:300; line-height:1.7;">
+                  Speaks Telugu, Kannada, Hindi &amp; English
+                </span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" class="mt-0.5 flex-shrink-0">
+                  <circle cx="6" cy="6" r="5.5" stroke="#8C8C52" stroke-width="1"/>
+                  <path d="M3.5 6l2 2 3-3" stroke="#8C8C52" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span class="font-sans text-bark/60 text-xs" style="font-weight:300; line-height:1.7;">
+                  AP Tourism Department — Licence No. AP-LPK-0047
+                </span>
+              </li>
+            </ul>
+
+            <!-- Locked contact info -->
+            <div style="background:rgba(74,71,55,0.04);border:1px solid rgba(74,71,55,0.09);padding:0.85rem 1rem;border-radius:1px;">
+              <p class="font-sans text-[0.55rem] tracking-[0.16em] text-bark/38 uppercase mb-3">Contact Details</p>
+              <div class="space-y-2.5">
+                <div class="guide-contact-locked flex items-center justify-between">
+                  <div class="flex items-center gap-2.5">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="rgba(74,71,55,0.4)" stroke-width="1.5">
+                      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.92 12 19.79 19.79 0 0 1 1.93 3.38a2 2 0 0 1 2-2.18h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                    </svg>
+                    <span class="contact-value">+91 94403 &nbsp;XXXXX</span>
+                  </div>
+                  <span class="lock-badge">Locked</span>
+                </div>
+                <div class="guide-contact-locked flex items-center justify-between">
+                  <div class="flex items-center gap-2.5">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="rgba(74,71,55,0.4)" stroke-width="1.5">
+                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                      <polyline points="22,6 12,13 2,6"/>
+                    </svg>
+                    <span class="contact-value">govinda@lepakshi‑guide.in</span>
+                  </div>
+                  <span class="lock-badge">Locked</span>
+                </div>
+              </div>
+              <p class="font-sans text-[0.53rem] tracking-[0.08em] text-terra/60 mt-3" style="font-weight:300;">
+                ↑ Register below to unlock verified contact details
+              </p>
+            </div>
+          </div>
+
+          <!-- Trust pills -->
+          <div class="flex flex-wrap gap-2">
+            <span class="trust-pill">
+              <svg width="9" height="9" viewBox="0 0 9 9" fill="#8C8C52"><circle cx="4.5" cy="4.5" r="4.5"/></svg>
+              Verified by AP Tourism
+            </span>
+            <span class="trust-pill">
+              <svg width="9" height="9" viewBox="0 0 9 9" fill="#C8624D"><circle cx="4.5" cy="4.5" r="4.5"/></svg>
+              Free · No spam
+            </span>
+            <span class="trust-pill">
+              <svg width="9" height="9" viewBox="0 0 9 9" fill="#8C8C52"><circle cx="4.5" cy="4.5" r="4.5"/></svg>
+              Unsubscribe anytime
+            </span>
+          </div>
+        </div>
+
+        <!-- RIGHT: Registration form -->
+        <div class="reveal-right">
+          <div style="background:#FFFDF8;border:1px solid rgba(74,71,55,0.12);padding:2.5rem;box-shadow:0 4px 28px rgba(74,71,55,0.07);">
+
+            <p class="font-sans text-[0.58rem] tracking-[0.24em] text-terra/70 uppercase mb-2">Step 1 of 1</p>
+            <h3 class="font-fell text-2xl md:text-3xl text-bark italic mb-2">Request Guide Details</h3>
+            <p class="font-sans font-light text-xs text-bark/48 leading-[1.85] mb-7" style="letter-spacing:0.03em;">
+              Fill in your details and we will send Govinda's verified contact to your inbox within 24 hours.
+            </p>
+
+            <!-- Form -->
+            <form id="guide-reg-form" novalidate>
+              <div class="reg-form-inner space-y-5">
+
+                <!-- Name + Email row -->
+                <div class="grid sm:grid-cols-2 gap-4">
+                  <div>
+                    <label for="reg-name" class="reg-label">Full Name</label>
+                    <input id="reg-name" type="text" class="reg-input" placeholder="Your name" required>
+                  </div>
+                  <div>
+                    <label for="reg-email" class="reg-label">Email Address</label>
+                    <input id="reg-email" type="email" class="reg-input" placeholder="you@email.com" required>
+                  </div>
+                </div>
+
+                <!-- Visit date + Language row -->
+                <div class="grid sm:grid-cols-2 gap-4">
+                  <div>
+                    <label for="reg-date" class="reg-label">Planned Visit Date</label>
+                    <input id="reg-date" type="date" class="reg-input" style="color-scheme:light;">
+                  </div>
+                  <div>
+                    <label for="reg-lang" class="reg-label">Preferred Language</label>
+                    <div style="position:relative;">
+                      <select id="reg-lang" class="reg-input" style="padding-right:2.5rem;">
+                        <option value="">Select language</option>
+                        <option value="en">English</option>
+                        <option value="te">Telugu</option>
+                        <option value="hi">Hindi</option>
+                        <option value="kn">Kannada</option>
+                      </select>
+                      <!-- Chevron -->
+                      <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="rgba(74,71,55,0.45)" stroke-width="1.4"
+                           style="position:absolute;right:0.9rem;top:50%;transform:translateY(-50%);pointer-events:none;">
+                        <polyline points="2,3 5,7 8,3"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Group size (optional) -->
+                <div>
+                  <label for="reg-group" class="reg-label">Group Size <span style="font-weight:300;opacity:0.6;">(optional)</span></label>
+                  <div class="flex gap-2">
+                    <label class="flex-1">
+                      <input type="radio" name="group" value="solo" class="sr-only" id="r-solo">
+                      <div class="reg-radio-btn font-sans text-[0.65rem] tracking-[0.12em] text-bark/55 uppercase text-center py-2.5 border border-bark/15 cursor-pointer hover:border-terra/40 transition-colors duration-200"
+                           style="background:#FFFFFF;">Solo</div>
+                    </label>
+                    <label class="flex-1">
+                      <input type="radio" name="group" value="couple" class="sr-only" id="r-couple">
+                      <div class="reg-radio-btn font-sans text-[0.65rem] tracking-[0.12em] text-bark/55 uppercase text-center py-2.5 border border-bark/15 cursor-pointer hover:border-terra/40 transition-colors duration-200"
+                           style="background:#FFFFFF;">Couple</div>
+                    </label>
+                    <label class="flex-1">
+                      <input type="radio" name="group" value="family" class="sr-only" id="r-family">
+                      <div class="reg-radio-btn font-sans text-[0.65rem] tracking-[0.12em] text-bark/55 uppercase text-center py-2.5 border border-bark/15 cursor-pointer hover:border-terra/40 transition-colors duration-200"
+                           style="background:#FFFFFF;">Family</div>
+                    </label>
+                    <label class="flex-1">
+                      <input type="radio" name="group" value="group" class="sr-only" id="r-group">
+                      <div class="reg-radio-btn font-sans text-[0.65rem] tracking-[0.12em] text-bark/55 uppercase text-center py-2.5 border border-bark/15 cursor-pointer hover:border-terra/40 transition-colors duration-200"
+                           style="background:#FFFFFF;">Group</div>
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Error message area -->
+                <p id="reg-error" class="font-sans text-[0.65rem] text-terra/80 hidden" style="letter-spacing:0.04em;"></p>
+
+                <!-- Submit -->
+                <button type="submit" class="btn-register mt-2">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                  </svg>
+                  <span>Unlock Guide Details</span>
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4">
+                    <polyline points="5,2 10,6 5,10"/><line x1="1" y1="6" x2="10" y2="6"/>
+                  </svg>
+                </button>
+
+                <!-- Privacy note -->
+                <p class="font-sans text-bark/32 text-center leading-relaxed" style="font-size:0.58rem;font-weight:300;letter-spacing:0.05em;">
+                  Your details are shared only with the guide and never sold to third parties.
+                  <br>Read our <a href="#" class="underline hover:text-terra transition-colors duration-200">Privacy Policy</a>.
+                </p>
+
+              </div><!-- /.reg-form-inner -->
+
+              <!-- Success state -->
+              <div class="reg-success">
+                <div style="width:56px;height:56px;border-radius:50%;background:rgba(140,140,82,0.12);border:1px solid rgba(140,140,82,0.3);display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;">
+                  <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#8C8C52" stroke-width="1.5">
+                    <path d="M4 11l5 5 9-9" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+                <p class="font-fell italic text-bark text-2xl mb-3">You're registered.</p>
+                <p class="font-sans font-light text-sm text-bark/55 leading-[1.9] max-w-xs mx-auto">
+                  Govinda's verified contact details will arrive in your inbox within 24 hours.
+                  Lepakshi awaits.
+                </p>
+                <div class="eyebrow-line opacity-30 mt-6 mx-auto" style="width:4rem;"></div>
+              </div>
+
+            </form>
+          </div>
+
+          <!-- Quote below form -->
+          <p class="font-fell italic text-bark/35 text-sm mt-5 text-right leading-relaxed">
+            "A guide doesn't just show you the temple —<br>
+            <em>he shows you what the temple means."</em>
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════
        FOOTER
   ════════════════════════════════════ -->
   <footer class="bg-stone py-20 px-6 border-t border-parch/[0.07]">
@@ -2341,6 +2745,53 @@
       // Close on Escape key
       document.addEventListener('keydown', e => {
         if (e.key === 'Escape') closeMenu();
+      });
+
+      // ── Guide Registration Form ────────────────────
+      // Radio group: highlight selected option
+      document.querySelectorAll('input[name="group"]').forEach(radio => {
+        radio.addEventListener('change', () => {
+          document.querySelectorAll('input[name="group"]').forEach(r => {
+            const div = r.nextElementSibling;
+            div.style.borderColor = 'rgba(74,71,55,0.15)';
+            div.style.color       = 'rgba(74,71,55,0.55)';
+            div.style.background  = '#FFFFFF';
+          });
+          const sel = radio.nextElementSibling;
+          sel.style.borderColor = '#C8624D';
+          sel.style.color       = '#C8624D';
+          sel.style.background  = 'rgba(200,98,77,0.04)';
+        });
+      });
+
+      const regForm    = document.getElementById('guide-reg-form');
+      const regInner   = regForm?.querySelector('.reg-form-inner');
+      const regSuccess = regForm?.querySelector('.reg-success');
+      const regError   = document.getElementById('reg-error');
+
+      regForm?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name  = document.getElementById('reg-name').value.trim();
+        const email = document.getElementById('reg-email').value.trim();
+        const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+        if (!name) {
+          regError.textContent = '↑ Please enter your name.';
+          regError.classList.remove('hidden');
+          document.getElementById('reg-name').focus();
+          return;
+        }
+        if (!email || !emailOk) {
+          regError.textContent = '↑ Please enter a valid email address.';
+          regError.classList.remove('hidden');
+          document.getElementById('reg-email').focus();
+          return;
+        }
+
+        regError.classList.add('hidden');
+        // Show success state
+        regInner.classList.add('hidden');
+        regSuccess.classList.add('visible');
       });
     })();
   </script>
