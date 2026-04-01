@@ -1881,7 +1881,13 @@
 
         <!-- Right: Content -->
         <div class="lg:w-[45%] bg-[#2e2419] px-10 py-12 flex flex-col justify-center">
-          <p class="font-sans text-[0.55rem] tracking-[0.28em] text-terra/70 uppercase mb-3">Featured Stay · Andhra Pradesh</p>
+          <div class="flex items-center gap-3 mb-3">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-sm font-sans text-[0.5rem] tracking-[0.22em] uppercase font-semibold" style="background: linear-gradient(135deg, rgba(200,98,77,0.9), rgba(155,74,53,0.85)); color: #F5F0E8; letter-spacing: 0.2em;">
+              <svg width="7" height="7" viewBox="0 0 8 8" fill="#F5F0E8"><path d="M4 0L5 3H8L5.5 5L6.5 8L4 6L1.5 8L2.5 5L0 3H3Z"/></svg>
+              Featured
+            </span>
+            <p class="font-sans text-[0.55rem] tracking-[0.28em] text-terra/70 uppercase">Andhra Pradesh</p>
+          </div>
           <h3 class="font-fell text-4xl md:text-5xl text-parch italic leading-tight mb-5">ProtoVillage</h3>
           <div class="eyebrow-line mb-6 opacity-50"></div>
           <p class="font-sans font-light text-sm text-parch/55 leading-[1.95] mb-8">
@@ -1908,6 +1914,71 @@
           <p class="font-sans font-light text-[0.6rem] tracking-wide text-parch/30 mt-5 leading-loose">
             ✦ &nbsp;15% of your booking directly funds Lepakshi Temple preservation.
           </p>
+        </div>
+      </div>
+
+      <!-- Haritha Hotel Stay Card -->
+      <div class="stay-card reveal lg:flex rounded-sm overflow-hidden mt-12" style="min-height: 460px;">
+
+        <!-- Left: Content -->
+        <div class="lg:w-[45%] bg-[#EDE6D7] px-10 py-12 flex flex-col justify-center order-2 lg:order-1">
+          <p class="font-sans text-[0.55rem] tracking-[0.28em] text-terra/70 uppercase mb-3">Government Tourism Stay · APTDC</p>
+          <h3 class="font-fell text-4xl md:text-5xl text-bark italic leading-tight mb-5">Haritha Hotel, Lepakshi</h3>
+          <div class="eyebrow-line mb-6 opacity-30"></div>
+          <p class="font-sans font-light text-sm text-bark/60 leading-[1.95] mb-8">
+            The closest government-run guesthouse to the temple, managed by Andhra Pradesh Tourism.
+            Simple, clean rooms set in a quiet compound just 500 metres from the Veerabhadra Swamy
+            complex — the practical choice for pilgrims and heritage travellers alike.
+          </p>
+
+          <!-- Amenity tags -->
+          <div class="flex flex-wrap gap-2 mb-10">
+            <span class="dish-tag" style="color:#4A4737; background:rgba(74,71,55,0.06); border-color:rgba(74,71,55,0.18);">AC &amp; Non-AC Rooms</span>
+            <span class="dish-tag" style="color:#4A4737; background:rgba(74,71,55,0.06); border-color:rgba(74,71,55,0.18);">In-house Restaurant</span>
+            <span class="dish-tag" style="color:#4A4737; background:rgba(74,71,55,0.06); border-color:rgba(74,71,55,0.18);">500 m from Temple</span>
+            <span class="dish-tag" style="color:#4A4737; background:rgba(74,71,55,0.06); border-color:rgba(74,71,55,0.18);">APTDC Managed</span>
+            <span class="dish-tag" style="color:#4A4737; background:rgba(74,71,55,0.06); border-color:rgba(74,71,55,0.18);">Advance Booking</span>
+          </div>
+
+          <div class="flex gap-6 mb-10">
+            <div class="stat-bar border-bark/20">
+              <p class="font-sans text-[0.55rem] tracking-[0.18em] text-bark/45 uppercase mb-1">Check-in</p>
+              <p class="font-serif text-sm text-bark">12 noon</p>
+            </div>
+            <div class="stat-bar border-bark/20">
+              <p class="font-sans text-[0.55rem] tracking-[0.18em] text-bark/45 uppercase mb-1">Distance</p>
+              <p class="font-serif text-sm text-bark">500 m</p>
+            </div>
+            <div class="stat-bar border-bark/20">
+              <p class="font-sans text-[0.55rem] tracking-[0.18em] text-bark/45 uppercase mb-1">Booking</p>
+              <p class="font-serif text-sm text-bark">aptdc.in</p>
+            </div>
+          </div>
+
+          <a href="https://www.aptdc.in" target="_blank" rel="noopener" class="btn-outline self-start font-sans text-[0.62rem] tracking-[0.2em] text-bark uppercase px-8 py-3.5 focus:outline-none" style="border-color: rgba(74,71,55,0.4); color: #4A4737;">
+            <span>Book via APTDC</span>
+          </a>
+        </div>
+
+        <!-- Right: Dual images -->
+        <div class="relative lg:w-[55%] flex-shrink-0 order-1 lg:order-2 grid grid-cols-2" style="min-height: 340px;">
+          <div class="overflow-hidden relative">
+            <img src="brand_assets/harita_hotel.jpeg"
+                 alt="Haritha Hotel Lepakshi exterior" class="sc-img w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent to-[#3a2f22]/30 pointer-events-none z-[2]"></div>
+          </div>
+          <div class="overflow-hidden relative">
+            <img src="brand_assets/haritha-hotel-lepakshi-hindupur.jpeg"
+                 alt="Haritha Hotel room" class="sc-img w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent to-[#3a2f22]/30 pointer-events-none z-[2]"></div>
+          </div>
+          <div class="absolute top-5 right-5 z-[5]">
+            <span class="stay-badge text-parch/85 border-parch/25 bg-stone/60 backdrop-blur-sm">
+              <svg width="8" height="8" viewBox="0 0 8 8" fill="#C8624D"><circle cx="4" cy="4" r="4"/></svg>
+              Government Certified
+            </span>
+          </div>
+          <div class="sc-glow"></div>
         </div>
       </div>
 
@@ -2111,40 +2182,89 @@
           </div>
         </div>
 
-        <!-- Stop 3: ProtoVillage -->
-        <div class="reveal grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-8 md:gap-12 items-center">
-          <!-- Card — left side -->
+        <!-- Stop 3: ProtoVillage — full-width expanded -->
+        <div class="reveal">
           <div class="explore-card rounded-sm overflow-hidden">
-            <div class="overflow-hidden" style="aspect-ratio: 4/3;">
-              <img src="brand_assets/proto.jpeg"
-                   alt="ProtoVillage" class="ex-img w-full h-full object-cover">
-            </div>
-            <div class="p-7">
-              <div class="relative">
-                <span class="stop-number">3</span>
-                <p class="font-sans text-[0.55rem] tracking-[0.24em] text-terra/65 uppercase mb-2">Stop 03 · 12 km from temple</p>
-                <h3 class="font-fell text-2xl md:text-3xl text-parch italic mb-3">ProtoVillage</h3>
-                <p class="font-sans font-light text-xs text-parch/50 leading-[1.9]">
-                  A 25-acre experiment in regenerative living — mud homes, organic farming, rainwater
-                  harvesting, and a community that demonstrates what rural Andhra life can be when
-                  reimagined with intention. Stay here. Leave changed.
-                </p>
+            <!-- Photo strip: 3 images -->
+            <div class="grid grid-cols-3" style="height: 260px;">
+              <div class="overflow-hidden relative">
+                <img src="brand_assets/proto.jpeg"
+                     alt="ProtoVillage mud homes and farmland" class="ex-img w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-stone/60 to-transparent pointer-events-none"></div>
               </div>
-              <div class="flex gap-2 mt-5 flex-wrap">
-                <span class="dish-tag" style="color:#8C8C52; background:rgba(140,140,82,0.07); border-color:rgba(140,140,82,0.2);">Eco village</span>
-                <span class="dish-tag" style="color:#8C8C52; background:rgba(140,140,82,0.07); border-color:rgba(140,140,82,0.2);">12 km away</span>
-                <span class="dish-tag" style="color:#C8624D; background:rgba(200,98,77,0.07); border-color:rgba(200,98,77,0.2);">15% for temple</span>
+              <div class="overflow-hidden relative">
+                <img src="https://placehold.co/480x260/8C8C52/F5F0E8?text=Community+Kitchen"
+                     alt="ProtoVillage community kitchen" class="w-full h-full object-cover opacity-80">
+                <div class="absolute inset-0 bg-gradient-to-t from-stone/60 to-transparent pointer-events-none"></div>
+              </div>
+              <div class="overflow-hidden relative">
+                <img src="https://placehold.co/480x260/4A4737/F5F0E8?text=Open+Farmland"
+                     alt="ProtoVillage open farmland" class="w-full h-full object-cover opacity-80">
+                <div class="absolute inset-0 bg-gradient-to-t from-stone/60 to-transparent pointer-events-none"></div>
+              </div>
+            </div>
+
+            <div class="p-8 md:p-10">
+              <div class="flex flex-col md:flex-row md:items-start md:gap-12">
+
+                <!-- Left: heading + description -->
+                <div class="md:w-[58%]">
+                  <div class="relative mb-1">
+                    <span class="stop-number">3</span>
+                  </div>
+                  <p class="font-sans text-[0.55rem] tracking-[0.24em] text-terra/65 uppercase mb-2">Stop 03 · 12 km from temple</p>
+                  <h3 class="font-fell text-3xl md:text-4xl text-parch italic mb-4">ProtoVillage</h3>
+                  <p class="font-sans font-light text-xs text-parch/55 leading-[1.95] mb-5">
+                    Spread across 25 acres of red-soil Andhra countryside, ProtoVillage is a living
+                    experiment in regenerative village life — built around mud-brick homes, organic
+                    kitchen gardens, rainwater harvesting, and open-source knowledge sharing. Founded
+                    with the belief that rural communities can be self-reliant, creative, and thriving,
+                    it offers immersive stays where guests participate in the daily rhythms of the land:
+                    planting, cooking, crafting, stargazing. Twelve kilometres from Lepakshi, it is the
+                    ideal complement to a day spent with ancient stone — a reminder that heritage lives
+                    in the soil as much as in the temple.
+                  </p>
+                  <a href="https://www.protovillage.org/" target="_blank" rel="noopener"
+                     class="inline-flex items-center gap-2 font-sans text-[0.6rem] tracking-[0.2em] uppercase text-terra hover:text-terra/70 transition-colors duration-300 focus:outline-none">
+                    <span>Visit protovillage.org</span>
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5">
+                      <path d="M2 6h8M6 2l4 4-4 4"/>
+                    </svg>
+                  </a>
+                </div>
+
+                <!-- Right: what to expect + tags -->
+                <div class="md:w-[42%] mt-8 md:mt-0 border-t md:border-t-0 md:border-l border-parch/10 pt-6 md:pt-0 md:pl-10">
+                  <p class="font-sans text-[0.55rem] tracking-[0.24em] text-parch/40 uppercase mb-4">What to expect</p>
+                  <ul class="space-y-2.5 mb-6">
+                    <li class="flex items-start gap-2.5">
+                      <span class="mt-0.5 flex-shrink-0 w-1 h-1 rounded-full bg-terra/50"></span>
+                      <p class="font-sans font-light text-xs text-parch/55 leading-[1.8]">Stay in traditional mud-brick cottages with open courtyards</p>
+                    </li>
+                    <li class="flex items-start gap-2.5">
+                      <span class="mt-0.5 flex-shrink-0 w-1 h-1 rounded-full bg-terra/50"></span>
+                      <p class="font-sans font-light text-xs text-parch/55 leading-[1.8]">Farm-to-table community meals, cooked over wood fires</p>
+                    </li>
+                    <li class="flex items-start gap-2.5">
+                      <span class="mt-0.5 flex-shrink-0 w-1 h-1 rounded-full bg-terra/50"></span>
+                      <p class="font-sans font-light text-xs text-parch/55 leading-[1.8]">Workshops in natural building, weaving, and organic farming</p>
+                    </li>
+                    <li class="flex items-start gap-2.5">
+                      <span class="mt-0.5 flex-shrink-0 w-1 h-1 rounded-full bg-terra/50"></span>
+                      <p class="font-sans font-light text-xs text-parch/55 leading-[1.8]">Guided dawn walks to Lepakshi temple, 12 km away</p>
+                    </li>
+                  </ul>
+                  <div class="flex gap-2 flex-wrap">
+                    <span class="dish-tag" style="color:#8C8C52; background:rgba(140,140,82,0.07); border-color:rgba(140,140,82,0.2);">Eco Village</span>
+                    <span class="dish-tag" style="color:#8C8C52; background:rgba(140,140,82,0.07); border-color:rgba(140,140,82,0.2);">Farm Stay</span>
+                    <span class="dish-tag" style="color:#8C8C52; background:rgba(140,140,82,0.07); border-color:rgba(140,140,82,0.2);">Workshops</span>
+                    <span class="dish-tag" style="color:#C8624D; background:rgba(200,98,77,0.07); border-color:rgba(200,98,77,0.2);">15% for temple</span>
+                  </div>
+                </div>
+
               </div>
             </div>
           </div>
-
-          <!-- Centre dot -->
-          <div class="hidden md:flex flex-col items-center gap-3">
-            <div class="timeline-dot"></div>
-          </div>
-
-          <!-- Spacer -->
-          <div class="hidden md:block"></div>
         </div>
 
       </div><!-- /timeline-track -->
