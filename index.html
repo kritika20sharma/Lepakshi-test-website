@@ -1199,8 +1199,25 @@
   <!-- ══════════════════════════════════
        SACRED MANUSCRIPT
   ════════════════════════════════════ -->
-  <section id="manuscripts" class="ms-paper py-28 overflow-hidden">
-    <div class="max-w-7xl mx-auto px-6 lg:px-16">
+  <section id="manuscripts" class="ms-paper py-28 overflow-hidden relative">
+
+    <!-- ── Sketch → Temple photo background transition ── -->
+    <!-- Sketch layer: starts opaque, fades out as user scrolls through -->
+    <div id="ms-bg-sketch" aria-hidden="true"
+         style="position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;transition:opacity 0.1s linear;">
+      <img src="brand_assets/532C688D-73FD-4B6C-BFB6-6BD1EC8F31C4.png" alt=""
+           style="width:100%;height:100%;object-fit:cover;filter:sepia(0.55) contrast(0.72) brightness(1.22);opacity:0.08;mix-blend-mode:multiply;">
+    </div>
+    <!-- Photo layer: starts invisible, builds in as user progresses through section -->
+    <div id="ms-bg-photo" aria-hidden="true"
+         style="position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;opacity:0;">
+      <img src="brand_assets/veerabhadra_temple.jpg" alt=""
+           style="width:100%;height:100%;object-fit:cover;object-position:center 30%;">
+      <!-- Parchment veil keeps text readable over the photo -->
+      <div style="position:absolute;inset:0;background:rgba(237,232,222,0.88);"></div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-6 lg:px-16 relative z-[1]">
 
       <!-- Section heading -->
       <div class="text-center mb-16 reveal">
@@ -1660,7 +1677,7 @@
         <!-- Left: Sketch-photo blend image -->
         <div class="relative lg:w-[55%] flex-shrink-0" style="min-height: 340px;">
           <div class="sketch-frame h-full">
-            <img src="https://placehold.co/900x600/2a1f0f/4a3420?text=ProtoVillage"
+            <img src="brand_assets/proto.jpeg"
                  alt="ProtoVillage eco heritage stay" class="sc-img img-photo w-full h-full object-cover">
             <!-- sketch overlay -->
             <div class="sketch-pencil-overlay"
@@ -1745,8 +1762,8 @@
 
         <!-- Image -->
         <div class="relative lg:w-[48%] flex-shrink-0 overflow-hidden" style="min-height: 280px;">
-          <img src="brand_assets/interiors.jpeg"
-               alt="APTDC Haritha Hotel dining" class="ec-img w-full h-full object-cover">
+          <img src="brand_assets/harita_hotel.jpeg"
+               alt="APTDC Haritha Hotel" class="ec-img w-full h-full object-cover">
           <div class="absolute inset-0 bg-gradient-to-t from-bark/50 via-transparent to-transparent pointer-events-none"></div>
           <span class="absolute top-5 left-5 stay-badge text-parch border-parch/25 bg-bark/70 backdrop-blur-sm">
             ✦ &nbsp;Featured Dining
@@ -1919,7 +1936,7 @@
           <!-- Card — left side -->
           <div class="explore-card rounded-sm overflow-hidden">
             <div class="overflow-hidden" style="aspect-ratio: 4/3;">
-              <img src="https://placehold.co/800x600/2a1f0f/4a3420?text=ProtoVillage"
+              <img src="brand_assets/proto.jpeg"
                    alt="ProtoVillage" class="ex-img w-full h-full object-cover">
             </div>
             <div class="p-7">
@@ -2197,6 +2214,25 @@
 
       window.addEventListener('scroll', runParallax, { passive: true });
       runParallax(); // initial call
+
+      // ── Manuscripts: Sketch → Temple photo background transition ──
+      const msSection  = document.getElementById('manuscripts');
+      const msBgSketch = document.getElementById('ms-bg-sketch');
+      const msBgPhoto  = document.getElementById('ms-bg-photo');
+
+      const runMsTransition = () => {
+        if (!msSection) return;
+        const rect     = msSection.getBoundingClientRect();
+        const total    = rect.height - window.innerHeight;
+        // progress: 0 when section top hits viewport top → 1 when section bottom hits viewport bottom
+        const progress = total > 0 ? Math.max(0, Math.min(1, -rect.top / total)) : 0;
+
+        if (msBgSketch) msBgSketch.style.opacity = (1 - progress * 0.85).toFixed(3);
+        if (msBgPhoto)  msBgPhoto.style.opacity  = (progress * 0.18).toFixed(3);
+      };
+
+      window.addEventListener('scroll', runMsTransition, { passive: true });
+      runMsTransition();
 
       // ── Reveal on scroll ──────────────────────────
       const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
