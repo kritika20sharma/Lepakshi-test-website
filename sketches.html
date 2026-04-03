@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sketches — Lepakshi Temple</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=IM+Fell+English:ital@0;1&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: { extend: {
+        colors: { terra:'#C8624D', olive:'#8C8C52', bark:'#4A4737', parch:'#F5F0E8', stone:'#2A261C', aged:'#B8A88A', rust:'#9B4A35' },
+        fontFamily: { serif:['"Cormorant Garamond"','serif'], fell:['"IM Fell English"','serif'], sans:['Raleway','sans-serif'] }
+      }}
+    }
+  </script>
+  <style>
+    body::after { content:''; position:fixed; inset:0; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E"); opacity:0.04; pointer-events:none; z-index:9000; }
+    *, *::before, *::after { box-sizing:border-box; margin:0; }
+    html { scroll-behavior:smooth; }
+    body { background-color:#F5F0E8; color:#2A261C; font-family:'Cormorant Garamond',serif; overflow-x:hidden; }
+    img { display:block; max-width:100%; }
+
+    .reveal { opacity:0; transform:translateY(44px); transition:opacity 1.3s cubic-bezier(0.16,1,0.3,1), transform 1.3s cubic-bezier(0.16,1,0.3,1); }
+    .reveal.visible { opacity:1; transform:none; }
+
+    /* ── NAV ── */
+    #main-nav { transition: background 0.7s ease, backdrop-filter 0.7s ease, padding 0.5s ease; }
+    #main-nav.scrolled { background:rgba(42,38,28,0.93)!important; backdrop-filter:blur(14px); padding-top:0.85rem; padding-bottom:0.85rem; }
+    .nav-link { position:relative; transition:color 0.3s ease; }
+    .nav-link::after { content:''; position:absolute; bottom:-3px; left:0; width:0; height:1px; background:#C8624D; transition:width 0.4s cubic-bezier(0.16,1,0.3,1); }
+    .nav-link:hover::after { width:100%; }
+    .nav-active { color:#F5F0E8!important; }
+    .nav-active::after { width:100%!important; }
+    #mobile-menu { transition:opacity 0.4s ease, visibility 0.4s ease; }
+    #mobile-menu.hidden { opacity:0; visibility:hidden; pointer-events:none; }
+    #mobile-menu:not(.hidden) { opacity:1; visibility:visible; }
+
+    /* ── PAGE HERO STRIP ── */
+    .page-hero { position:relative; height:38vh; min-height:260px; overflow:hidden; display:flex; align-items:flex-end; }
+    .page-hero-bg { position:absolute; inset:-10%; background-size:cover; background-position:center; filter:brightness(0.62) sepia(0.28); }
+    .page-hero-grad { position:absolute; inset:0; background:linear-gradient(to bottom, rgba(42,38,28,0.3) 0%, rgba(42,38,28,0.82) 100%); }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width:6px; }
+    ::-webkit-scrollbar-track { background:#2A261C; }
+    ::-webkit-scrollbar-thumb { background:#C8624D; border-radius:3px; }
+
+    /* ── CANVAS SURFACE ── */
+    .scroll-section {
+      background-color:#D9C9A3;
+      background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23n)' opacity='0.07'/%3E%3C/svg%3E"),
+        repeating-linear-gradient(0deg, transparent 0, transparent 31px, rgba(74,71,55,0.022) 31px, rgba(74,71,55,0.022) 32px),
+        radial-gradient(ellipse at 18% 12%, rgba(200,98,77,0.08), transparent 48%),
+        radial-gradient(ellipse at 82% 88%, rgba(140,140,82,0.06), transparent 44%),
+        radial-gradient(ellipse at 55% 55%, rgba(155,90,45,0.05), transparent 60%);
+    }
+    .si { background:transparent; position:relative; cursor:pointer; opacity:1; }
+    .ti-a { transform:rotate(-2.1deg); } .ti-b { transform:rotate(1.8deg); }
+    .ti-c { transform:rotate(-0.7deg); } .ti-d { transform:rotate(2.4deg); }
+    .ti-e { transform:rotate(-1.6deg); } .ti-f { transform:rotate(1.1deg); }
+    .ti-g { transform:rotate(-2.7deg); } .ti-h { transform:rotate(1.4deg); }
+    .ti-z { transform:rotate(0.4deg); }
+    .s-tape { position:absolute; z-index:6; pointer-events:none; width:40px; height:12px; background:rgba(238,215,120,0.32); background-image:repeating-linear-gradient(90deg,rgba(255,255,255,0.18) 0,rgba(255,255,255,0.18) 2px,transparent 2px,transparent 7px); }
+    .s-tape.tp-tc { top:-6px; left:50%; transform:translateX(-50%) rotate(-0.5deg); }
+    .s-tape.tp-tl { top:-6px; left:15%; transform:rotate(-3deg); }
+    .s-tape.tp-tr { top:-6px; right:15%; transform:rotate(2.8deg); }
+    .s-img-wrap { overflow:hidden; position:relative; background:transparent; }
+    .s-img { width:100%; height:100%; display:block; object-fit:contain; mix-blend-mode:multiply; filter:sepia(0.32) contrast(1.18) brightness(0.88); transition:transform 0.85s cubic-bezier(0.16,1,0.3,1), filter 0.4s ease; }
+    .si:hover .s-img { transform:scale(1.04); filter:sepia(0.16) contrast(1.22) brightness(0.91); }
+    .si.has-reality .reality-photo { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; z-index:3; transition:opacity 1s ease; }
+    .si.has-reality:hover .reality-photo { opacity:0.72; }
+    .si.has-draw .draw-overlay { position:absolute; bottom:0; left:0; right:0; height:100%; background:#D9C9A3; z-index:4; pointer-events:none; transition:height 2.8s cubic-bezier(0.16,1,0.3,1); }
+    .si.has-draw.drawing .draw-overlay { height:0%; }
+    .s-label { padding:0.45rem 0.1rem 0.7rem; border-top:none; background:transparent; }
+    .s-num  { font-family:'IM Fell English',serif; font-size:0.58rem; color:rgba(200,98,77,0.48); letter-spacing:0.04em; display:block; margin-bottom:0.06rem; }
+    .s-title { font-family:'IM Fell English',serif; font-size:0.86rem; color:rgba(74,71,55,0.78); font-style:italic; line-height:1.25; display:block; margin-bottom:0.16rem; }
+    .s-note { font-family:'Raleway',sans-serif; font-weight:300; font-size:0.53rem; letter-spacing:0.06em; color:rgba(74,71,55,0.40); line-height:1.85; }
+    .s-ch-mark { display:inline-block; transform:rotate(-0.8deg); }
+    .s-ch-no   { font-family:'IM Fell English',serif; font-size:0.58rem; letter-spacing:0.22em; color:rgba(200,98,77,0.58); text-transform:uppercase; display:block; margin-bottom:0.28rem; }
+    .s-ch-name { font-family:'IM Fell English',serif; font-size:clamp(1.55rem,2.8vw,2.2rem); color:rgba(74,71,55,0.82); font-style:italic; line-height:1.12; display:block; margin-bottom:0.45rem; }
+    .s-ch-note { font-family:'Raleway',sans-serif; font-weight:300; font-size:0.72rem; color:rgba(74,71,55,0.44); line-height:1.9; letter-spacing:0.04em; max-width:38ch; }
+    .s-rule { height:1px; background:linear-gradient(to right, transparent, rgba(74,71,55,0.12) 20%, rgba(74,71,55,0.12) 80%, transparent); }
+    .ink-js-ready .si { opacity:0; transition:opacity 0.85s ease; }
+    .ink-js-ready .si.si-shown { opacity:1; }
+    .si.sd1 { transition-delay:0s; } .si.sd2 { transition-delay:0.1s; }
+    .si.sd3 { transition-delay:0.2s; } .si.sd4 { transition-delay:0.32s; }
+
+    /* ── LIGHTBOX ── */
+    #sketch-lightbox { position:fixed; inset:0; z-index:11000; background:rgba(8,6,3,0.97); display:flex; flex-direction:column; align-items:center; justify-content:center; opacity:0; visibility:hidden; transition:opacity 0.38s ease, visibility 0.38s ease; }
+    #sketch-lightbox.lb-open { opacity:1; visibility:visible; }
+    #lb-img-wrap { max-width:min(88vw,820px); max-height:82vh; display:flex; align-items:center; justify-content:center; transform:scale(0.93); transition:transform 0.42s cubic-bezier(0.16,1,0.3,1); }
+    #sketch-lightbox.lb-open #lb-img-wrap { transform:scale(1); }
+    #lb-img { max-width:100%; max-height:82vh; object-fit:contain; filter:sepia(0.15) contrast(1.06) brightness(0.98); }
+    #lb-close { position:absolute; top:1.25rem; right:1.25rem; width:2.4rem; height:2.4rem; border:1px solid rgba(245,240,232,0.2); display:flex; align-items:center; justify-content:center; cursor:pointer; color:rgba(245,240,232,0.6); transition:color 0.3s ease, border-color 0.3s ease, background 0.3s ease; background:transparent; }
+    #lb-close:hover { color:#F5F0E8; border-color:rgba(200,98,77,0.5); background:rgba(200,98,77,0.08); }
+    #lb-caption { margin-top:1.2rem; font-family:'Cormorant Garamond',serif; font-size:0.85rem; letter-spacing:0.06em; color:rgba(245,240,232,0.42); text-align:center; max-width:520px; line-height:1.5; }
+    #lb-nav { position:absolute; top:50%; transform:translateY(-50%); width:100%; display:flex; justify-content:space-between; padding:0 1rem; pointer-events:none; }
+    .lb-arrow { pointer-events:all; width:2.8rem; height:2.8rem; border:1px solid rgba(245,240,232,0.18); display:flex; align-items:center; justify-content:center; cursor:pointer; color:rgba(245,240,232,0.5); transition:color 0.3s ease, border-color 0.3s ease, background 0.3s ease; background:rgba(8,6,3,0.45); }
+    .lb-arrow:hover { color:#F5F0E8; border-color:rgba(200,98,77,0.45); background:rgba(200,98,77,0.09); }
+
+    /* ── FOOTER ── */
+    .site-footer { background:#2A261C; border-top:1px solid rgba(245,240,232,0.06); }
+  </style>
+</head>
+
+<body class="text-stone font-serif overflow-x-hidden" style="background:#F5F0E8;">
+
+  <!-- NAV -->
+  <nav id="main-nav" class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-6"
+       style="background:rgba(42,38,28,0.82); backdrop-filter:blur(14px);">
+    <a href="index.html" class="flex-shrink-0 hover:opacity-85 transition-opacity duration-300 focus:outline-none">
+      <img src="brand_assets/last_nandi_logo.jpeg" alt="Lepakshi" style="height:48px; width:auto; filter:drop-shadow(0 2px 12px rgba(0,0,0,0.35));">
+    </a>
+    <div class="hidden md:flex items-center gap-8">
+      <a href="index.html"    class="nav-link font-sans text-[0.65rem] tracking-[0.22em] text-parch/60 uppercase hover:text-parch">← Home</a>
+      <a href="sketches.html" class="nav-link nav-active font-sans text-[0.65rem] tracking-[0.22em] text-parch uppercase">Sketches</a>
+      <a href="visit.html"    class="nav-link font-sans text-[0.65rem] tracking-[0.22em] text-parch/60 uppercase hover:text-parch">Plan Visit</a>
+      <a href="mla.html"      class="nav-link font-sans text-[0.65rem] tracking-[0.22em] text-parch/60 uppercase hover:text-parch">MLA Message</a>
+    </div>
+    <button id="menu-open" class="md:hidden text-parch focus:outline-none p-1" aria-label="Open menu">
+      <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.4">
+        <line x1="3" y1="7" x2="23" y2="7"/><line x1="3" y1="13" x2="23" y2="13"/><line x1="3" y1="19" x2="23" y2="19"/>
+      </svg>
+    </button>
+  </nav>
+
+  <div id="mobile-menu" class="hidden fixed inset-0 bg-stone/96 backdrop-blur-lg z-[9100] flex flex-col items-center justify-center gap-9">
+    <button id="menu-close" class="absolute top-6 right-8 text-parch/70 hover:text-parch focus:outline-none">
+      <svg width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.4"><line x1="5" y1="5" x2="25" y2="25"/><line x1="25" y1="5" x2="5" y2="25"/></svg>
+    </button>
+    <a href="index.html"    class="m-link font-serif text-parch text-4xl font-light tracking-wide hover:text-terra transition-colors duration-300">Home</a>
+    <a href="sketches.html" class="m-link font-serif text-terra text-4xl font-light tracking-wide">Sketches</a>
+    <a href="visit.html"    class="m-link font-serif text-parch text-4xl font-light tracking-wide hover:text-terra transition-colors duration-300">Plan Visit</a>
+    <a href="mla.html"      class="m-link font-serif text-parch text-4xl font-light tracking-wide hover:text-terra transition-colors duration-300">MLA Message</a>
+  </div>
+
+  <!-- PAGE HERO -->
+  <div class="page-hero">
+    <div class="page-hero-bg" style="background-image:url('brand_assets/veerabhadra_temple.jpg');"></div>
+    <div class="page-hero-grad"></div>
+    <div class="relative z-10 w-full px-8 lg:px-16 pb-12 pt-32">
+      <div class="max-w-5xl mx-auto">
+        <p class="font-sans text-[0.55rem] tracking-[0.3em] text-terra/80 uppercase mb-3">Artist's Field Journal · Pen &amp; Ink Studies</p>
+        <h1 class="font-fell text-parch italic" style="font-size:clamp(2.4rem,6vw,4.5rem); line-height:1.08; letter-spacing:-0.01em;">
+          Seventeen Studies<br><em>in Ink &amp; Stone</em>
+        </h1>
+        <p class="font-sans font-light text-parch/45 text-sm mt-4 max-w-md leading-loose">
+          Drawn by Dr A S Raja Rao across seventeen visits, in the tradition of measured devotion.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- MANUSCRIPTS CANVAS SECTION -->
+  <section id="manuscripts" class="scroll-section py-20 overflow-hidden relative">
+
+    <div id="ms-bg-sketch" aria-hidden="true"
+         style="position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;">
+      <img src="brand_assets/532C688D-73FD-4B6C-BFB6-6BD1EC8F31C4.png" alt=""
+           style="width:100%;height:100%;object-fit:cover;filter:sepia(0.55) contrast(0.72) brightness(1.22);opacity:0.07;mix-blend-mode:multiply;">
+    </div>
+    <div id="ms-bg-photo" aria-hidden="true"
+         style="position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;opacity:0;">
+      <img src="brand_assets/veerabhadra_temple.jpg" alt=""
+           style="width:100%;height:100%;object-fit:cover;object-position:center 30%;">
+      <div style="position:absolute;inset:0;background:rgba(217,201,163,0.88);"></div>
+    </div>
+    <div aria-hidden="true" style="position:absolute;top:0;bottom:0;left:clamp(1rem,5.5vw,5rem);width:1px;background:rgba(200,98,77,0.16);pointer-events:none;z-index:0;"></div>
+
+    <div class="max-w-5xl mx-auto px-6 sm:px-10 lg:px-14 relative" style="z-index:1;">
+
+      <!-- ── CHAPTER I ── -->
+      <div class="mb-24">
+        <div class="mb-10 reveal">
+          <div class="s-ch-mark"><span class="s-ch-no">Chapter I</span><span class="s-ch-name">Entry — The Outer World</span></div>
+          <p class="s-ch-note mt-1">The first sight of Lepakshi — the silhouette of the gopuram against open sky, the outer parikramas that circle the sacred ground.</p>
+        </div>
+        <div class="flex justify-center mb-12">
+          <div class="si has-draw has-reality ti-a sd1" style="width:88%;"
+               data-src="brand_assets/papneshwara_1st%262nd_parikrama.png"
+               data-caption="The Outer Parikramas — 1st &amp; 2nd circuit of the Veerabhadraswamy complex, surveyed in a single unbroken panoramic line">
+            <div class="s-tape tp-tc" aria-hidden="true"></div>
+            <div class="s-img-wrap" style="height:clamp(195px,26vw,320px);">
+              <img class="s-img" src="brand_assets/papneshwara_1st%262nd_parikrama.png" alt="Temple parikrama panoramic sketch">
+              <img class="reality-photo" src="brand_assets/veerabhadra_temple.jpg" alt="Veerabhadra temple exterior">
+              <div class="draw-overlay"></div>
+            </div>
+            <div class="s-label"><span class="s-num">Study I · 1</span><span class="s-title">The Outer Parikramas</span><p class="s-note">A single ink traverse of both circumambulation circuits — note the shift in cornice height between the first and second ring. Hover to reveal the temple today.</p></div>
+          </div>
+        </div>
+        <div class="flex justify-end">
+          <div class="si has-reality ti-b sd2" style="width:55%;"
+               data-src="brand_assets/532C688D-73FD-4B6C-BFB6-6BD1EC8F31C4.png"
+               data-caption="Gopuram &amp; Mandapa — panoramic ink study of the temple complex silhouette from the eastern approach">
+            <div class="s-tape tp-tr" aria-hidden="true"></div>
+            <div class="s-img-wrap" style="height:clamp(185px,24vw,300px);">
+              <img class="s-img" src="brand_assets/532C688D-73FD-4B6C-BFB6-6BD1EC8F31C4.png" alt="Temple complex panorama sketch">
+              <img class="reality-photo" src="brand_assets/veerabhadra_temple.jpg" alt="Veerabhadra temple">
+            </div>
+            <div class="s-label"><span class="s-num">Study I · 2</span><span class="s-title">Gopuram &amp; Mandapa</span><p class="s-note">The Dravidian tower in elevation — seven storeys of diminishing yali pilasters, capped by a barrel-vault shikhara unique to the Vijayanagara idiom</p></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="s-rule mb-16"></div>
+
+      <!-- ── CHAPTER II ── -->
+      <div class="mb-24">
+        <div class="mb-10 reveal">
+          <div class="s-ch-mark"><span class="s-ch-no">Chapter II</span><span class="s-ch-name">Guardians at the Threshold</span></div>
+          <p class="s-ch-note mt-1">Before you enter the inner world, the dvarapalas stand watch — fierce, adorned, eternal.</p>
+        </div>
+        <div class="grid grid-cols-5 gap-5 items-start">
+          <div class="si has-draw ti-e sd1 col-span-3" style="grid-row:span 2;"
+               data-src="brand_assets/0D1057A8-DD86-42EE-BB3A-DE84CCB177BA_1_105_c.jpeg"
+               data-caption="Veerabhadra — the fierce eighteen-armed emanation of Shiva, presiding guardian deity of Lepakshi">
+            <div class="s-tape tp-tl" aria-hidden="true"></div>
+            <div class="s-img-wrap" style="height:clamp(360px,48vw,560px);">
+              <img class="s-img" src="brand_assets/0D1057A8-DD86-42EE-BB3A-DE84CCB177BA_1_105_c.jpeg" alt="Veerabhadra sketch">
+              <div class="draw-overlay"></div>
+            </div>
+            <div class="s-label"><span class="s-num">Study II · 1</span><span class="s-title">Veerabhadra</span><p class="s-note">Eighteen arms bearing weapons of cosmic destruction — the gana lord born from Shiva's rage</p></div>
+          </div>
+          <div class="si ti-d sd2 col-span-2"
+               data-src="brand_assets/6BA78610-587E-47A8-85F6-F26C75079D9B.png"
+               data-caption="Dvarapala and Ganesha — guardian pair flanking the sacred entrance pillar">
+            <div class="s-tape tp-tr" aria-hidden="true"></div>
+            <div class="s-img-wrap" style="height:clamp(170px,22vw,258px);">
+              <img class="s-img" src="brand_assets/6BA78610-587E-47A8-85F6-F26C75079D9B.png" alt="Ganesha and guardian sketch">
+            </div>
+            <div class="s-label"><span class="s-num">Study II · 2</span><span class="s-title">Dvarapala &amp; Ganesha</span><p class="s-note">Abundance paired with the removal of obstacles at every entrance</p></div>
+          </div>
+          <div class="si ti-c sd3 col-span-2"
+               data-src="brand_assets/F5B80039-EA29-4D26-A5C8-2915829F2AF4.png"
+               data-caption="The Warrior at the Gate — in relaxed tribhanga stance, eternal keeper of the threshold">
+            <div class="s-tape tp-tl" aria-hidden="true"></div>
+            <div class="s-img-wrap" style="height:clamp(170px,22vw,258px);">
+              <img class="s-img" src="brand_assets/F5B80039-EA29-4D26-A5C8-2915829F2AF4.png" alt="Warrior deity sketch">
+            </div>
+            <div class="s-label"><span class="s-num">Study II · 3</span><span class="s-title">The Warrior at the Gate</span><p class="s-note">Tribhanga stance — weight over one hip. Signals potential force, not rest</p></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="s-rule mb-16"></div>
+
+      <!-- ── CHAPTER III ── -->
+      <div class="mb-24">
+        <div class="mb-10 reveal">
+          <div class="s-ch-mark"><span class="s-ch-no">Chapter III</span><span class="s-ch-name">Figures of the Mandapa</span></div>
+          <p class="s-ch-note mt-1">The pillared halls hold a silent congregation — deities, apsaras, and celestial attendants carved into living stone, now alive again in ink.</p>
+        </div>
+        <div class="grid grid-cols-12 gap-4 mb-5 items-start">
+          <div class="si ti-b sd1 col-span-12 sm:col-span-5"
+               data-src="brand_assets/4DE25544-0C98-4765-9E21-A568700787C6.png"
+               data-caption="Deity in a Shrine Niche — flanked by carved pillars in characteristic Vijayanagara frontality">
+            <div class="s-tape tp-tl" aria-hidden="true"></div>
+            <div class="s-img-wrap" style="height:clamp(200px,26vw,320px);">
+              <img class="s-img" src="brand_assets/4DE25544-0C98-4765-9E21-A568700787C6.png" alt="Shrine niche deity sketch">
+            </div>
+            <div class="s-label"><span class="s-num">Study III · 1</span><span class="s-title">Deity in the Niche</span><p class="s-note">The cusped archway frames a tiered mukhamandapa — a Chalukyan compositional device refined at Vijayanagara</p></div>
+          </div>
+          <div class="si has-reality ti-a sd2 col-span-12 sm:col-span-4"
+               data-src="brand_assets/9834201B-70E6-4060-9C8B-26495AEDBB1B.png"
+               data-caption="The Abhaya Mudra — deity in nimbus of grace, raising the gesture of fearlessness">
+            <div class="s-tape tp-tc" aria-hidden="true"></div>
+            <div class="s-img-wrap" style="height:clamp(200px,26vw,320px);">
+              <img class="s-img" src="brand_assets/9834201B-70E6-4060-9C8B-26495AEDBB1B.png" alt="Deity with nimbus sketch">
+              <img class="reality-photo" src="brand_assets/interiors.jpeg" alt="Temple interiors">
+            </div>
+            <div class="s-label"><span class="s-num">Study III · 2</span><span class="s-title">The Abhaya Mudra</span><p class="s-note">Palm outward — the oldest gesture of protection in South Asian sculpture. Hover to see the hall it inhabits.</p></div>
+          </div>
+          <div class="si ti-f sd3 col-span-12 sm:col-span-3"
+               data-src="brand_assets/4DEE6BF4-17CC-417C-86FA-641A0D4801C0.png"
+               data-caption="Celestial Attendant — serene, adorned, standing on a carved plinth of foliate design">
+            <div class="s-tape tp-tr" aria-hidden="true"></div>
+            <div class="s-img-wrap" style="height:clamp(200px,26vw,320px);">
+              <img class="s-img" src="brand_assets/4DEE6BF4-17CC-417C-86FA-641A0D4801C0.png" alt="Celestial figure sketch">
+            </div>
+            <div class="s-label"><span class="s-num">Study III · 3</span><span class="s-title">Celestial Attendant</span><p class="s-note">High chignon, elongated fingers — a vidyadhara, knowledge-bearer of the celestial court</p></div>
+          </div>
+        </div>
+        <div class="grid grid-cols-3 gap-4 mb-5 items-start">
+          <div class="si ti-g sd1"
+               data-src="brand_assets/B793355E-0BED-4174-BFF0-D18F14F83114.png"
+               data-caption="Four-Armed Deity on a carved pedestal — divine attributes held in each hand">
+            <div class="s-tape tp-tc" aria-hidden="true"></div>
+            <div class="s-img-wrap" style="height:clamp(190px,25vw,310px);">
+              <img class="s-img" src="brand_assets/B793355E-0BED-4174-BFF0-D18F14F83114.png" alt="Four-armed deity sketch">
+            </div>
+            <div class="s-label"><span class="s-num">Study III · 4</span><span class="s-title">Four-Armed Deity</span><p class="s-note">Conch, discus, mace, lotus — a Vaishnava form within a predominantly Shaiva temple complex</p></div>
+          </div>
+          <div class="si ti-d sd2"
+               data-src="brand_assets/CCD83356-A14F-4A7D-AF75-80C127CF0806.png"
+               data-caption="The Lion Plinth — a recurrent motif of Vijayanagara power and cosmological authority">
+            <div class="s-tape tp-tr" aria-hidden="true"></div>
+            <div class="s-img-wrap" style="height:clamp(190px,25vw,310px);">
+              <img class="s-img" src="brand_assets/CCD83356-A14F-4A7D-AF75-80C127CF0806.png" alt="Deity with lion sketch">
+            </div>
+            <div class="s-label"><span class="s-num">Study III · 5</span><span class="s-title">The Lion Plinth</span><p class="s-note">The sardula base — half-horse, half-lion — appears on every major pillar shaft at Lepakshi</p></div>
+          </div>
+          <div class="si ti-e sd3"
+               data-src="brand_assets/437B8528-13AF-46A5-88EC-1B18A6426981.png"
+               data-caption="Apsara — the heavenly dancer rendered in intricate pen and ink cross-hatching">
+            <div class="s-tape tp-tl" aria-hidden="true"></div>
+            <div class="s-img-wrap" style="height:clamp(190px,25vw,310px);">
+              <img class="s-img" src="brand_assets/437B8528-13AF-46A5-88EC-1B18A6426981.png" alt="Apsara deity sketch">
+            </div>
+            <div class="s-label"><span class="s-num">Study III · 6</span><span class="s-title">Apsara</span><p class="s-note">Atibhanga — triple curve of the body — conveying sensuous celestial grace unique to Vijayanagara figuration</p></div>
+          </div>
+        </div>
+        <div class="grid grid-cols-12 gap-4 items-start">
+          <div class="si ti-h sd1 col-span-12 sm:col-span-5"
+               data-src="brand_assets/B4415058-6589-48E4-92D9-5941AC8223D1.png"
+               data-caption="Apsara with Lotus — beside an ornate pillar shaft, holding the sacred half-open flower">
+            <div class="s-tape tp-tl" aria-hidden="true"></div>
+            <div class="s-img-wrap" style="height:clamp(210px,27vw,340px);">
+              <img class="s-img" src="brand_assets/B4415058-6589-48E4-92D9-5941AC8223D1.png" alt="Apsara with lotus sketch">
+            </div>
+            <div class="s-label"><span class="s-num">Study III · 7</span><span class="s-title">Apsara with Lotus</span><p class="s-note">The half-open lotus — unfolding creation — a signature motif of Krishnadevaraya's patronage at Lepakshi</p></div>
+          </div>
+          <div class="si ti-c sd2 col-span-12 sm:col-span-7"
+               data-src="brand_assets/D69EA50F-2C3F-4AE6-BD82-6F8897085D98.png"
+               data-caption="Amid Scrolling Foliage — deity within the high baroque stonework, surrounded by kirtimukhas">
+            <div class="s-tape tp-tr" aria-hidden="true"></div>
+            <div class="s-img-wrap" style="height:clamp(210px,27vw,340px);">
+              <img class="s-img" src="brand_assets/D69EA50F-2C3F-4AE6-BD82-6F8897085D98.png" alt="Deity with scrollwork sketch">
+            </div>
+            <div class="s-label"><span class="s-num">Study III · 8</span><span class="s-title">Amid Scrolling Foliage</span><p class="s-note">The kirtimukha consumes its own body at the arch apex — horror vacui in stone</p></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="s-rule mb-16"></div>
+
+      <!-- ── CHAPTER IV ── -->
+      <div>
+        <div class="mb-10 reveal">
+          <div class="s-ch-mark"><span class="s-ch-no">Chapter IV</span><span class="s-ch-name">Cosmic Forms — The Sanctum</span></div>
+          <p class="s-ch-note mt-1">In the innermost chamber, the divine takes its most expansive form — multi-armed, multi-headed, treading the earth. Here, time folds.</p>
+        </div>
+        <div class="grid grid-cols-12 gap-5 mb-6 items-start">
+          <div class="si has-draw ti-e sd1 col-span-12 sm:col-span-7"
+               data-src="brand_assets/4DC269F6-8819-4518-A738-AF9C8BCDB86B.png"
+               data-caption="Brahma — the multi-headed creator, bearing the kalasha, akshamala, vedas, and lotus of cosmogony">
+            <div class="s-tape tp-tl" aria-hidden="true"></div>
+            <div class="s-img-wrap" style="height:clamp(300px,38vw,480px);">
+              <img class="s-img" src="brand_assets/4DC269F6-8819-4518-A738-AF9C8BCDB86B.png" alt="Brahma sketch">
+              <div class="draw-overlay"></div>
+            </div>
+            <div class="s-label"><span class="s-num">Study IV · 1</span><span class="s-title">Brahma — The Creator</span><p class="s-note">Rarely depicted as primary deity — Lepakshi's Brahma implies a fifth head via the elevated lotus seat</p></div>
+          </div>
+          <div class="si ti-b sd2 col-span-12 sm:col-span-5"
+               data-src="brand_assets/AFE92A85-BAE6-47E9-80BE-80FCB3897F0D.png"
+               data-caption="The Wrathful Form — treading upon the asura, arms multiplied in cosmic fury">
+            <div class="s-tape tp-tr" aria-hidden="true"></div>
+            <div class="s-img-wrap" style="height:clamp(300px,38vw,480px);">
+              <img class="s-img" src="brand_assets/AFE92A85-BAE6-47E9-80BE-80FCB3897F0D.png" alt="Wrathful deity sketch">
+            </div>
+            <div class="s-label"><span class="s-num">Study IV · 2</span><span class="s-title">The Wrathful Form</span><p class="s-note">The trampled figure — not enemy but ego — motif of inner conquest on all four sanctuary pillars</p></div>
+          </div>
+        </div>
+        <div class="flex justify-start mb-6">
+          <div class="si ti-d sd1" style="width:46%;"
+               data-src="brand_assets/DD1309E2-A250-40BB-9F6D-337D23F697BD.png"
+               data-caption="Cosmic Dance — many arms, many weapons, the universe held in cyclical motion">
+            <div class="s-tape tp-tc" aria-hidden="true"></div>
+            <div class="s-img-wrap" style="height:clamp(240px,30vw,380px);">
+              <img class="s-img" src="brand_assets/DD1309E2-A250-40BB-9F6D-337D23F697BD.png" alt="Cosmic dance deity sketch">
+            </div>
+            <div class="s-label"><span class="s-num">Study IV · 3</span><span class="s-title">Cosmic Dance</span><p class="s-note">Ten arms in perfect radial symmetry — the geometry of creation, frozen in stone</p></div>
+          </div>
+        </div>
+        <div class="si has-reality ti-z sd1"
+             data-src="brand_assets/EB8E798E-6F90-4AE0-B544-0FC635A9178B.png"
+             data-caption="Veerabhadra Supreme — warrior, destroyer, and protector of the temple in his most sovereign aspect">
+          <div class="s-tape tp-tc" aria-hidden="true"></div>
+          <div class="s-img-wrap" style="height:clamp(260px,30vw,420px);">
+            <img class="s-img" src="brand_assets/EB8E798E-6F90-4AE0-B544-0FC635A9178B.png" alt="Veerabhadra supreme sketch">
+            <img class="reality-photo" src="brand_assets/frescoes_2.jpg" alt="Temple frescoes">
+          </div>
+          <div class="s-label"><span class="s-num">Study IV · 4</span><span class="s-title">Veerabhadra Supreme</span><p class="s-note">The presiding deity in full regalia — hover to reveal the painted fresco above the sanctum door</p></div>
+        </div>
+
+        <div class="flex flex-col items-center mt-20 reveal">
+          <div class="s-rule mb-5" style="width:5rem;"></div>
+          <p class="font-fell italic text-bark/35 text-sm tracking-wider text-center">"What the chisel wrought in stone, the pen has written in devotion."</p>
+          <p class="font-sans text-[0.52rem] tracking-[0.18em] text-bark/22 uppercase mt-2">— Dr A S Raja Rao</p>
+          <div class="s-rule mt-5" style="width:5rem;"></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- LIGHTBOX -->
+  <div id="sketch-lightbox" role="dialog" aria-modal="true" aria-label="Sketch viewer">
+    <button id="lb-close" aria-label="Close viewer">
+      <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6"><line x1="1" y1="1" x2="12" y2="12"/><line x1="12" y1="1" x2="1" y2="12"/></svg>
+    </button>
+    <div id="lb-nav">
+      <button class="lb-arrow" id="lb-prev" aria-label="Previous sketch">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="10,2 4,8 10,14"/></svg>
+      </button>
+      <button class="lb-arrow" id="lb-next" aria-label="Next sketch">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="6,2 12,8 6,14"/></svg>
+      </button>
+    </div>
+    <div id="lb-img-wrap"><img id="lb-img" src="" alt=""></div>
+    <p id="lb-caption"></p>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer py-12 px-8">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+      <a href="index.html">
+        <img src="brand_assets/last_nandi_logo.jpeg" alt="Lepakshi" style="height:40px; opacity:0.65; filter:invert(1) sepia(0.2);">
+      </a>
+      <div class="flex gap-8">
+        <a href="index.html"    class="font-sans text-[0.58rem] tracking-[0.2em] text-parch/35 uppercase hover:text-parch/70 transition-colors">Home</a>
+        <a href="sketches.html" class="font-sans text-[0.58rem] tracking-[0.2em] text-parch/35 uppercase hover:text-parch/70 transition-colors">Sketches</a>
+        <a href="visit.html"    class="font-sans text-[0.58rem] tracking-[0.2em] text-parch/35 uppercase hover:text-parch/70 transition-colors">Plan Visit</a>
+        <a href="mla.html"      class="font-sans text-[0.58rem] tracking-[0.2em] text-parch/35 uppercase hover:text-parch/70 transition-colors">MLA Message</a>
+      </div>
+      <p class="font-sans text-[0.52rem] tracking-wide text-parch/20">Lepakshi Heritage · Andhra Pradesh</p>
+    </div>
+  </footer>
+
+  <script>
+  (() => {
+    const nav = document.getElementById('main-nav');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 55), { passive:true });
+
+    const msSection  = document.getElementById('manuscripts');
+    const msBgSketch = document.getElementById('ms-bg-sketch');
+    const msBgPhoto  = document.getElementById('ms-bg-photo');
+    const runMsTrans = () => {
+      if (!msSection) return;
+      const rect = msSection.getBoundingClientRect();
+      const total = rect.height - window.innerHeight;
+      const p = total > 0 ? Math.max(0, Math.min(1, -rect.top / total)) : 0;
+      if (msBgSketch) msBgSketch.style.opacity = (1 - p * 0.85).toFixed(3);
+      if (msBgPhoto)  msBgPhoto.style.opacity  = (p * 0.18).toFixed(3);
+    };
+    window.addEventListener('scroll', runMsTrans, { passive:true });
+    runMsTrans();
+
+    const revealEls = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }), { threshold:0.08, rootMargin:'0px 0px -50px 0px' });
+    revealEls.forEach(el => io.observe(el));
+
+    const inkCards = Array.from(document.querySelectorAll('.si[data-src]'));
+    document.body.classList.add('ink-js-ready');
+    const inkObs = new IntersectionObserver(entries => entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('si-shown'); inkObs.unobserve(entry.target); } }), { threshold:0.04, rootMargin:'0px 0px -20px 0px' });
+    inkCards.forEach(el => inkObs.observe(el));
+
+    const drawObs = new IntersectionObserver(entries => entries.forEach(entry => { if (entry.isIntersecting) { setTimeout(() => entry.target.classList.add('drawing'), 250); drawObs.unobserve(entry.target); } }), { threshold:0.15 });
+    Array.from(document.querySelectorAll('.si.has-draw')).forEach(el => drawObs.observe(el));
+
+    // Lightbox
+    const lightbox = document.getElementById('sketch-lightbox');
+    const lbImg = document.getElementById('lb-img');
+    const lbCaption = document.getElementById('lb-caption');
+    let lbIndex = 0;
+    const openLB = idx => {
+      lbIndex = ((idx % inkCards.length) + inkCards.length) % inkCards.length;
+      const card = inkCards[lbIndex];
+      lbImg.src = card.dataset.src; lbImg.alt = card.querySelector('img').alt;
+      lbCaption.textContent = card.dataset.caption || '';
+      lightbox.classList.add('lb-open'); document.body.style.overflow = 'hidden';
+    };
+    const closeLB = () => { lightbox.classList.remove('lb-open'); document.body.style.overflow = ''; setTimeout(() => { lbImg.src = ''; }, 400); };
+    inkCards.forEach((card, i) => card.addEventListener('click', () => openLB(i)));
+    document.getElementById('lb-close')?.addEventListener('click', closeLB);
+    document.getElementById('lb-prev')?.addEventListener('click', e => { e.stopPropagation(); openLB(lbIndex - 1); });
+    document.getElementById('lb-next')?.addEventListener('click', e => { e.stopPropagation(); openLB(lbIndex + 1); });
+    lightbox?.addEventListener('click', e => { if (e.target === lightbox) closeLB(); });
+    document.addEventListener('keydown', e => {
+      if (!lightbox?.classList.contains('lb-open')) return;
+      if (e.key === 'Escape') closeLB();
+      if (e.key === 'ArrowLeft')  openLB(lbIndex - 1);
+      if (e.key === 'ArrowRight') openLB(lbIndex + 1);
+    });
+
+    // Mobile menu
+    const menuOpen = document.getElementById('menu-open');
+    const menuClose = document.getElementById('menu-close');
+    const mobileMenu = document.getElementById('mobile-menu');
+    menuOpen?.addEventListener('click', () => mobileMenu.classList.remove('hidden'));
+    menuClose?.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+    document.querySelectorAll('.m-link').forEach(l => l.addEventListener('click', () => mobileMenu.classList.add('hidden')));
+  })();
+  </script>
+</body>
+</html>

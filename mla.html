@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>From the MLA — Lepakshi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=IM+Fell+English:ital@0;1&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: { extend: {
+        colors: { terra:'#C8624D', olive:'#8C8C52', bark:'#4A4737', parch:'#F5F0E8', stone:'#2A261C', aged:'#B8A88A', rust:'#9B4A35' },
+        fontFamily: { serif:['"Cormorant Garamond"','serif'], fell:['"IM Fell English"','serif'], sans:['Raleway','sans-serif'] }
+      }}
+    }
+  </script>
+  <style>
+    body::after { content:''; position:fixed; inset:0; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E"); opacity:0.04; pointer-events:none; z-index:9000; }
+    *, *::before, *::after { box-sizing:border-box; margin:0; }
+    html { scroll-behavior:smooth; }
+    body { background-color:#F5F0E8; color:#2A261C; font-family:'Cormorant Garamond',serif; overflow-x:hidden; }
+    img { display:block; max-width:100%; }
+
+    .reveal { opacity:0; transform:translateY(44px); transition:opacity 1.3s cubic-bezier(0.16,1,0.3,1), transform 1.3s cubic-bezier(0.16,1,0.3,1); }
+    .reveal-left { opacity:0; transform:translateX(-52px); transition:opacity 1.5s cubic-bezier(0.16,1,0.3,1), transform 1.5s cubic-bezier(0.16,1,0.3,1); }
+    .reveal-right { opacity:0; transform:translateX(52px); transition:opacity 1.5s cubic-bezier(0.16,1,0.3,1), transform 1.5s cubic-bezier(0.16,1,0.3,1); }
+    .reveal.visible, .reveal-left.visible, .reveal-right.visible { opacity:1; transform:none; }
+    .d1 { transition-delay:0.10s; } .d2 { transition-delay:0.24s; } .d3 { transition-delay:0.38s; } .d4 { transition-delay:0.52s; }
+
+    /* ── NAV ── */
+    #main-nav { transition: background 0.7s ease, backdrop-filter 0.7s ease, padding 0.5s ease; }
+    #main-nav.scrolled { background:rgba(42,38,28,0.93)!important; backdrop-filter:blur(14px); padding-top:0.85rem; padding-bottom:0.85rem; }
+    .nav-link { position:relative; transition:color 0.3s ease; }
+    .nav-link::after { content:''; position:absolute; bottom:-3px; left:0; width:0; height:1px; background:#C8624D; transition:width 0.4s cubic-bezier(0.16,1,0.3,1); }
+    .nav-link:hover::after { width:100%; }
+    .nav-active { color:#F5F0E8!important; }
+    .nav-active::after { width:100%!important; }
+    #mobile-menu { transition:opacity 0.4s ease, visibility 0.4s ease; }
+    #mobile-menu.hidden { opacity:0; visibility:hidden; pointer-events:none; }
+    #mobile-menu:not(.hidden) { opacity:1; visibility:visible; }
+    .btn-outline { position:relative; overflow:hidden; border:1px solid rgba(245,240,232,0.4); transition:border-color 0.4s ease, color 0.4s ease; }
+    .btn-outline::before { content:''; position:absolute; inset:0; background:#C8624D; transform:scaleX(0); transform-origin:left; transition:transform 0.45s cubic-bezier(0.16,1,0.3,1); }
+    .btn-outline:hover { border-color:#C8624D; color:#F5F0E8; }
+    .btn-outline:hover::before { transform:scaleX(1); }
+    .btn-outline span { position:relative; z-index:1; }
+
+    /* ── MLA HERO ── */
+    .mla-hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background-color: #1E1B13;
+      background-image:
+        radial-gradient(ellipse at 20% 50%, rgba(200,98,77,0.09) 0%, transparent 52%),
+        radial-gradient(ellipse at 80% 30%, rgba(140,140,82,0.06) 0%, transparent 48%),
+        radial-gradient(ellipse at 50% 90%, rgba(74,71,55,0.18) 0%, transparent 55%);
+    }
+    /* Subtle temple silhouette bg */
+    .mla-hero-temple {
+      position: absolute;
+      inset: 0;
+      background-image: url('brand_assets/veerabhadra_temple.jpg');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.07;
+      filter: sepia(1) brightness(0.4);
+    }
+    /* Portrait frame */
+    .mla-portrait-wrap {
+      position: relative;
+      flex-shrink: 0;
+    }
+    .mla-portrait-frame {
+      position: relative;
+      width: 320px;
+      height: 400px;
+      overflow: hidden;
+    }
+    @media (max-width: 768px) {
+      .mla-portrait-frame { width: 220px; height: 280px; }
+    }
+    .mla-portrait-frame img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      filter: sepia(0.1) contrast(1.08) brightness(0.95);
+    }
+    /* Decorative corner brackets */
+    .bracket-tl, .bracket-tr, .bracket-bl, .bracket-br {
+      position: absolute;
+      width: 28px; height: 28px;
+      border-color: rgba(200,98,77,0.6);
+      border-style: solid;
+    }
+    .bracket-tl { top:-1px; left:-1px; border-width: 2px 0 0 2px; }
+    .bracket-tr { top:-1px; right:-1px; border-width: 2px 2px 0 0; }
+    .bracket-bl { bottom:-1px; left:-1px; border-width: 0 0 2px 2px; }
+    .bracket-br { bottom:-1px; right:-1px; border-width: 0 2px 2px 0; }
+    /* Glow under portrait */
+    .mla-portrait-glow {
+      position: absolute;
+      bottom: -40px; left: 50%; transform: translateX(-50%);
+      width: 80%; height: 80px;
+      background: radial-gradient(ellipse, rgba(200,98,77,0.22) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* ── ORNAMENTS ── */
+    .ornament-line { display:flex; align-items:center; gap:1rem; }
+    .ornament-line::before, .ornament-line::after { content:''; flex:1; height:1px; background:currentColor; opacity:0.3; }
+
+    /* ── MESSAGE SECTION ── */
+    .message-bg {
+      background-color: #F5F0E8;
+      background-image:
+        radial-gradient(ellipse at 15% 40%, rgba(200,98,77,0.05) 0%, transparent 50%),
+        radial-gradient(ellipse at 85% 70%, rgba(140,140,82,0.04) 0%, transparent 48%);
+    }
+    /* Letterhead top bar */
+    .letterhead-bar {
+      height: 3px;
+      background: linear-gradient(to right, #C8624D 0%, #9B4A35 40%, #8C8C52 100%);
+    }
+    /* Letter body */
+    .letter-body {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.18rem;
+      font-weight: 300;
+      line-height: 2;
+      color: #3a3428;
+    }
+    .letter-body p + p { margin-top: 1.4em; }
+    /* Signature */
+    .sig-line { width: 120px; height: 1px; background: #C8624D; margin-bottom: 0.6rem; }
+    /* Pull quote */
+    .pull-quote {
+      border-left: 3px solid #C8624D;
+      padding: 1rem 1.5rem;
+      background: rgba(200,98,77,0.04);
+    }
+    /* Heritage band */
+    .heritage-band {
+      background: #2A261C;
+      background-image: radial-gradient(ellipse at 30% 50%, rgba(200,98,77,0.08) 0%, transparent 50%),
+                        radial-gradient(ellipse at 70% 50%, rgba(140,140,82,0.05) 0%, transparent 50%);
+    }
+    /* Scrollbar */
+    ::-webkit-scrollbar { width:6px; } ::-webkit-scrollbar-track { background:#2A261C; } ::-webkit-scrollbar-thumb { background:#C8624D; border-radius:3px; }
+    /* Footer */
+    .site-footer { background:#2A261C; border-top:1px solid rgba(245,240,232,0.06); }
+  </style>
+</head>
+<body class="overflow-x-hidden">
+
+  <!-- ══ NAV ══ -->
+  <nav id="main-nav" class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-6"
+       style="background:rgba(30,27,19,0.85); backdrop-filter:blur(16px);">
+    <a href="index.html" class="flex-shrink-0 hover:opacity-85 transition-opacity">
+      <img src="brand_assets/last_nandi_logo.jpeg" alt="Lepakshi" style="height:48px; width:auto; filter:drop-shadow(0 2px 12px rgba(0,0,0,0.35));">
+    </a>
+    <div class="hidden md:flex items-center gap-8">
+      <a href="index.html"    class="nav-link font-sans text-[0.65rem] tracking-[0.22em] text-parch/60 uppercase hover:text-parch">← Home</a>
+      <a href="sketches.html" class="nav-link font-sans text-[0.65rem] tracking-[0.22em] text-parch/60 uppercase hover:text-parch">Sketches</a>
+      <a href="visit.html"    class="nav-link font-sans text-[0.65rem] tracking-[0.22em] text-parch/60 uppercase hover:text-parch">Plan Visit</a>
+      <a href="mla.html"      class="nav-link nav-active font-sans text-[0.65rem] tracking-[0.22em] text-parch uppercase">MLA Message</a>
+    </div>
+    <button id="menu-open" class="md:hidden text-parch focus:outline-none p-1" aria-label="Open menu">
+      <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.4"><line x1="3" y1="7" x2="23" y2="7"/><line x1="3" y1="13" x2="23" y2="13"/><line x1="3" y1="19" x2="23" y2="19"/></svg>
+    </button>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="hidden fixed inset-0 bg-stone/96 backdrop-blur-lg z-[9100] flex flex-col items-center justify-center gap-9">
+    <button id="menu-close" class="absolute top-6 right-8 text-parch/70 hover:text-parch focus:outline-none">
+      <svg width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.4"><line x1="5" y1="5" x2="25" y2="25"/><line x1="25" y1="5" x2="5" y2="25"/></svg>
+    </button>
+    <a href="index.html"    class="m-link font-serif text-parch text-4xl font-light hover:text-terra transition-colors">Home</a>
+    <a href="sketches.html" class="m-link font-serif text-parch text-4xl font-light hover:text-terra transition-colors">Sketches</a>
+    <a href="visit.html"    class="m-link font-serif text-parch text-4xl font-light hover:text-terra transition-colors">Plan Visit</a>
+    <a href="mla.html"      class="m-link font-serif text-terra text-4xl font-light">MLA Message</a>
+  </div>
+
+  <!-- ══ MLA HERO ══ -->
+  <section class="mla-hero">
+    <div class="mla-hero-temple"></div>
+
+    <div class="relative z-10 w-full max-w-7xl mx-auto px-8 lg:px-16 pt-28 pb-20">
+      <div class="flex flex-col lg:flex-row items-center lg:items-end gap-16 lg:gap-24">
+
+        <!-- LEFT: Text content -->
+        <div class="flex-1 text-center lg:text-left order-2 lg:order-1">
+
+          <div class="reveal d1">
+            <p class="font-sans text-[0.55rem] tracking-[0.38em] uppercase mb-5"
+               style="color:rgba(200,98,77,0.75); letter-spacing:0.35em;">
+              Official Address &nbsp;·&nbsp; Lepakshi Constituency
+            </p>
+          </div>
+
+          <div class="reveal d2">
+            <h1 class="font-fell italic text-parch leading-none mb-6"
+                style="font-size: clamp(3rem, 7vw, 5.5rem);">
+              A Message<br>
+              <span style="color:#C8624D;">from the MLA</span>
+            </h1>
+          </div>
+
+          <div class="reveal d3">
+            <div class="ornament-line text-parch/20 mb-8 max-w-xs mx-auto lg:mx-0">
+              <span class="font-sans text-[0.5rem] tracking-[0.3em] text-parch/30 uppercase whitespace-nowrap">Lepakshi · Andhra Pradesh</span>
+            </div>
+          </div>
+
+          <div class="reveal d3 mb-8">
+            <p class="font-serif font-light text-parch/50 leading-relaxed max-w-md mx-auto lg:mx-0"
+               style="font-size:1.05rem;">
+              A heartfelt address from the elected representative of Lepakshi —
+              on heritage, faith, and the duty to preserve what the ancients built.
+            </p>
+          </div>
+
+          <div class="reveal d4">
+            <div class="inline-flex items-center gap-3 px-5 py-3"
+                 style="border:1px solid rgba(200,98,77,0.3); background:rgba(200,98,77,0.07);">
+              <!-- Emblem icon -->
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="7" cy="7" r="6" stroke="#C8624D" stroke-width="1" opacity="0.6"/>
+                <path d="M7 3L8.1 5.9H11L8.8 7.6L9.7 10.5L7 8.8L4.3 10.5L5.2 7.6L3 5.9H5.9Z" fill="#C8624D" opacity="0.7"/>
+              </svg>
+              <span class="font-sans text-[0.58rem] tracking-[0.22em] text-parch/55 uppercase">Member of Legislative Assembly</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: Portrait -->
+        <div class="order-1 lg:order-2 reveal-right d2">
+          <div class="mla-portrait-wrap">
+            <!-- Soft halo ring behind photo -->
+            <div style="position:absolute; inset:-20px; border-radius:2px;
+                        background:radial-gradient(ellipse at 50% 40%, rgba(200,98,77,0.18) 0%, transparent 68%);
+                        pointer-events:none;"></div>
+
+            <div class="mla-portrait-frame" style="border:1px solid rgba(245,240,232,0.1);">
+              <img src="brand_assets/MLA.jpg" alt="MLA of Lepakshi">
+              <!-- Subtle gradient overlay at bottom -->
+              <div style="position:absolute; bottom:0; left:0; right:0; height:35%;
+                          background:linear-gradient(to top, rgba(30,27,19,0.75) 0%, transparent 100%);"></div>
+            </div>
+
+            <!-- Corner brackets -->
+            <div class="bracket-tl"></div>
+            <div class="bracket-tr"></div>
+            <div class="bracket-bl"></div>
+            <div class="bracket-br"></div>
+
+            <!-- Name plate below photo -->
+            <div class="mt-6 text-center">
+              <p class="font-fell text-parch italic"
+                 style="font-size:1.45rem; letter-spacing:0.02em; line-height:1.2;">
+                Sri Nandamuri Balakrishna
+              </p>
+              <p class="font-sans text-[0.56rem] tracking-[0.28em] uppercase mt-1.5"
+                 style="color:rgba(200,98,77,0.75);">
+                MLA · Lepakshi Constituency
+              </p>
+              <p class="font-sans text-[0.5rem] tracking-[0.2em] uppercase mt-1"
+                 style="color:rgba(245,240,232,0.25);">
+                Andhra Pradesh Legislative Assembly
+              </p>
+            </div>
+
+            <div class="mla-portrait-glow"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Decorative bottom rule -->
+    <div style="position:absolute; bottom:0; left:0; right:0; height:1px;
+                background:linear-gradient(to right, transparent, rgba(200,98,77,0.35) 30%, rgba(200,98,77,0.35) 70%, transparent);"></div>
+  </section>
+
+
+  <!-- ══ MESSAGE SECTION ══ -->
+  <section class="message-bg py-28 px-6 lg:px-16">
+    <div class="max-w-4xl mx-auto">
+
+      <!-- Section header -->
+      <div class="reveal text-center mb-16">
+        <p class="font-sans text-[0.55rem] tracking-[0.35em] uppercase mb-4"
+           style="color:rgba(200,98,77,0.65);">Official Address</p>
+        <h2 class="font-fell italic text-stone mb-4" style="font-size:clamp(2rem,4vw,3rem);">
+          Message from the MLA
+        </h2>
+        <div style="width:2.5rem; height:1px; background:#C8624D; margin:0 auto 1.5rem;"></div>
+        <p class="font-sans font-light text-bark/50 text-sm tracking-wide">
+          Lepakshi Constituency · Andhra Pradesh
+        </p>
+      </div>
+
+      <!-- Letter card -->
+      <div class="reveal" style="background:#FFFDF8; border:1px solid rgba(74,71,55,0.1); box-shadow:0 20px 70px rgba(74,71,55,0.1), 0 4px 16px rgba(74,71,55,0.07);">
+        <div class="letterhead-bar"></div>
+
+        <!-- Letterhead -->
+        <div class="px-10 lg:px-16 pt-10 pb-6 border-b" style="border-color:rgba(74,71,55,0.08);">
+          <div class="flex items-start justify-between gap-6 flex-wrap">
+            <div>
+              <p class="font-fell italic text-stone" style="font-size:1.5rem; line-height:1.2;">Sri Nandamuri Balakrishna</p>
+              <p class="font-sans text-[0.56rem] tracking-[0.22em] uppercase text-terra/70 mt-1.5">Member of Legislative Assembly</p>
+              <p class="font-sans text-[0.5rem] tracking-[0.18em] uppercase text-bark/40 mt-0.5">Lepakshi Constituency, Andhra Pradesh</p>
+            </div>
+            <div class="text-right">
+              <p class="font-sans text-[0.5rem] tracking-[0.18em] uppercase text-bark/35 mb-1">Date</p>
+              <p class="font-serif text-bark/60 text-sm">[Month Year]</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pull quote -->
+        <div class="px-10 lg:px-16 pt-10 reveal d1">
+          <div class="pull-quote mb-10">
+            <p class="font-fell italic text-stone/80 leading-relaxed" style="font-size:1.25rem;">
+              "Lepakshi is not merely a temple — it is a living scripture in stone.
+               Every pillar, every fresco, every corridor speaks of a civilisation
+               that believed beauty itself was a form of devotion."
+            </p>
+          </div>
+        </div>
+
+        <!-- Body -->
+        <div class="px-10 lg:px-16 pb-4 reveal d2">
+          <p class="font-sans text-[0.57rem] tracking-[0.22em] uppercase text-bark/45 mb-6">
+            To the People of Lepakshi &amp; All Who Journey Here,
+          </p>
+
+          <div class="letter-body">
+            <p>
+              It is with great pride and humility that I address you on behalf of the people of the Lepakshi constituency.
+              Our land holds within it one of India's most exquisite examples of Vijayanagara architectural genius —
+              the Veerabhadra Temple — a monument that has endured centuries and continues to inspire all who stand before it.
+            </p>
+            <p>
+              As your representative, I am deeply committed to the preservation, restoration, and promotion of Lepakshi's
+              heritage. Our ancient craftsmen left us an incomparable inheritance: the hanging pillar, the monolithic Nandi,
+              the intricate frescoes depicting stories from the epics — each a testament to the spiritual and artistic
+              heights our ancestors reached.
+            </p>
+            <p>
+              This website has been created to share that legacy with the world — through architectural sketches, travel
+              guidance, and the stories embedded in every stone. I encourage visitors, scholars, and pilgrims alike to
+              come, see, and carry Lepakshi's story forward.
+            </p>
+            <p>
+              Let us together ensure that what was built with devotion is preserved with equal devotion.
+            </p>
+          </div>
+        </div>
+
+        <!-- Signature -->
+        <div class="px-10 lg:px-16 pt-10 pb-12 reveal d3">
+          <div class="sig-line"></div>
+          <p class="font-fell italic text-stone" style="font-size:1.3rem; line-height:1.3;">Sri Nandamuri Balakrishna</p>
+          <p class="font-sans text-[0.54rem] tracking-[0.2em] uppercase text-terra/65 mt-1.5">Member of Legislative Assembly</p>
+          <p class="font-sans text-[0.48rem] tracking-[0.16em] uppercase text-bark/35 mt-0.5">Lepakshi Constituency · Andhra Pradesh</p>
+
+          <!-- Seal -->
+          <div class="mt-8 inline-flex flex-col items-center gap-1.5"
+               style="border:1px solid rgba(140,140,82,0.22); padding:1rem 1.4rem; background:rgba(140,140,82,0.03);">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+              <circle cx="16" cy="16" r="14" stroke="#8C8C52" stroke-width="1" opacity="0.4"/>
+              <circle cx="16" cy="16" r="10" stroke="#8C8C52" stroke-width="0.8" opacity="0.3"/>
+              <path d="M16 7L18 13H24L19.5 16.5L21.5 22.5L16 19L10.5 22.5L12.5 16.5L8 13H14Z"
+                    fill="#8C8C52" opacity="0.35"/>
+            </svg>
+            <p class="font-sans text-[0.44rem] tracking-[0.2em] uppercase"
+               style="color:rgba(140,140,82,0.5);">Official Seal</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══ HERITAGE BAND ══ -->
+  <section class="heritage-band py-20 px-8 lg:px-16">
+    <div class="max-w-5xl mx-auto reveal">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-0"
+           style="border:1px solid rgba(245,240,232,0.08);">
+
+        <div class="px-10 py-10 text-center md:border-r" style="border-color:rgba(245,240,232,0.08);">
+          <p class="font-fell italic text-parch mb-1" style="font-size:2.6rem; color:#C8624D;">5<span class="text-2xl">th</span></p>
+          <p class="font-sans text-[0.54rem] tracking-[0.25em] uppercase text-parch/35 mt-1">Century CE</p>
+          <p class="font-sans text-[0.5rem] tracking-[0.18em] uppercase text-parch/22 mt-1.5">Temple Origins</p>
+        </div>
+
+        <div class="px-10 py-10 text-center md:border-r" style="border-color:rgba(245,240,232,0.08);">
+          <p class="font-fell italic" style="font-size:2.6rem; color:#C8624D;">70<span class="text-2xl">+</span></p>
+          <p class="font-sans text-[0.54rem] tracking-[0.25em] uppercase text-parch/35 mt-1">Carved Pillars</p>
+          <p class="font-sans text-[0.5rem] tracking-[0.18em] uppercase text-parch/22 mt-1.5">Veerabhadra Temple</p>
+        </div>
+
+        <div class="px-10 py-10 text-center">
+          <p class="font-fell italic" style="font-size:2.6rem; color:#C8624D;">1</p>
+          <p class="font-sans text-[0.54rem] tracking-[0.25em] uppercase text-parch/35 mt-1">Hanging Pillar</p>
+          <p class="font-sans text-[0.5rem] tracking-[0.18em] uppercase text-parch/22 mt-1.5">Architectural Marvel</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══ FOOTER ══ -->
+  <footer class="site-footer py-12 px-8">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+      <a href="index.html">
+        <img src="brand_assets/last_nandi_logo.jpeg" alt="Lepakshi"
+             style="height:40px; opacity:0.65; filter:invert(1) sepia(0.2);">
+      </a>
+      <div class="flex gap-8">
+        <a href="index.html"    class="font-sans text-[0.58rem] tracking-[0.2em] text-parch/35 uppercase hover:text-parch/70 transition-colors">Home</a>
+        <a href="sketches.html" class="font-sans text-[0.58rem] tracking-[0.2em] text-parch/35 uppercase hover:text-parch/70 transition-colors">Sketches</a>
+        <a href="visit.html"    class="font-sans text-[0.58rem] tracking-[0.2em] text-parch/35 uppercase hover:text-parch/70 transition-colors">Plan Visit</a>
+        <a href="mla.html"      class="font-sans text-[0.58rem] tracking-[0.2em] text-parch/35 uppercase hover:text-parch/70 transition-colors">MLA Message</a>
+      </div>
+      <p class="font-sans text-[0.52rem] tracking-wide text-parch/20">Lepakshi Heritage · Andhra Pradesh</p>
+    </div>
+  </footer>
+
+  <script>
+  (() => {
+    const nav = document.getElementById('main-nav');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 55), { passive:true });
+
+    const menuOpen  = document.getElementById('menu-open');
+    const menuClose = document.getElementById('menu-close');
+    const mobileMenu = document.getElementById('mobile-menu');
+    menuOpen?.addEventListener('click',  () => mobileMenu.classList.remove('hidden'));
+    menuClose?.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+    document.querySelectorAll('.m-link').forEach(l => l.addEventListener('click', () => mobileMenu.classList.add('hidden')));
+
+    const io = new IntersectionObserver(
+      entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+      { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
+    );
+    document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => io.observe(el));
+  })();
+  </script>
+</body>
+</html>

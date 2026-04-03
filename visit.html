@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plan Your Visit — Lepakshi Temple</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=IM+Fell+English:ital@0;1&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: { extend: {
+        colors: { terra:'#C8624D', olive:'#8C8C52', bark:'#4A4737', parch:'#F5F0E8', stone:'#2A261C', aged:'#B8A88A', rust:'#9B4A35' },
+        fontFamily: { serif:['"Cormorant Garamond"','serif'], fell:['"IM Fell English"','serif'], sans:['Raleway','sans-serif'] }
+      }}
+    }
+  </script>
+  <style>
+    body::after { content:''; position:fixed; inset:0; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E"); opacity:0.04; pointer-events:none; z-index:9000; }
+    *, *::before, *::after { box-sizing:border-box; margin:0; }
+    html { scroll-behavior:smooth; }
+    body { background-color:#F5F0E8; color:#2A261C; font-family:'Cormorant Garamond',serif; overflow-x:hidden; }
+    img { display:block; max-width:100%; }
+    .reveal { opacity:0; transform:translateY(44px); transition:opacity 1.3s cubic-bezier(0.16,1,0.3,1), transform 1.3s cubic-bezier(0.16,1,0.3,1); }
+    .reveal-left { opacity:0; transform:translateX(-52px); transition:opacity 1.5s cubic-bezier(0.16,1,0.3,1), transform 1.5s cubic-bezier(0.16,1,0.3,1); }
+    .reveal-right { opacity:0; transform:translateX(52px); transition:opacity 1.5s cubic-bezier(0.16,1,0.3,1), transform 1.5s cubic-bezier(0.16,1,0.3,1); }
+    .reveal.visible, .reveal-left.visible, .reveal-right.visible { opacity:1; transform:none; }
+    /* nav */
+    #main-nav { transition: background 0.7s ease, backdrop-filter 0.7s ease, padding 0.5s ease; }
+    #main-nav.scrolled { background:rgba(42,38,28,0.93)!important; backdrop-filter:blur(14px); padding-top:0.85rem; padding-bottom:0.85rem; }
+    .nav-link { position:relative; transition:color 0.3s ease; }
+    .nav-link::after { content:''; position:absolute; bottom:-3px; left:0; width:0; height:1px; background:#C8624D; transition:width 0.4s cubic-bezier(0.16,1,0.3,1); }
+    .nav-link:hover::after, .nav-active::after { width:100%; }
+    .nav-active { color:#F5F0E8!important; }
+    #mobile-menu { transition:opacity 0.4s ease, visibility 0.4s ease; }
+    #mobile-menu.hidden { opacity:0; visibility:hidden; pointer-events:none; }
+    #mobile-menu:not(.hidden) { opacity:1; visibility:visible; }
+    /* page hero */
+    .page-hero { position:relative; height:38vh; min-height:280px; overflow:hidden; display:flex; align-items:flex-end; }
+    .page-hero-bg { position:absolute; inset:-10%; background-size:cover; background-position:center 30%; filter:brightness(0.55) sepia(0.22); }
+    .page-hero-grad { position:absolute; inset:0; background:linear-gradient(to bottom, rgba(42,38,28,0.25) 0%, rgba(42,38,28,0.88) 100%); }
+    /* section tabs */
+    .visit-tab { cursor:pointer; padding:0.6rem 1.5rem; border-bottom:2px solid transparent; font-family:'Raleway',sans-serif; font-size:0.62rem; letter-spacing:0.2em; text-transform:uppercase; color:rgba(74,71,55,0.48); transition:color 0.3s ease, border-color 0.3s ease; }
+    .visit-tab.active, .visit-tab:hover { color:#C8624D; border-color:#C8624D; }
+    /* stays */
+    .stay-card { position:relative; overflow:hidden; transition:box-shadow 0.65s cubic-bezier(0.16,1,0.3,1); }
+    .stay-card:hover { box-shadow:0 28px 72px rgba(200,98,77,0.2), 0 10px 28px rgba(42,38,28,0.22); }
+    .stay-card .sc-img { transition:transform 1s cubic-bezier(0.16,1,0.3,1), filter 0.65s ease; filter:sepia(14%) contrast(1.05) brightness(0.86); }
+    .stay-card:hover .sc-img { transform:scale(1.06); filter:sepia(5%) contrast(1.02) brightness(0.96); }
+    .sc-glow { position:absolute; inset:0; background:radial-gradient(ellipse at 35% 65%, rgba(200,98,77,0.28) 0%, transparent 65%); opacity:0; transition:opacity 0.75s ease; mix-blend-mode:soft-light; pointer-events:none; z-index:2; }
+    .stay-card:hover .sc-glow { opacity:1; }
+    .impact-strip { background:linear-gradient(135deg, rgba(200,98,77,0.14) 0%, rgba(140,140,82,0.09) 100%); border:1px solid rgba(200,98,77,0.3); }
+    .stay-badge { display:inline-flex; align-items:center; gap:0.4rem; padding:0.3rem 0.8rem; font-family:'Raleway',sans-serif; font-size:0.57rem; letter-spacing:0.17em; text-transform:uppercase; border:1px solid; transition:background 0.35s ease, color 0.35s ease; }
+    /* eateries */
+    .eatery-card { background:#FAF7F2; border:1px solid rgba(74,71,55,0.1); overflow:hidden; transition:transform 0.55s cubic-bezier(0.16,1,0.3,1), box-shadow 0.55s cubic-bezier(0.16,1,0.3,1); }
+    .eatery-card:hover { transform:translateY(-7px); box-shadow:0 20px 52px rgba(200,98,77,0.1), 0 6px 18px rgba(42,38,28,0.09); }
+    .eatery-card .ec-img { transition:transform 0.9s cubic-bezier(0.16,1,0.3,1), filter 0.5s ease; filter:sepia(10%) contrast(1.05) brightness(0.92); }
+    .eatery-card:hover .ec-img { transform:scale(1.07); filter:sepia(3%) brightness(1.0); }
+    .dish-tag { display:inline-block; padding:0.22rem 0.7rem; background:rgba(200,98,77,0.08); border:1px solid rgba(200,98,77,0.22); font-family:'Raleway',sans-serif; font-size:0.58rem; letter-spacing:0.1em; color:#C8624D; text-transform:uppercase; }
+    .chapter-rule { width:2.4rem; height:1px; background:#C8624D; margin-bottom:0.5rem; }
+    .stat-bar { border-left:2px solid; padding-left:1rem; }
+    /* guide */
+    .reg-section-bg { background-color:#F2ECE1; background-image:radial-gradient(ellipse at 10% 50%, rgba(200,98,77,0.07) 0%, transparent 55%), radial-gradient(ellipse at 90% 20%, rgba(74,71,55,0.05) 0%, transparent 50%); }
+    .reg-input { width:100%; background:#FFFFFF; border:1px solid rgba(74,71,55,0.16); color:#2A261C; padding:0.82rem 1rem; font-family:'Raleway',sans-serif; font-size:0.88rem; font-weight:300; outline:none; border-radius:1px; transition:border-color 0.3s ease, box-shadow 0.3s ease; appearance:none; }
+    .reg-input:focus { border-color:#C8624D; box-shadow:0 0 0 3px rgba(200,98,77,0.09); }
+    .reg-input::placeholder { color:rgba(74,71,55,0.35); }
+    .reg-label { display:block; font-family:'Raleway',sans-serif; font-size:0.57rem; letter-spacing:0.16em; text-transform:uppercase; color:rgba(74,71,55,0.55); margin-bottom:0.4rem; }
+    .btn-register { width:100%; background:#C8624D; color:#F5F0E8; border:none; padding:1.05rem 2rem; cursor:pointer; font-family:'Raleway',sans-serif; font-size:0.68rem; letter-spacing:0.22em; text-transform:uppercase; display:flex; align-items:center; justify-content:center; gap:0.75rem; position:relative; overflow:hidden; transition:background 0.3s ease, transform 0.2s cubic-bezier(0.16,1,0.3,1); }
+    .btn-register:hover { background:#B3543E; transform:translateY(-2px); }
+    .guide-card { background:#FFFDF8; border:1px solid rgba(74,71,55,0.14); box-shadow:0 8px 40px rgba(74,71,55,0.1), 0 2px 8px rgba(74,71,55,0.06); position:relative; overflow:hidden; }
+    .guide-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(to right, #C8624D, #9B4A35); }
+    .guide-avatar { width:72px; height:72px; border-radius:50%; background:linear-gradient(135deg, rgba(200,98,77,0.13), rgba(74,71,55,0.13)); border:2px solid rgba(200,98,77,0.25); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .guide-contact-locked { position:relative; }
+    .guide-contact-locked .contact-value { filter:blur(4.5px); user-select:none; pointer-events:none; font-family:'Raleway',sans-serif; font-size:0.88rem; color:#4A4737; letter-spacing:0.04em; }
+    .lock-badge { position:absolute; right:0; top:50%; transform:translateY(-50%); background:rgba(200,98,77,0.1); border:1px solid rgba(200,98,77,0.22); padding:0.18rem 0.55rem; font-family:'Raleway',sans-serif; font-size:0.5rem; letter-spacing:0.16em; text-transform:uppercase; color:#C8624D; }
+    .trust-pill { display:inline-flex; align-items:center; gap:0.45rem; background:#FFF8F4; border:1px solid rgba(200,98,77,0.18); padding:0.35rem 0.8rem; font-family:'Raleway',sans-serif; font-size:0.54rem; letter-spacing:0.14em; text-transform:uppercase; color:rgba(74,71,55,0.65); }
+    .verified-stamp { position:absolute; top:1.2rem; right:1.2rem; width:52px; height:52px; border:2px solid rgba(140,140,82,0.4); border-radius:50%; display:flex; flex-direction:column; align-items:center; justify-content:center; transform:rotate(12deg); }
+    .reg-success { display:none; text-align:center; padding:2.5rem 1rem; }
+    .reg-success.visible { display:block; }
+    .reg-form-inner.hidden { display:none; }
+    /* ornaments */
+    .ornament-line { display:flex; align-items:center; gap:1rem; color:#8C8C52; }
+    .ornament-line::before, .ornament-line::after { content:''; flex:1; height:1px; background:currentColor; opacity:0.35; }
+    .ornament-dot::before { content:'✦'; font-size:0.6rem; color:#C8624D; opacity:0.7; }
+    .bg-texture-bark { background-color:#3a2f22; background-image:radial-gradient(ellipse at 25% 50%, rgba(200,98,77,0.07) 0%, transparent 50%), radial-gradient(ellipse at 75% 50%, rgba(140,140,82,0.05) 0%, transparent 42%); }
+    .bg-texture-light { background-color:#F5F0E8; background-image:radial-gradient(ellipse at 20% 60%, rgba(200,98,77,0.055) 0%, transparent 52%), radial-gradient(ellipse at 80% 20%, rgba(140,140,82,0.04) 0%, transparent 42%); }
+    .sketch-frame { position:relative; overflow:hidden; }
+    .sketch-frame .img-photo { filter:sepia(18%) contrast(1.06) brightness(0.93); transition:filter 0.6s ease, transform 0.9s cubic-bezier(0.16,1,0.3,1); }
+    ::-webkit-scrollbar { width:6px; } ::-webkit-scrollbar-track { background:#2A261C; } ::-webkit-scrollbar-thumb { background:#C8624D; border-radius:3px; }
+    .site-footer { background:#2A261C; border-top:1px solid rgba(245,240,232,0.06); }
+    .btn-outline { position:relative; overflow:hidden; border:1px solid rgba(245,240,232,0.4); transition:border-color 0.4s ease, color 0.4s ease; }
+    .btn-outline::before { content:''; position:absolute; inset:0; background:#C8624D; transform:scaleX(0); transform-origin:left; transition:transform 0.45s cubic-bezier(0.16,1,0.3,1); }
+    .btn-outline:hover { border-color:#C8624D; color:#F5F0E8; }
+    .btn-outline:hover::before { transform:scaleX(1); }
+    .btn-outline span { position:relative; z-index:1; }
+  </style>
+</head>
+<body class="overflow-x-hidden">
+
+  <!-- NAV -->
+  <nav id="main-nav" class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-6"
+       style="background:rgba(42,38,28,0.82); backdrop-filter:blur(14px);">
+    <a href="index.html" class="flex-shrink-0 hover:opacity-85 transition-opacity">
+      <img src="brand_assets/last_nandi_logo.jpeg" alt="Lepakshi" style="height:48px; width:auto; filter:drop-shadow(0 2px 12px rgba(0,0,0,0.35));">
+    </a>
+    <div class="hidden md:flex items-center gap-8">
+      <a href="index.html"    class="nav-link font-sans text-[0.65rem] tracking-[0.22em] text-parch/60 uppercase hover:text-parch">← Home</a>
+      <a href="sketches.html" class="nav-link font-sans text-[0.65rem] tracking-[0.22em] text-parch/60 uppercase hover:text-parch">Sketches</a>
+      <a href="visit.html"    class="nav-link nav-active font-sans text-[0.65rem] tracking-[0.22em] text-parch uppercase">Plan Visit</a>
+      <a href="mla.html"      class="nav-link font-sans text-[0.65rem] tracking-[0.22em] text-parch/60 uppercase hover:text-parch">MLA Message</a>
+    </div>
+    <button id="menu-open" class="md:hidden text-parch focus:outline-none p-1">
+      <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.4"><line x1="3" y1="7" x2="23" y2="7"/><line x1="3" y1="13" x2="23" y2="13"/><line x1="3" y1="19" x2="23" y2="19"/></svg>
+    </button>
+  </nav>
+
+  <div id="mobile-menu" class="hidden fixed inset-0 bg-stone/96 backdrop-blur-lg z-[9100] flex flex-col items-center justify-center gap-9">
+    <button id="menu-close" class="absolute top-6 right-8 text-parch/70 hover:text-parch focus:outline-none">
+      <svg width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.4"><line x1="5" y1="5" x2="25" y2="25"/><line x1="25" y1="5" x2="5" y2="25"/></svg>
+    </button>
+    <a href="index.html"    class="m-link font-serif text-parch text-4xl font-light hover:text-terra transition-colors">Home</a>
+    <a href="sketches.html" class="m-link font-serif text-parch text-4xl font-light hover:text-terra transition-colors">Sketches</a>
+    <a href="visit.html"    class="m-link font-serif text-terra text-4xl font-light">Plan Visit</a>
+    <a href="mla.html"      class="m-link font-serif text-parch text-4xl font-light hover:text-terra transition-colors">MLA Message</a>
+  </div>
+
+  <!-- PAGE HERO -->
+  <div class="page-hero">
+    <div class="page-hero-bg" style="background-image:url('brand_assets/kalyana%20mantapa.jpeg');"></div>
+    <div class="page-hero-grad"></div>
+    <div class="relative z-10 w-full px-8 lg:px-16 pb-12 pt-32">
+      <div class="max-w-6xl mx-auto">
+        <p class="font-sans text-[0.55rem] tracking-[0.3em] text-terra/80 uppercase mb-3">Travel · Stay · Dine · Guide</p>
+        <h1 class="font-fell text-parch italic" style="font-size:clamp(2.4rem,6vw,4.5rem); line-height:1.08;">
+          Plan Your<br><em>Visit to Lepakshi</em>
+        </h1>
+        <p class="font-sans font-light text-parch/45 text-sm mt-4 max-w-md leading-loose">Everything you need for a meaningful, unhurried journey to the temple.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE TABS -->
+  <div class="bg-texture-light border-b border-bark/8 sticky top-[74px] z-40">
+    <div class="max-w-6xl mx-auto px-8 flex gap-0 overflow-x-auto">
+      <a href="#stays"    class="visit-tab active">Stay</a>
+      <a href="#eateries" class="visit-tab">Dine</a>
+      <a href="#guide"    class="visit-tab">Guide</a>
+    </div>
+  </div>
+
+  <!-- ══ STAYS ══ -->
+  <section id="stays" class="py-28 bg-texture-bark overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6 lg:px-16">
+      <div class="text-center mb-16 reveal">
+        <div class="ornament-line mb-8">
+          <span class="ornament-dot"></span>
+          <span class="font-sans text-[0.58rem] tracking-[0.28em] text-parch/50 uppercase">Sleep with Purpose</span>
+          <span class="ornament-dot"></span>
+        </div>
+        <h2 class="font-fell text-5xl md:text-6xl text-parch leading-[1.06] mb-5">Where to<br><em>Stay</em></h2>
+        <p class="font-sans font-light text-sm text-parch/50 max-w-lg mx-auto leading-[1.9]">Where you rest shapes what endures. Every night spent here is a quiet act of preservation — of stone, story, and living heritage.</p>
+      </div>
+
+      <!-- Impact strip -->
+      <div class="impact-strip rounded-sm px-8 py-7 mb-16 flex flex-col sm:flex-row items-center gap-6 reveal">
+        <div class="flex-shrink-0 text-center sm:text-left">
+          <p class="font-fell text-[3.5rem] leading-none text-terra">15%</p>
+          <p class="font-sans text-[0.55rem] tracking-[0.22em] text-terra/70 uppercase mt-1">of every stay</p>
+        </div>
+        <div class="hidden sm:block w-px h-16 bg-terra/20 flex-shrink-0"></div>
+        <div>
+          <p class="font-fell text-xl md:text-2xl text-parch/90 italic leading-snug mb-2">"Goes directly towards the preservation and community support of Lepakshi Temple."</p>
+          <p class="font-sans font-light text-xs tracking-wide text-parch/45 leading-loose">Your travel funds conservation programs, artisan livelihoods, and the maintenance of this 16th-century Vijayanagara masterpiece.</p>
+        </div>
+      </div>
+
+      <!-- ProtoVillage -->
+      <div class="stay-card reveal lg:flex rounded-sm overflow-hidden mb-12" style="min-height:520px;">
+        <div class="relative lg:w-[55%] flex-shrink-0" style="min-height:340px;">
+          <div style="position:relative;height:100%;overflow:hidden;">
+            <img src="brand_assets/proto.jpeg" alt="ProtoVillage" class="sc-img w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-r from-transparent to-[#3a2f22]/80 pointer-events-none z-[4]"></div>
+          </div>
+          <div class="sc-glow"></div>
+          <div class="absolute top-6 left-6 z-[5] flex flex-col gap-2">
+            <span class="stay-badge text-parch/85 border-parch/25 bg-stone/60 backdrop-blur-sm">
+              <svg width="8" height="8" viewBox="0 0 8 8" fill="#C8624D"><circle cx="4" cy="4" r="4"/></svg>
+              Heritage Support Stay
+            </span>
+          </div>
+        </div>
+        <div class="lg:w-[45%] bg-[#2e2419] px-10 py-12 flex flex-col justify-center">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-sm font-sans text-[0.5rem] tracking-[0.22em] uppercase font-semibold" style="background:linear-gradient(135deg,rgba(200,98,77,0.9),rgba(155,74,53,0.85));color:#F5F0E8;">
+              <svg width="7" height="7" viewBox="0 0 8 8" fill="#F5F0E8"><path d="M4 0L5 3H8L5.5 5L6.5 8L4 6L1.5 8L2.5 5L0 3H3Z"/></svg>
+              Featured
+            </span>
+            <p class="font-sans text-[0.55rem] tracking-[0.28em] text-terra/70 uppercase">Andhra Pradesh</p>
+          </div>
+          <h3 class="font-fell text-4xl md:text-5xl text-parch italic leading-tight mb-5">ProtoVillage</h3>
+          <div style="height:1px;background:linear-gradient(to right,rgba(200,98,77,0.4),transparent);margin-bottom:1.5rem;"></div>
+          <p class="font-sans font-light text-sm text-parch/55 leading-[1.95] mb-8">Spread across 25 acres of red-soil Andhra countryside, ProtoVillage is a living experiment in regenerative village life — mud-brick homes, organic kitchen gardens, and open-source knowledge sharing. Twelve kilometres from Lepakshi, it is the ideal complement to a day with ancient stone.</p>
+          <div class="flex flex-wrap gap-2 mb-10">
+            <span class="dish-tag" style="color:#8C8C52;background:rgba(140,140,82,0.08);border-color:rgba(140,140,82,0.25);">Farm Stay</span>
+            <span class="dish-tag" style="color:#8C8C52;background:rgba(140,140,82,0.08);border-color:rgba(140,140,82,0.25);">Community Meals</span>
+            <span class="dish-tag" style="color:#8C8C52;background:rgba(140,140,82,0.08);border-color:rgba(140,140,82,0.25);">Craft Workshops</span>
+            <span class="dish-tag" style="color:#8C8C52;background:rgba(140,140,82,0.08);border-color:rgba(140,140,82,0.25);">Stargazing</span>
+          </div>
+          <div class="flex gap-4">
+            <a href="https://www.protovillage.org/" target="_blank" rel="noopener" class="btn-outline font-sans text-[0.62rem] tracking-[0.2em] text-parch uppercase px-8 py-3.5 focus:outline-none"><span>Visit Website</span></a>
+          </div>
+          <p class="font-sans font-light text-[0.6rem] tracking-wide text-parch/30 mt-5 leading-loose">✦ &nbsp;15% of your booking directly funds Lepakshi Temple preservation.</p>
+        </div>
+      </div>
+
+      <!-- Haritha Hotel -->
+      <div class="stay-card reveal lg:flex rounded-sm overflow-hidden" style="min-height:460px;">
+        <div class="lg:w-[45%] bg-[#EDE6D7] px-10 py-12 flex flex-col justify-center order-2 lg:order-1">
+          <p class="font-sans text-[0.55rem] tracking-[0.28em] text-terra/70 uppercase mb-3">Government Tourism Stay · APTDC</p>
+          <h3 class="font-fell text-4xl md:text-5xl text-bark italic leading-tight mb-5">Haritha Hotel, Lepakshi</h3>
+          <div style="height:1px;background:linear-gradient(to right,rgba(74,71,55,0.2),transparent);margin-bottom:1.5rem;"></div>
+          <p class="font-sans font-light text-sm text-bark/60 leading-[1.95] mb-8">The closest government-run guesthouse to the temple, managed by Andhra Pradesh Tourism. Simple, clean rooms set in a quiet compound just 500 metres from the Veerabhadra Swamy complex.</p>
+          <div class="flex flex-wrap gap-2 mb-10">
+            <span class="dish-tag" style="color:#4A4737;background:rgba(74,71,55,0.06);border-color:rgba(74,71,55,0.18);">AC &amp; Non-AC Rooms</span>
+            <span class="dish-tag" style="color:#4A4737;background:rgba(74,71,55,0.06);border-color:rgba(74,71,55,0.18);">In-house Restaurant</span>
+            <span class="dish-tag" style="color:#4A4737;background:rgba(74,71,55,0.06);border-color:rgba(74,71,55,0.18);">500 m from Temple</span>
+          </div>
+          <a href="https://www.aptdc.in" target="_blank" rel="noopener" class="inline-flex items-center gap-2 font-sans text-[0.6rem] tracking-[0.2em] uppercase text-bark/60 hover:text-terra transition-colors self-start focus:outline-none">
+            <span>Book via aptdc.in</span>
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 6h8M6 2l4 4-4 4"/></svg>
+          </a>
+        </div>
+        <div class="relative lg:w-[55%] flex-shrink-0 order-1 lg:order-2 grid grid-cols-2" style="min-height:340px;">
+          <div class="overflow-hidden relative">
+            <img src="brand_assets/harita_hotel.jpeg" alt="Haritha Hotel exterior" class="sc-img w-full h-full object-cover">
+          </div>
+          <div class="overflow-hidden relative">
+            <img src="brand_assets/haritha-hotel-lepakshi-hindupur.jpeg" alt="Haritha Hotel room" class="sc-img w-full h-full object-cover">
+          </div>
+          <div class="absolute top-5 right-5 z-[5]">
+            <span class="stay-badge text-parch/85 border-parch/25 bg-stone/60 backdrop-blur-sm">
+              <svg width="8" height="8" viewBox="0 0 8 8" fill="#C8624D"><circle cx="4" cy="4" r="4"/></svg>
+              Government Certified
+            </span>
+          </div>
+          <div class="sc-glow"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ EATERIES ══ -->
+  <section id="eateries" class="py-28 bg-texture-light overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6 lg:px-16">
+      <div class="text-center mb-20 reveal">
+        <div class="ornament-line mb-8">
+          <span class="ornament-dot"></span>
+          <span class="font-sans text-[0.58rem] tracking-[0.28em] text-terra/75 uppercase">Local Flavour</span>
+          <span class="ornament-dot"></span>
+        </div>
+        <h2 class="font-fell text-5xl md:text-6xl text-bark leading-[1.06] mb-5">The Andhra<br><em>Table</em></h2>
+        <p class="font-sans font-light text-sm tracking-wide text-bark/55 max-w-lg mx-auto leading-[1.9]">Telugu cuisine is an act of devotion. Fiery, earthy, and deeply rooted — the food around Lepakshi is as layered as the temple's frescoes.</p>
+      </div>
+
+      <!-- Haritha Hotel dining -->
+      <div class="eatery-card reveal lg:flex rounded-sm mb-10" style="min-height:420px;">
+        <div class="relative lg:w-[48%] flex-shrink-0 overflow-hidden" style="min-height:280px;">
+          <img src="brand_assets/harita_hotel.jpeg" alt="APTDC Haritha Hotel" class="ec-img w-full h-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-bark/50 via-transparent to-transparent pointer-events-none"></div>
+          <span class="absolute top-5 left-5 stay-badge text-parch border-parch/25 bg-bark/70 backdrop-blur-sm">✦ &nbsp;Featured Dining</span>
+        </div>
+        <div class="lg:w-[52%] px-10 py-12 flex flex-col justify-center">
+          <p class="font-sans text-[0.55rem] tracking-[0.28em] text-terra/70 uppercase mb-3">Government Heritage Dining · APTDC</p>
+          <h3 class="font-fell text-3xl md:text-4xl text-bark italic mb-4">Haritha Hotel, Lepakshi</h3>
+          <div class="chapter-rule mb-6"></div>
+          <p class="font-sans font-light text-sm text-bark/60 leading-[1.95] mb-8">Run by Andhra Pradesh Tourism, Haritha Hotel serves the definitive Telugu thali in a clean, no-frills dining hall — a fitting companion to a temple visit. The meal arrives in courses, unhurried, as it always has.</p>
+          <p class="font-sans text-[0.56rem] tracking-[0.22em] text-bark/45 uppercase mb-3">On the thali</p>
+          <div class="flex flex-wrap gap-2 mb-8">
+            <span class="dish-tag">Pulihora</span>
+            <span class="dish-tag">Ragi Sangati</span>
+            <span class="dish-tag">Gongura Mutton</span>
+            <span class="dish-tag">Pesarattu</span>
+            <span class="dish-tag">Natu Kodi Pulusu</span>
+            <span class="dish-tag">Jaggery Pongal</span>
+            <span class="dish-tag">Dosakaya Pachadi</span>
+          </div>
+          <div class="flex gap-6">
+            <div class="stat-bar border-terra/40"><p class="font-sans text-[0.55rem] tracking-[0.18em] text-bark/45 uppercase mb-1">Open</p><p class="font-serif text-sm text-bark">7 am – 10 pm</p></div>
+            <div class="stat-bar border-terra/40"><p class="font-sans text-[0.55rem] tracking-[0.18em] text-bark/45 uppercase mb-1">Cuisine</p><p class="font-serif text-sm text-bark">Andhra · Telugu</p></div>
+            <div class="stat-bar border-terra/40"><p class="font-sans text-[0.55rem] tracking-[0.18em] text-bark/45 uppercase mb-1">Distance</p><p class="font-serif text-sm text-bark">500 m from temple</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Local eats note -->
+      <div class="reveal rounded-sm p-8 text-center" style="background:rgba(74,71,55,0.04); border:1px solid rgba(74,71,55,0.08);">
+        <p class="font-fell italic text-bark text-xl mb-3">"The roadside dhabas near the temple gate serve some of the freshest pesarattu in Andhra."</p>
+        <p class="font-sans font-light text-xs text-bark/45 tracking-wide">Several small family-run eateries line the road to the temple — look for the ones with the longest queues at breakfast.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ GUIDE REGISTRATION ══ -->
+  <section id="guide" class="reg-section-bg py-28 overflow-hidden relative">
+    <img src="brand_assets/437B8528-13AF-46A5-88EC-1B18A6426981.png" alt="" aria-hidden="true"
+         style="position:absolute;right:-4%;top:0;width:22%;opacity:0.055;filter:sepia(0.55) contrast(0.8) brightness(1.15);mix-blend-mode:multiply;pointer-events:none;">
+    <div class="max-w-7xl mx-auto px-6 lg:px-16 relative z-[1]">
+      <div class="text-center mb-16 reveal">
+        <div class="ornament-line mb-8">
+          <span class="ornament-dot"></span>
+          <span class="font-sans text-[0.58rem] tracking-[0.28em] text-terra/75 uppercase">Walk with a Guardian</span>
+          <span class="ornament-dot"></span>
+        </div>
+        <h2 class="font-fell text-5xl md:text-6xl text-bark leading-[1.06] mb-5">Meet Your<br><em>Temple Guide</em></h2>
+        <p class="font-sans font-light text-sm tracking-wide text-bark/55 max-w-lg mx-auto leading-[1.9]">Every stone at Lepakshi holds a story. Register to receive the verified contact details of a certified local guide.</p>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-12 xl:gap-20 items-start">
+        <!-- Guide card -->
+        <div class="reveal-left">
+          <div class="guide-card rounded-sm p-7 mb-6">
+            <div class="verified-stamp">
+              <span class="font-sans text-[0.38rem] tracking-[0.15em] text-olive/70 uppercase leading-none">Cert.</span>
+              <span class="font-sans text-[0.38rem] tracking-[0.12em] text-olive/70 uppercase leading-none mt-0.5">Guide</span>
+            </div>
+            <div class="flex items-center gap-4 mb-5">
+              <div class="guide-avatar">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                  <circle cx="16" cy="11" r="5.5" stroke="#C8624D" stroke-width="1.2" fill="rgba(200,98,77,0.08)"/>
+                  <path d="M4 28c0-6.627 5.373-12 12-12s12 5.373 12 12" stroke="#C8624D" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+                </svg>
+              </div>
+              <div>
+                <p class="font-fell text-bark text-xl leading-tight mb-0.5">Govinda Reddy</p>
+                <p class="font-sans text-bark/45 text-xs" style="font-weight:300; letter-spacing:0.06em;">Lepakshi Temple · Certified Guide</p>
+                <div class="flex gap-0.5 mt-1.5">
+                  <svg width="10" height="10" viewBox="0 0 10 10" fill="#C8624D"><path d="M5 1l1.18 2.6L9 4.18 7 6.1l.47 2.9L5 7.6 2.53 9 3 6.1 1 4.18l2.82-.58z"/></svg>
+                  <svg width="10" height="10" viewBox="0 0 10 10" fill="#C8624D"><path d="M5 1l1.18 2.6L9 4.18 7 6.1l.47 2.9L5 7.6 2.53 9 3 6.1 1 4.18l2.82-.58z"/></svg>
+                  <svg width="10" height="10" viewBox="0 0 10 10" fill="#C8624D"><path d="M5 1l1.18 2.6L9 4.18 7 6.1l.47 2.9L5 7.6 2.53 9 3 6.1 1 4.18l2.82-.58z"/></svg>
+                  <svg width="10" height="10" viewBox="0 0 10 10" fill="#C8624D"><path d="M5 1l1.18 2.6L9 4.18 7 6.1l.47 2.9L5 7.6 2.53 9 3 6.1 1 4.18l2.82-.58z"/></svg>
+                  <svg width="10" height="10" viewBox="0 0 10 10" fill="#C8624D"><path d="M5 1l1.18 2.6L9 4.18 7 6.1l.47 2.9L5 7.6 2.53 9 3 6.1 1 4.18l2.82-.58z"/></svg>
+                  <span class="font-sans text-bark/35 text-[0.6rem] ml-1.5" style="font-weight:300;">4.9 / 5</span>
+                </div>
+              </div>
+            </div>
+            <div style="height:1px;background:rgba(74,71,55,0.08);margin-bottom:1.25rem;"></div>
+            <div class="grid grid-cols-3 gap-4 mb-5 text-center">
+              <div><p class="font-fell text-terra text-2xl leading-none">21</p><p class="font-sans text-bark/40 text-[0.55rem] tracking-[0.14em] uppercase mt-1" style="font-weight:300;">Years exp.</p></div>
+              <div style="border-left:1px solid rgba(74,71,55,0.08);border-right:1px solid rgba(74,71,55,0.08);">
+                <p class="font-fell text-terra text-2xl leading-none">4</p><p class="font-sans text-bark/40 text-[0.55rem] tracking-[0.14em] uppercase mt-1" style="font-weight:300;">Languages</p>
+              </div>
+              <div><p class="font-fell text-terra text-2xl leading-none">1.2k</p><p class="font-sans text-bark/40 text-[0.55rem] tracking-[0.14em] uppercase mt-1" style="font-weight:300;">Guests</p></div>
+            </div>
+            <div style="background:rgba(74,71,55,0.04);border:1px solid rgba(74,71,55,0.09);padding:0.85rem 1rem;">
+              <p class="font-sans text-[0.55rem] tracking-[0.16em] text-bark/38 uppercase mb-3">Contact Details</p>
+              <div class="space-y-2.5">
+                <div class="guide-contact-locked flex items-center justify-between">
+                  <div class="flex items-center gap-2.5">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="rgba(74,71,55,0.4)" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.92 12 19.79 19.79 0 0 1 1.93 3.38a2 2 0 0 1 2-2.18h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    <span class="contact-value">+91 94403 &nbsp;XXXXX</span>
+                  </div>
+                  <span class="lock-badge">Locked</span>
+                </div>
+                <div class="guide-contact-locked flex items-center justify-between">
+                  <div class="flex items-center gap-2.5">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="rgba(74,71,55,0.4)" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    <span class="contact-value">govinda@lepakshi-guide.in</span>
+                  </div>
+                  <span class="lock-badge">Locked</span>
+                </div>
+              </div>
+              <p class="font-sans text-[0.53rem] tracking-[0.08em] text-terra/60 mt-3" style="font-weight:300;">↑ Register below to unlock verified contact details</p>
+            </div>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="trust-pill"><svg width="9" height="9" viewBox="0 0 9 9" fill="#8C8C52"><circle cx="4.5" cy="4.5" r="4.5"/></svg>Verified by AP Tourism</span>
+            <span class="trust-pill"><svg width="9" height="9" viewBox="0 0 9 9" fill="#C8624D"><circle cx="4.5" cy="4.5" r="4.5"/></svg>Free · No spam</span>
+            <span class="trust-pill"><svg width="9" height="9" viewBox="0 0 9 9" fill="#8C8C52"><circle cx="4.5" cy="4.5" r="4.5"/></svg>Unsubscribe anytime</span>
+          </div>
+        </div>
+
+        <!-- Registration form -->
+        <div class="reveal-right">
+          <div style="background:#FFFDF8;border:1px solid rgba(74,71,55,0.12);padding:2.5rem;box-shadow:0 4px 28px rgba(74,71,55,0.07);">
+            <p class="font-sans text-[0.58rem] tracking-[0.24em] text-terra/70 uppercase mb-2">Step 1 of 1</p>
+            <h3 class="font-fell text-2xl md:text-3xl text-bark italic mb-2">Request Guide Details</h3>
+            <p class="font-sans font-light text-xs text-bark/48 leading-[1.85] mb-7">Fill in your details and we will send Govinda's verified contact to your inbox within 24 hours.</p>
+            <form id="guide-reg-form" novalidate>
+              <div class="reg-form-inner space-y-5">
+                <div class="grid sm:grid-cols-2 gap-4">
+                  <div>
+                    <label for="reg-name" class="reg-label">Full Name</label>
+                    <input id="reg-name" type="text" class="reg-input" placeholder="Your name" required>
+                  </div>
+                  <div>
+                    <label for="reg-email" class="reg-label">Email Address</label>
+                    <input id="reg-email" type="email" class="reg-input" placeholder="you@email.com" required>
+                  </div>
+                </div>
+                <div class="grid sm:grid-cols-2 gap-4">
+                  <div>
+                    <label for="reg-date" class="reg-label">Planned Visit Date</label>
+                    <input id="reg-date" type="date" class="reg-input" style="color-scheme:light;">
+                  </div>
+                  <div>
+                    <label for="reg-lang" class="reg-label">Preferred Language</label>
+                    <div style="position:relative;">
+                      <select id="reg-lang" class="reg-input" style="padding-right:2.5rem;">
+                        <option value="">Select language</option>
+                        <option>English</option><option>Telugu</option><option>Hindi</option><option>Kannada</option>
+                      </select>
+                      <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="rgba(74,71,55,0.45)" stroke-width="1.4" style="position:absolute;right:0.9rem;top:50%;transform:translateY(-50%);pointer-events:none;"><polyline points="2,3 5,7 8,3"/></svg>
+                    </div>
+                  </div>
+                </div>
+                <div id="reg-error" class="hidden font-sans text-xs text-terra" style="letter-spacing:0.04em;"></div>
+                <button type="submit" class="btn-register">
+                  <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                  <span>Unlock Guide Details</span>
+                </button>
+                <p class="font-sans font-light text-[0.6rem] tracking-wide text-bark/35 text-center">Your details are shared only with the guide and never sold to third parties.</p>
+              </div>
+              <div class="reg-success">
+                <div style="width:52px;height:52px;background:rgba(140,140,82,0.12);border:1px solid rgba(140,140,82,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.2rem;">
+                  <svg width="22" height="22" fill="none" stroke="#8C8C52" stroke-width="1.5"><polyline points="4,12 9,17 18,7"/></svg>
+                </div>
+                <h4 class="font-fell text-bark text-2xl italic mb-2">Details on their way.</h4>
+                <p class="font-sans font-light text-sm text-bark/50 leading-relaxed">Check your inbox — Govinda's verified contact will arrive within 24 hours.</p>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer py-12 px-8">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+      <a href="index.html"><img src="brand_assets/last_nandi_logo.jpeg" alt="Lepakshi" style="height:40px;opacity:0.65;filter:invert(1) sepia(0.2);"></a>
+      <div class="flex gap-8">
+        <a href="index.html"    class="font-sans text-[0.58rem] tracking-[0.2em] text-parch/35 uppercase hover:text-parch/70 transition-colors">Home</a>
+        <a href="sketches.html" class="font-sans text-[0.58rem] tracking-[0.2em] text-parch/35 uppercase hover:text-parch/70 transition-colors">Sketches</a>
+        <a href="visit.html"    class="font-sans text-[0.58rem] tracking-[0.2em] text-parch/35 uppercase hover:text-parch/70 transition-colors">Plan Visit</a>
+        <a href="mla.html"      class="font-sans text-[0.58rem] tracking-[0.2em] text-parch/35 uppercase hover:text-parch/70 transition-colors">MLA Message</a>
+      </div>
+      <p class="font-sans text-[0.52rem] tracking-wide text-parch/20">Lepakshi Heritage · Andhra Pradesh</p>
+    </div>
+  </footer>
+
+  <script>
+  (() => {
+    const nav = document.getElementById('main-nav');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 55), { passive:true });
+    const menuOpen = document.getElementById('menu-open');
+    const menuClose = document.getElementById('menu-close');
+    const mobileMenu = document.getElementById('mobile-menu');
+    menuOpen?.addEventListener('click', () => mobileMenu.classList.remove('hidden'));
+    menuClose?.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+    document.querySelectorAll('.m-link').forEach(l => l.addEventListener('click', () => mobileMenu.classList.add('hidden')));
+
+    // Smooth tab highlight on scroll
+    const tabs = document.querySelectorAll('.visit-tab');
+    const sections = ['stays','eateries','guide'].map(id => document.getElementById(id));
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY + 160;
+      sections.forEach((sec, i) => {
+        if (sec && y >= sec.offsetTop) {
+          tabs.forEach(t => t.classList.remove('active'));
+          tabs[i]?.classList.add('active');
+        }
+      });
+    }, { passive:true });
+
+    const io = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }), { threshold:0.08, rootMargin:'0px 0px -50px 0px' });
+    document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => io.observe(el));
+
+    // Form
+    document.querySelectorAll('input[name="group"]').forEach(r => {
+      r.addEventListener('change', () => {
+        document.querySelectorAll('input[name="group"]').forEach(x => { const d = x.nextElementSibling; if (d) { d.style.borderColor='rgba(74,71,55,0.15)'; d.style.color='rgba(74,71,55,0.55)'; d.style.background='#FFFFFF'; } });
+        const sel = r.nextElementSibling;
+        if (sel) { sel.style.borderColor='#C8624D'; sel.style.color='#C8624D'; sel.style.background='rgba(200,98,77,0.04)'; }
+      });
+    });
+    const regForm = document.getElementById('guide-reg-form');
+    const regInner = regForm?.querySelector('.reg-form-inner');
+    const regSuccess = regForm?.querySelector('.reg-success');
+    const regError = document.getElementById('reg-error');
+    regForm?.addEventListener('submit', e => {
+      e.preventDefault();
+      const name = document.getElementById('reg-name').value.trim();
+      const email = document.getElementById('reg-email').value.trim();
+      if (!name) { regError.textContent='↑ Please enter your name.'; regError.classList.remove('hidden'); return; }
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { regError.textContent='↑ Please enter a valid email address.'; regError.classList.remove('hidden'); return; }
+      regError.classList.add('hidden');
+      regInner.classList.add('hidden');
+      regSuccess.classList.add('visible');
+    });
+  })();
+  </script>
+</body>
+</html>

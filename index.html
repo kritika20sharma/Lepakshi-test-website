@@ -910,7 +910,11 @@
       <a href="#explore"      class="nav-link font-sans text-[0.65rem] tracking-[0.22em] text-parch/75 uppercase hover:text-parch">Explore</a>
       <a href="#visit"        class="nav-link font-sans text-[0.65rem] tracking-[0.22em] text-parch/75 uppercase hover:text-parch">Visit</a>
       <a href="#guide"        class="nav-link font-sans text-[0.65rem] tracking-[0.22em] text-parch/75 uppercase hover:text-parch">Guide</a>
-      <a href="#visit" class="btn-outline font-sans text-[0.65rem] tracking-[0.22em] text-parch uppercase px-7 py-3 focus:outline-none">
+      <div class="w-px h-5 bg-parch/15"></div>
+      <a href="sketches.html" class="nav-link font-sans text-[0.72rem] tracking-[0.22em] text-parch uppercase hover:text-terra font-medium">Sketches</a>
+      <a href="visit.html"    class="nav-link font-sans text-[0.72rem] tracking-[0.22em] text-parch uppercase hover:text-terra font-medium">Plan Visit</a>
+      <a href="mla.html"      class="nav-link font-sans text-[0.72rem] tracking-[0.22em] text-parch uppercase hover:text-terra font-medium">MLA Message</a>
+      <a href="visit.html" class="btn-outline font-sans text-[0.65rem] tracking-[0.22em] text-parch uppercase px-7 py-3 focus:outline-none">
         <span>Plan Your Visit</span>
       </a>
     </div>
@@ -941,6 +945,9 @@
     <a href="#explore"      class="m-link font-serif text-parch text-4xl font-light tracking-wide hover:text-terra transition-colors duration-300">Explore</a>
     <a href="#visit"        class="m-link font-serif text-parch text-4xl font-light tracking-wide hover:text-terra transition-colors duration-300">Visit</a>
     <a href="#guide"        class="m-link font-serif text-parch text-4xl font-light tracking-wide hover:text-terra transition-colors duration-300">Guide</a>
+    <a href="sketches.html" class="m-link font-serif text-parch text-4xl font-light hover:text-terra transition-colors duration-300">Sketches Page</a>
+    <a href="visit.html"    class="m-link font-serif text-parch text-4xl font-light hover:text-terra transition-colors duration-300">Plan Your Visit</a>
+    <a href="mla.html"      class="m-link font-serif text-parch text-4xl font-light hover:text-terra transition-colors duration-300">MLA Message</a>
   </div>
 
 
@@ -998,14 +1005,115 @@
         "Lepakshi — a living testament to an empire that carved devotion into granite, and breathed legend into stone."
       </p>
 
-      <!-- CTAs -->
-      <div class="reveal d3 flex flex-col sm:flex-row items-center justify-center gap-5">
-        <a href="#origin" class="btn-outline font-sans text-[0.65rem] tracking-[0.22em] text-parch uppercase px-12 py-4 focus:outline-none">
-          <span>Discover the Story</span>
-        </a>
-        <a href="#gallery" class="font-sans text-[0.65rem] tracking-[0.22em] text-parch/50 uppercase hover:text-terra transition-colors duration-400 px-4">
-          View Gallery &darr;
-        </a>
+      <!-- ── Page destination cards ────────────── -->
+      <div class="reveal d3 w-full max-w-4xl mx-auto" style="border: 1px solid rgba(245,240,232,0.22);">
+        <div class="grid grid-cols-1 sm:grid-cols-3" style="background: rgba(42,38,28,0.62); backdrop-filter: blur(22px);">
+
+          <!-- Sketches -->
+          <a href="sketches.html"
+             class="group relative flex flex-col justify-between overflow-hidden border-b sm:border-b-0 sm:border-r"
+             style="border-color: rgba(245,240,232,0.18); transition: background 0.5s ease;"
+             onmouseenter="this.style.background='rgba(245,240,232,0.09)'"
+             onmouseleave="this.style.background='transparent'">
+            <div style="position:relative; height:130px; overflow:hidden; flex-shrink:0;">
+              <img src="brand_assets/kalyana%20mantapa.jpeg" alt="Kalyana Mantapa, Lepakshi"
+                   style="width:100%; height:100%; object-fit:cover; object-position:center 50%;
+                          filter:sepia(0.25) contrast(1.08) brightness(0.68);
+                          transition:transform 0.9s cubic-bezier(0.16,1,0.3,1), filter 0.5s ease;"
+                   class="group-hover:[transform:scale(1.05)] group-hover:[filter:sepia(0.1)_contrast(1.04)_brightness(0.80)]">
+              <div style="position:absolute; inset:0; background:linear-gradient(to bottom, transparent 30%, rgba(42,38,28,0.72) 100%);"></div>
+              <div style="position:absolute; bottom:0; left:0; right:0; height:1px; background:linear-gradient(to right, transparent, rgba(200,98,77,0.5), transparent);"></div>
+            </div>
+            <div class="px-8 pt-5 pb-8 flex flex-col justify-between flex-1">
+              <div>
+                <p class="font-sans text-[0.6rem] tracking-[0.28em] text-terra/75 uppercase mb-3">01 &nbsp;·&nbsp; Drawings</p>
+                <h3 class="font-fell text-[1.75rem] text-parch italic leading-tight mb-3"
+                    style="transition: color 0.3s ease;"
+                    onmouseenter="this.style.color='#C8624D'" onmouseleave="this.style.color=''">Sketches</h3>
+                <p class="font-sans font-light text-[0.65rem] tracking-wide leading-relaxed" style="color: rgba(245,240,232,0.55);">
+                  Seventeen architectural studies in ink &amp; stone
+                </p>
+              </div>
+              <div class="flex items-center gap-2 mt-6">
+                <span class="font-sans text-[0.58rem] tracking-[0.22em] uppercase" style="color: rgba(200,98,77,0.85);">Explore</span>
+                <svg width="20" height="9" fill="none" stroke="#C8624D" stroke-width="1.4" opacity="0.85"
+                     style="transition: transform 0.35s cubic-bezier(0.16,1,0.3,1);" class="group-hover:translate-x-1.5">
+                  <path d="M0 4.5h17M12 1.5l5 3-5 3"/>
+                </svg>
+              </div>
+            </div>
+          </a>
+
+          <!-- Plan Your Visit -->
+          <a href="visit.html"
+             class="group relative flex flex-col justify-between overflow-hidden border-b sm:border-b-0 sm:border-r"
+             style="border-color: rgba(245,240,232,0.18); transition: background 0.5s ease;"
+             onmouseenter="this.style.background='rgba(245,240,232,0.09)'"
+             onmouseleave="this.style.background='transparent'">
+            <div style="position:relative; height:130px; overflow:hidden; flex-shrink:0;">
+              <img src="brand_assets/frescoes_1.jpg" alt="Lepakshi frescoes"
+                   style="width:100%; height:100%; object-fit:cover; object-position:center 40%;
+                          filter:sepia(0.2) contrast(1.06) brightness(0.68);
+                          transition:transform 0.9s cubic-bezier(0.16,1,0.3,1), filter 0.5s ease;"
+                   class="group-hover:[transform:scale(1.05)] group-hover:[filter:sepia(0.06)_contrast(1.03)_brightness(0.80)]">
+              <div style="position:absolute; inset:0; background:linear-gradient(to bottom, transparent 30%, rgba(42,38,28,0.72) 100%);"></div>
+              <div style="position:absolute; bottom:0; left:0; right:0; height:1px; background:linear-gradient(to right, transparent, rgba(200,98,77,0.5), transparent);"></div>
+            </div>
+            <div class="px-8 pt-5 pb-8 flex flex-col justify-between flex-1">
+              <div>
+                <p class="font-sans text-[0.6rem] tracking-[0.28em] text-terra/75 uppercase mb-3">02 &nbsp;·&nbsp; Travel</p>
+                <h3 class="font-fell text-[1.75rem] text-parch italic leading-tight mb-3"
+                    style="transition: color 0.3s ease;"
+                    onmouseenter="this.style.color='#C8624D'" onmouseleave="this.style.color=''">Plan Your Visit</h3>
+                <p class="font-sans font-light text-[0.65rem] tracking-wide leading-relaxed" style="color: rgba(245,240,232,0.55);">
+                  Where to stay, dine, and who will guide you
+                </p>
+              </div>
+              <div class="flex items-center gap-2 mt-6">
+                <span class="font-sans text-[0.58rem] tracking-[0.22em] uppercase" style="color: rgba(200,98,77,0.85);">Explore</span>
+                <svg width="20" height="9" fill="none" stroke="#C8624D" stroke-width="1.4" opacity="0.85"
+                     style="transition: transform 0.35s cubic-bezier(0.16,1,0.3,1);" class="group-hover:translate-x-1.5">
+                  <path d="M0 4.5h17M12 1.5l5 3-5 3"/>
+                </svg>
+              </div>
+            </div>
+          </a>
+
+          <!-- From the MLA -->
+          <a href="mla.html"
+             class="group relative flex flex-col justify-between overflow-hidden"
+             style="transition: background 0.5s ease;"
+             onmouseenter="this.style.background='rgba(245,240,232,0.09)'"
+             onmouseleave="this.style.background='transparent'">
+            <div style="position:relative; height:130px; overflow:hidden; flex-shrink:0;">
+              <img src="brand_assets/MLA.jpg" alt="Sri Nandamuri Balakrishna"
+                   style="width:100%; height:100%; object-fit:cover; object-position:center 12%;
+                          filter:sepia(0.15) contrast(1.05) brightness(0.72);
+                          transition:transform 0.9s cubic-bezier(0.16,1,0.3,1), filter 0.5s ease;"
+                   class="group-hover:[transform:scale(1.05)] group-hover:[filter:sepia(0.05)_contrast(1.02)_brightness(0.82)]">
+              <div style="position:absolute; inset:0; background:linear-gradient(to bottom, transparent 30%, rgba(42,38,28,0.72) 100%);"></div>
+              <div style="position:absolute; bottom:0; left:0; right:0; height:1px; background:linear-gradient(to right, transparent, rgba(200,98,77,0.5), transparent);"></div>
+            </div>
+            <div class="px-8 pt-5 pb-8 flex flex-col justify-between flex-1">
+              <div>
+                <p class="font-sans text-[0.6rem] tracking-[0.28em] text-terra/75 uppercase mb-3">03 &nbsp;·&nbsp; Official</p>
+                <h3 class="font-fell text-[1.75rem] text-parch italic leading-tight mb-2"
+                    style="transition: color 0.3s ease;"
+                    onmouseenter="this.style.color='#C8624D'" onmouseleave="this.style.color=''">From the MLA</h3>
+                <p class="font-sans font-light text-[0.62rem] leading-relaxed mb-1" style="color: rgba(245,240,232,0.55);">Sri Nandamuri Balakrishna</p>
+                <p class="font-sans font-light text-[0.58rem] tracking-wide" style="color: rgba(245,240,232,0.32);">MLA · Lepakshi Constituency</p>
+              </div>
+              <div class="flex items-center gap-2 mt-5">
+                <span class="font-sans text-[0.58rem] tracking-[0.22em] uppercase" style="color: rgba(200,98,77,0.85);">Read</span>
+                <svg width="20" height="9" fill="none" stroke="#C8624D" stroke-width="1.4" opacity="0.85"
+                     style="transition: transform 0.35s cubic-bezier(0.16,1,0.3,1);" class="group-hover:translate-x-1.5">
+                  <path d="M0 4.5h17M12 1.5l5 3-5 3"/>
+                </svg>
+              </div>
+            </div>
+          </a>
+
+        </div>
       </div>
     </div>
 
@@ -2772,12 +2880,12 @@
         </div>
       </div>
 
-      <div class="border-t border-parch/[0.07] pt-7 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <p class="font-sans text-parch/18 text-xs" style="font-weight:300;">
-          &copy; 2025 Lepakshi Heritage Trust. All rights reserved.
+      <div class="border-t border-parch/[0.07] pt-7 flex flex-col items-center gap-3">
+        <p class="font-sans text-parch/30 text-[0.62rem] tracking-wide text-center" style="font-weight:300; font-style:italic;">
+          An initiative to promote and preserve the heritage of Lepakshi, supported by ProtoVillage and crafted by Kritika Sharma.
         </p>
         <p class="font-sans text-parch/18 text-xs" style="font-weight:300;">
-          Crafted with reverence for the living stones of Lepakshi
+          &copy; 2025 Lepakshi Heritage Trust. All rights reserved.
         </p>
       </div>
     </div>
